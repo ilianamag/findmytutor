@@ -6,12 +6,16 @@ class AppDecoration {
   static BoxDecoration get fillBlueGray => BoxDecoration(
         color: appTheme.blueGray100,
       );
+  static BoxDecoration get fillRed => BoxDecoration(
+        color: appTheme.red100,
+      );    
   static BoxDecoration get fillWhiteA => BoxDecoration(
         color: appTheme.whiteA700,
       );
 
   // Outline decorations
   static BoxDecoration get outlineBlack => BoxDecoration();
+  static BoxDecoration get outlineBlackF => BoxDecoration();
   static BoxDecoration get outlineGrayE => BoxDecoration(
         border: Border.all(
           color: appTheme.gray9001e,
@@ -25,6 +29,15 @@ class BorderRadiusStyle {
   static BorderRadius get circleBorder20 => BorderRadius.circular(
         20.h,
       );
+      static BorderRadius get circleBorder45 => BorderRadius.circular(
+        45.h,
+      );
+  static BorderRadius get circleBorder100 => BorderRadius.circular(
+        100.h,
+      );
+  static BorderRadius get circleBorder16 => BorderRadius.circular(
+        16.h,
+      );  
 
   // Rounded borders
   static BorderRadius get roundedBorder32 => BorderRadius.circular(
