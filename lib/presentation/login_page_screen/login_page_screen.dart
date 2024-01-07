@@ -143,6 +143,9 @@ class LoginPageScreen extends StatelessWidget {
                             ),
                           ),
                           CustomElevatedButton(
+                            onPressed: () {
+                            onTapTxtSignUp(context);
+                            },
                             width: 62.h,
                             text: "Sign up",
                           ),
@@ -160,7 +163,7 @@ class LoginPageScreen extends StatelessWidget {
     );
   }
   // /// Navigates to the signupPageScreen when the action is triggered.
-  // onTapTxtSignUp(BuildContext context) {
-  //   Navigator.pushNamed(context, AppRoutes.signupPageScreen);
-  // }
+  onTapTxtSignUp(BuildContext context) {
+    Navigator.pushNamed(context, AppRoutes.studentoneScreen);
+  }
 }
