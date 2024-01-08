@@ -21,7 +21,11 @@ class StudentProfilePage extends StatelessWidget {
         appBar: _buildAppBar(context),
         body: Container(
           width: double.maxFinite,
-          padding: EdgeInsets.symmetric(vertical: 41.v),
+          padding: EdgeInsets.only(
+            left: 18.h,
+            top: 41.v,
+            bottom: 41.v,
+          ),
           child: Column(
             children: [
               Container(
@@ -87,7 +91,7 @@ class StudentProfilePage extends StatelessWidget {
         ),
         AppbarTrailingButton(
           margin: EdgeInsets.only(
-            left: 29.h,
+            left: 20.h,
             top: 13.v,
             right: 30.h,
           ),
