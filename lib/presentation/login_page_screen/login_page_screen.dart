@@ -55,14 +55,14 @@ class LoginPageScreen extends StatelessWidget {
                       hintText: "Password",
                       textInputAction: TextInputAction.done,
                       textInputType: TextInputType.visiblePassword,
-                      suffix: Container(
-                        margin: EdgeInsets.fromLTRB(30.h, 16.v, 21.h, 16.v),
-                        child: CustomImageView(
-                          imagePath: ImageConstant.imgEye,
-                          height: 24.adaptSize,
-                          width: 24.adaptSize,
-                        ),
-                      ),
+                      // suffix: Container(
+                      //   margin: EdgeInsets.fromLTRB(30.h, 16.v, 21.h, 16.v),
+                      //   child: CustomImageView(
+                      //     imagePath: ImageConstant.imgEye,
+                      //     height: 24.adaptSize,
+                      //     width: 24.adaptSize,
+                      //   ),
+                      // ),
                       suffixConstraints: BoxConstraints(
                         maxHeight: 56.v,
                       ),
