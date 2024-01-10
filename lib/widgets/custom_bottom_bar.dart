@@ -57,79 +57,75 @@ class CustomBottomBarState extends State<CustomBottomBar> {
         type: BottomNavigationBarType.fixed,
         items: List.generate(bottomMenuList.length, (index) {
           return BottomNavigationBarItem(
-            icon: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  decoration: AppDecoration.outlineBlackF,
-                  child: CustomImageView(
-                    imagePath: bottomMenuList[index].icon,
-                    height: 24.adaptSize,
-                    width: 24.adaptSize,
-                    color: appTheme.gray800,
-                    margin: EdgeInsets.symmetric(
-                      horizontal: 20.h,
-                      vertical: 4.v,
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(top: 4.v),
-                  child: Text(
-                    bottomMenuList[index].title ?? "",
-                    style: TextStyle(
-                      color: appTheme.gray800,
-                      fontSize: 12.fSize,
-                      fontFamily: 'Roboto',
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            activeIcon: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  decoration: AppDecoration.fillRed.copyWith(
-                    borderRadius: BorderRadiusStyle.circleBorder16,
-                  ),
-                  child: CustomImageView(
-                    imagePath: bottomMenuList[index].activeIcon,
-                    height: 24.adaptSize,
-                    width: 24.adaptSize,
-                    color: appTheme.gray90001,
-                    margin: EdgeInsets.symmetric(
-                      horizontal: 20.h,
-                      vertical: 4.v,
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(top: 4.v),
-                  child: Text(
-                    bottomMenuList[index].title ?? "",
-                    style: TextStyle(
-                      color: appTheme.gray900,
-                      fontSize: 12.fSize,
-                      fontFamily: 'Roboto',
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
-              ],
-            ),
+            icon: buildMenuItem(bottomMenuList[index], false),
+            activeIcon: buildMenuItem(bottomMenuList[index], true),
             label: '',
           );
         }),
         onTap: (index) {
-          selectedIndex = index;
-          widget.onChanged?.call(bottomMenuList[index].type);
-          setState(() {});
+          setState(() {
+            selectedIndex = index;
+          });
+
+          BottomBarEnum selectedType = bottomMenuList[index].type;
+          widget.onChanged?.call(selectedType);
+
+          switch (selectedType) {
+            case BottomBarEnum.Search:
+              Navigator.pushReplacementNamed(context, '/search');
+              break;
+            case BottomBarEnum.Favourites:
+              Navigator.pushReplacementNamed(
+                  context, AppRoutes.myFavouritesScreen);
+              break;
+            case BottomBarEnum.Messages:
+              Navigator.pushReplacementNamed(context, '/messages');
+              break;
+            case BottomBarEnum.Profile:
+              Navigator.pushReplacementNamed(
+                  context, AppRoutes.studentProfileScreen);
+              break;
+          }
         },
       ),
+    );
+  }
+
+  Widget buildMenuItem(BottomMenuModel item, bool isActive) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Container(
+          decoration: isActive
+              ? AppDecoration.fillRed.copyWith(
+                  borderRadius: BorderRadiusStyle.circleBorder16,
+                )
+              : AppDecoration.outlineBlackF,
+          child: CustomImageView(
+            imagePath: isActive ? item.activeIcon : item.icon,
+            height: 24.adaptSize,
+            width: 24.adaptSize,
+            color: isActive ? appTheme.gray90001 : appTheme.gray800,
+            margin: EdgeInsets.symmetric(
+              horizontal: 20.h,
+              vertical: 4.v,
+            ),
+          ),
+        ),
+        Padding(
+          padding: EdgeInsets.only(top: 4.v),
+          child: Text(
+            item.title ?? "",
+            style: TextStyle(
+              color: isActive ? appTheme.gray900 : appTheme.gray800,
+              fontSize: 12.fSize,
+              fontFamily: 'Roboto',
+              fontWeight: isActive ? FontWeight.w600 : FontWeight.w500,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

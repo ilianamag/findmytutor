@@ -260,6 +260,6 @@ class StudentoneScreen extends StatelessWidget {
     );
   }
     onTapStateLayer(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.studentProfileContainerScreen);
+    Navigator.pushNamed(context, AppRoutes.studentProfileScreen);
   }
 }

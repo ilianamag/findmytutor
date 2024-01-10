@@ -55,14 +55,14 @@ class LoginPageScreen extends StatelessWidget {
                       hintText: "Password",
                       textInputAction: TextInputAction.done,
                       textInputType: TextInputType.visiblePassword,
-                      suffix: Container(
-                        margin: EdgeInsets.fromLTRB(30.h, 16.v, 21.h, 16.v),
-                        child: CustomImageView(
-                          imagePath: ImageConstant.imgEye,
-                          height: 24.adaptSize,
-                          width: 24.adaptSize,
-                        ),
-                      ),
+                      // suffix: Container(
+                      //   margin: EdgeInsets.fromLTRB(30.h, 16.v, 21.h, 16.v),
+                      //   child: CustomImageView(
+                      //     imagePath: ImageConstant.imgEye,
+                      //     height: 24.adaptSize,
+                      //     width: 24.adaptSize,
+                      //   ),
+                      // ),
                       suffixConstraints: BoxConstraints(
                         maxHeight: 56.v,
                       ),
@@ -76,11 +76,11 @@ class LoginPageScreen extends StatelessWidget {
                     SizedBox(height: 22.v),
                     Container(
                       margin: EdgeInsets.symmetric(horizontal: 66.h),
-                      decoration: AppDecoration.outlineBlack,
+                      decoration: AppDecoration.outlineBlack,              
                       child: Container(
                         decoration: AppDecoration.outlineGrayE.copyWith(
                           borderRadius: BorderRadiusStyle.circleBorder20,
-                        ),
+                        ),                       
                         child: Container(
                           padding: EdgeInsets.symmetric(
                             horizontal: 16.h,
@@ -89,6 +89,7 @@ class LoginPageScreen extends StatelessWidget {
                           decoration: AppDecoration.fillBlueGray.copyWith(
                             borderRadius: BorderRadiusStyle.circleBorder20,
                           ),
+                          
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [

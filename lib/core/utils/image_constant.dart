@@ -13,9 +13,21 @@ class ImageConstant {
   
   static String imgSettings = '$imagePath/img_settings.svg';
 
+  static String imgIconsStarBorder = '$imagePath/img_icons_star_border.svg';
+
+  static String imgFavorite = '$imagePath/img_favorite.svg';
+
+  static String imgMedia = '$imagePath/img_media.png';
+
   static String imgEdit = '$imagePath/img_edit.svg';
 
+  static String imgBackground = '$imagePath/img_background.png';
+
   static String imgIconsMailoutline = '$imagePath/img_icons_mailoutline.svg';
+
+  static String imgMonogram = '$imagePath/img_monogram.png';
+
+  static String imgEditGray90001 = '$imagePath/img_edit_gray_900_01.svg';
 
   static String imgLock = '$imagePath/img_lock.svg';
 

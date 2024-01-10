@@ -6,13 +6,10 @@ import 'package:login/widgets/app_bar/appbar_trailing_button.dart';
 import 'package:login/widgets/app_bar/appbar_trailing_image.dart';
 import 'package:login/widgets/app_bar/custom_app_bar.dart';
 import 'package:login/widgets/custom_outlined_button.dart';
+import 'package:login/widgets/custom_bottom_bar.dart';
 
-// ignore_for_file: must_be_immutable
-class StudentProfilePage extends StatelessWidget {
-  const StudentProfilePage({Key? key})
-      : super(
-          key: key,
-        );
+class StudentProfileScreen extends StatelessWidget {
+  const StudentProfileScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +19,7 @@ class StudentProfilePage extends StatelessWidget {
         body: Container(
           width: double.maxFinite,
           padding: EdgeInsets.only(
-            left: 18.h,
+            left: 38.h,
             top: 41.v,
             bottom: 41.v,
           ),
@@ -46,29 +43,22 @@ class StudentProfilePage extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 60.v),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 37.h),
-                child: Column(
-                  children: [
-                    _buildMyTutors(context),
-                    SizedBox(height: 9.v),
-                    _buildMyReviews(context),
-                    SizedBox(height: 9.v),
-                    _buildEditProfile(context),
-                    SizedBox(height: 9.v),
-                    _buildLogout(context),
-                  ],
-                ),
-              ),
+              _buildMyTutors(context),
+              SizedBox(height: 9.v),
+              _buildMyReviews(context),
+              SizedBox(height: 9.v),
+              _buildEditProfile(context),
+              SizedBox(height: 9.v),
+              _buildLogout(context),
               SizedBox(height: 5.v),
             ],
           ),
         ),
+        bottomNavigationBar: _buildBottomBar(context),
       ),
     );
   }
 
-  /// Section Widget
   PreferredSizeWidget _buildAppBar(BuildContext context) {
     return CustomAppBar(
       leadingWidth: 40.h,
@@ -91,7 +81,7 @@ class StudentProfilePage extends StatelessWidget {
         ),
         AppbarTrailingButton(
           margin: EdgeInsets.only(
-            left: 20.h,
+            left: 29.h,
             top: 13.v,
             right: 30.h,
           ),
@@ -101,35 +91,67 @@ class StudentProfilePage extends StatelessWidget {
     );
   }
 
-  /// Section Widget
   Widget _buildMyTutors(BuildContext context) {
     return CustomOutlinedButton(
+      onPressed: () {
+        onTapStatel(context);
+      },
       width: 111.h,
       text: "My Tutors",
     );
   }
 
-  /// Section Widget
   Widget _buildMyReviews(BuildContext context) {
     return CustomOutlinedButton(
+      onPressed: () {
+        onTapState(context);
+      },
       width: 123.h,
       text: "My Reviews",
     );
   }
 
-  /// Section Widget
   Widget _buildEditProfile(BuildContext context) {
     return CustomOutlinedButton(
+      onPressed: () {
+        onTap(context);
+      },
       width: 117.h,
       text: "Edit Profile",
     );
   }
 
-  /// Section Widget
   Widget _buildLogout(BuildContext context) {
     return CustomOutlinedButton(
+      onPressed: () {
+        onTapStateLayer(context);
+      },
       width: 92.h,
       text: "Logout",
     );
   }
+
+  void onTapStateLayer(BuildContext context) {
+    Navigator.pushReplacementNamed(context, AppRoutes.loginPageScreen);
+  }
+
+  void onTap(BuildContext context) {
+    Navigator.pushReplacementNamed(context, AppRoutes.editProfileOfStudentPage);
+  }
+
+  void onTapState(BuildContext context) {
+    Navigator.pushReplacementNamed(context, AppRoutes.studentsMyReviewsoneScreen);
+  }
+  void onTapStatel(BuildContext context) {
+    Navigator.pushReplacementNamed(context, AppRoutes.myTutorsScreen);
+  }
+
+  Widget _buildBottomBar(BuildContext context) {
+    return CustomBottomBar(onChanged: (BottomBarEnum type) {
+      // You can handle the navigation logic in the CustomBottomBar widget
+      // instead of doing it in the StudentProfileScreen widget.
+      // This callback will be triggered when a bottom bar item is tapped.
+    });
+  }
 }
+      

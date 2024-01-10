@@ -109,6 +109,8 @@ class PrimaryColors {
   Color get deepPurple500 => Color(0XFF6750A4);
 
   // Gray
+  Color get gray50 => Color(0XFFFFF8F7);
+  Color get gray400 => Color(0XFFD8C2BF);
   Color get gray600 => Color(0XFF79747E);
   Color get gray60001 => Color(0XFF857371);
   Color get gray800 => Color(0XFF534341);

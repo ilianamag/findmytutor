@@ -8,6 +8,16 @@ class CustomButtonStyles {
         backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent),
         elevation: MaterialStateProperty.all<double>(0),
       );
+  static ButtonStyle get outlineGrayTL20 => OutlinedButton.styleFrom(
+        backgroundColor: Colors.transparent,
+        side: BorderSide(
+          color: appTheme.gray600,
+          width: 1,
+        ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20.h),
+        ),
+      );
   static ButtonStyle get outlineGray => OutlinedButton.styleFrom(
         backgroundColor: Colors.transparent,
         side: BorderSide(
