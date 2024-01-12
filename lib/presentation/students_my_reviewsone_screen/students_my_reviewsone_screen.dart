@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:login/core/app_export.dart';
 import 'package:login/presentation/students_my_reviewstwo_screen/students_my_reviewstwo_screen.dart';
-import 'package:login/widgets/app_bar/appbar_leading_image.dart';
-import 'package:login/widgets/app_bar/appbar_title.dart';
-import 'package:login/widgets/app_bar/appbar_trailing_button.dart';
-import 'package:login/widgets/app_bar/appbar_trailing_image.dart';
-import 'package:login/widgets/app_bar/custom_app_bar.dart';
 import 'package:login/widgets/custom_rating_bar.dart';
 import 'package:login/widgets/custom_bottom_bar.dart';
 
@@ -29,10 +24,12 @@ class StudentsMyReviewsoneScreen extends StatelessWidget {
               ),
           ),
           backgroundColor: const Color(0xffF8EBEA),
-          leading: IconButton( //pisw velaki
-            icon: Icon(Icons.arrow_back, color: Colors.black),
-            onPressed: () => Navigator.of(context).pop(),
-          )
+          actions: [ //για να εμφανιζεται δεξια του τιτλου θελει actions αντί για leading
+          IconButton(icon: Icon(Icons.arrow_back),
+            onPressed: () => { Navigator.pushNamed(context, AppRoutes.studentProfileScreen)
+            }
+          ),
+        ],
         ),
 
       drawer: Drawer(
@@ -128,41 +125,41 @@ class StudentsMyReviewsoneScreen extends StatelessWidget {
     );
   }
 
-  /// Section Widget
-  PreferredSizeWidget _buildAppBar(BuildContext context) {
-    return CustomAppBar(
-      leadingWidth: 39.h,
-      leading: AppbarLeadingImage(
-        imagePath: ImageConstant.imgMegaphone,
-        margin: EdgeInsets.only(
-          left: 15.h,
-          top: 19.v,
-          bottom: 19.v,
-        ),
-      ),
-      title: AppbarTitle(
-        text: "FindmyTutor",
-        margin: EdgeInsets.only(left: 18.h),
-      ),
-      actions: [
-        AppbarTrailingImage(
-          imagePath: ImageConstant.imgArrowLeft,
-          margin: EdgeInsets.fromLTRB(14.h, 13.v, 17.h, 8.v),
-          onTap: () {
-            Navigator.pushReplacementNamed(context, AppRoutes.studentProfileScreen);
-          },
-        ),
-        AppbarTrailingButton(
-          margin: EdgeInsets.only(
-            left: 29.h,
-            top: 13.v,
-            right: 31.h,
-          ),
-        ),
-      ],
-      styleType: Style.bgFill,
-    );
-  }
+  // /// Section Widget
+  // PreferredSizeWidget _buildAppBar(BuildContext context) {
+  //   return CustomAppBar(
+  //     leadingWidth: 39.h,
+  //     leading: AppbarLeadingImage(
+  //       imagePath: ImageConstant.imgMegaphone,
+  //       margin: EdgeInsets.only(
+  //         left: 15.h,
+  //         top: 19.v,
+  //         bottom: 19.v,
+  //       ),
+  //     ),
+  //     title: AppbarTitle(
+  //       text: "FindmyTutor",
+  //       margin: EdgeInsets.only(left: 18.h),
+  //     ),
+  //     actions: [
+  //       AppbarTrailingImage(
+  //         imagePath: ImageConstant.imgArrowLeft,
+  //         margin: EdgeInsets.fromLTRB(14.h, 13.v, 17.h, 8.v),
+  //         onTap: () {
+  //           Navigator.pushReplacementNamed(context, AppRoutes.studentProfileScreen);
+  //         },
+  //       ),
+  //       AppbarTrailingButton(
+  //         margin: EdgeInsets.only(
+  //           left: 29.h,
+  //           top: 13.v,
+  //           right: 31.h,
+  //         ),
+  //       ),
+  //     ],
+  //     styleType: Style.bgFill,
+  //   );
+  // }
 
   /// Section Widget
   Widget _buildHorizontalCard(BuildContext context) {
