@@ -26,17 +26,20 @@ class MyReviewsTutorScreen extends StatelessWidget {
           child: Column(
             children: [
                Padding(
-                padding: EdgeInsets.only(left: 96.h),
+                padding: EdgeInsets.only(left: 20.h),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      "  My",
-                      style: TextStyle(
+                    Align(
+                      alignment: Alignment.center,
+                      child: Text(
+                        "My",
+                        style: TextStyle(
                         color: appTheme.black900,
                         fontSize: 40.fSize,
                         fontFamily: 'Roboto',
                         fontWeight: FontWeight.w400,
+                        ),
                       ),
                     ),
                     Align(
@@ -44,10 +47,10 @@ class MyReviewsTutorScreen extends StatelessWidget {
                       child: Text(
                         "Reviews",
                         style: TextStyle(
-                          color: appTheme.black900,
-                          fontSize: 40.fSize,
-                          fontFamily: 'Roboto',
-                          fontWeight: FontWeight.w400,
+                        color: appTheme.black900,
+                        fontSize: 40.fSize,
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.w400,
                         ),
                       ),
                     ),

@@ -24,21 +24,24 @@ class StudentsMyReviewsoneScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: EdgeInsets.only(left: 80.h),
+                padding: EdgeInsets.only(left: 20.h),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      "    My",
-                      style: TextStyle(
-                        color: appTheme.black900,
-                        fontSize: 40.fSize,
-                        fontFamily: 'Roboto',
-                        fontWeight: FontWeight.w400,
+                    Align(
+                      alignment: Alignment.center,
+                      child: Text(
+                        "My",
+                        style: TextStyle(
+                          color: appTheme.black900,
+                          fontSize: 40.fSize,
+                          fontFamily: 'Roboto',
+                          fontWeight: FontWeight.w400,
+                        ),
                       ),
                     ),
                     Align(
-                      alignment: Alignment(-0.2, 0.0),
+                      alignment: Alignment.center,
                       child: Text(
                         "Reviews",
                         style: TextStyle(

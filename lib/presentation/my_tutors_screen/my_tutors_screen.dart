@@ -25,13 +25,16 @@ class MyTutorsScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      "      My",
-                      style: TextStyle(
-                        color: appTheme.black900,
-                        fontSize: 40.fSize,
-                        fontFamily: 'Roboto',
-                        fontWeight: FontWeight.w400,
+                    Align(
+                      alignment: Alignment.center,
+                      child: Text(
+                        "My",
+                        style: TextStyle(
+                          color: appTheme.black900,
+                          fontSize: 40.fSize,
+                          fontFamily: 'Roboto',
+                          fontWeight: FontWeight.w400,
+                        ),
                       ),
                     ),
                     Align(

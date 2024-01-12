@@ -70,7 +70,7 @@ class AppWidgets {
             color: appTheme.black900, // Replace with your color value
           ),
           title: Text(
-            'QR Code Scanner',
+            'My QR Code',
             style: TextStyle(
               color: appTheme.black900, // Replace with your color value
             ),
