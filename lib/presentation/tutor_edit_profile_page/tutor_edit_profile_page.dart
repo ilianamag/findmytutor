@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:login/core/app_export.dart';
-import 'package:login/widgets/app_bar/appbar_leading_image.dart';
-import 'package:login/widgets/app_bar/appbar_title.dart';
-import 'package:login/widgets/app_bar/appbar_trailing_image.dart';
-import 'package:login/widgets/app_bar/custom_app_bar.dart';
 import 'package:login/widgets/custom_floating_text_field.dart';
 import 'package:login/widgets/custom_icon_button.dart';
 import 'package:login/widgets/custom_bottom_bar_teacher.dart';
 import 'package:login/widgets/appbarfortutors.dart';
+import 'package:login/widgets/custom_outlined_button.dart';
 // ignore_for_file: must_be_immutable
 class TutorEditProfilePage extends StatelessWidget {
   TutorEditProfilePage({Key? key}): super(key: key,);
@@ -176,6 +173,8 @@ class TutorEditProfilePage extends StatelessWidget {
                         ],
                       ),
                     ),
+                    _buildEditButton(context),
+                    SizedBox(height: 5.v),
                   ],
                 ),
               ),
@@ -317,6 +316,21 @@ class TutorEditProfilePage extends StatelessWidget {
         alignment: Alignment.center,
       ),
     );
+  }
+
+  Widget _buildEditButton(BuildContext context) {
+    return CustomOutlinedButton(
+      onPressed: () {
+        onTapTxtSignUp(context);
+      },
+      height: 40.v,
+      width: 72.h,
+      text: "Edit",
+      buttonStyle: CustomButtonStyles.outlineGrayTL20,
+    );
+  }
+  void onTapTxtSignUp(BuildContext context) {
+    Navigator.pushReplacementNamed(context, AppRoutes.tutorProfilePage);
   }
    Widget _buildBottomBar2(BuildContext context) {
     return CustomBottomBar2(onChanged: (BottomBarEnum2 type) {

@@ -25,23 +25,30 @@ class MyReviewsTutorScreen extends StatelessWidget {
           padding: EdgeInsets.symmetric(vertical: 57.v),
           child: Column(
             children: [
-              Padding(
-                padding: EdgeInsets.only(
-                  left: 96.h,
-                  right: 83.h,
-                ),
+               Padding(
+                padding: EdgeInsets.only(left: 96.h),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "My  ",
-                      style: theme.textTheme.displayMedium,
+                      "  My",
+                      style: TextStyle(
+                        color: appTheme.black900,
+                        fontSize: 40.fSize,
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.w400,
+                      ),
                     ),
                     Align(
                       alignment: Alignment.center,
                       child: Text(
                         "Reviews",
-                        style: theme.textTheme.displayMedium,
+                        style: TextStyle(
+                          color: appTheme.black900,
+                          fontSize: 40.fSize,
+                          fontFamily: 'Roboto',
+                          fontWeight: FontWeight.w400,
+                        ),
                       ),
                     ),
                   ],

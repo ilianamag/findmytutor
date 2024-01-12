@@ -21,7 +21,7 @@ class AppWidgets {
           Icons.arrow_back,
           color: appTheme.black900, // Replace with your color value
         ),
-        onPressed: () => Navigator.pushNamed(context, AppRoutes.studentProfileScreen),
+        onPressed: () => Navigator.pushNamed(context, AppRoutes.tutorProfilePage),
       ),
     ],
     );
@@ -45,7 +45,7 @@ class AppWidgets {
           ),
           onTap: () {
             Navigator.pop(context);
-            Navigator.pushNamed(context, AppRoutes.myTutorsScreen);
+            Navigator.pushNamed(context, AppRoutes.studentsTutorProfileoneScreen);
           },
         ),
         ListTile(

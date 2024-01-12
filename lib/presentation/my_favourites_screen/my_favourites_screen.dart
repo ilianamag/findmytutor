@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:login/core/app_export.dart';
-import 'package:login/widgets/app_bar/appbar_leading_image.dart';
-import 'package:login/widgets/app_bar/appbar_title.dart';
-import 'package:login/widgets/app_bar/appbar_trailing_button.dart';
-import 'package:login/widgets/app_bar/appbar_trailing_image.dart';
-import 'package:login/widgets/app_bar/custom_app_bar.dart';
 import 'package:login/widgets/appbar.dart';
 import 'package:login/widgets/custom_bottom_bar.dart';
 class MyFavouritesScreen extends StatelessWidget {
@@ -27,7 +22,7 @@ class MyFavouritesScreen extends StatelessWidget {
               Align(
                 alignment: Alignment.centerRight,
                 child: Padding(
-                  padding: EdgeInsets.only(right: 58.h),
+                  padding: EdgeInsets.only(right: 70.h),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -46,7 +41,7 @@ class MyFavouritesScreen extends StatelessWidget {
                       Align(
                         alignment: Alignment.centerRight,
                         child: Text(
-                          "Favourites",
+                          "   Favourites",
                           style: TextStyle(
                             color: appTheme.black900,
                             fontSize: 40.fSize,

@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:login/core/app_export.dart';
-import 'package:login/widgets/app_bar/appbar_leading_image.dart';
-import 'package:login/widgets/app_bar/appbar_title.dart';
-import 'package:login/widgets/app_bar/appbar_trailing_image.dart';
-import 'package:login/widgets/app_bar/custom_app_bar.dart';
 import 'package:login/widgets/custom_bottom_bar_teacher.dart';
 import 'package:login/widgets/appbarfortutors.dart';
 
@@ -26,27 +22,28 @@ class StudentsTutorProfileoneScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: EdgeInsets.only(left: 87.h),
+                padding: EdgeInsets.only(left: 96.h),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Align(
-                      alignment: Alignment.center,
-                      child: Padding(
-                        padding: EdgeInsets.only(right: 120.h),
-                        child: Text(
-                          "My  ",
-                          style: theme.textTheme.displayMedium,
-                        ),
+                    Text(
+                      "  My",
+                      style: TextStyle(
+                        color: appTheme.black900,
+                        fontSize: 40.fSize,
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.w400,
                       ),
                     ),
                     Align(
                       alignment: Alignment.center,
-                      child: Padding(
-                        padding: EdgeInsets.only(right: 20.h),
-                        child: Text(
-                          "Students",
-                          style: theme.textTheme.displayMedium,
+                      child: Text(
+                        "Students",
+                        style: TextStyle(
+                          color: appTheme.black900,
+                          fontSize: 40.fSize,
+                          fontFamily: 'Roboto',
+                          fontWeight: FontWeight.w400,
                         ),
                       ),
                     ),

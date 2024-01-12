@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:login/core/app_export.dart';
-import 'package:login/widgets/app_bar/appbar_leading_image.dart';
-import 'package:login/widgets/app_bar/appbar_title.dart';
-import 'package:login/widgets/app_bar/appbar_trailing_image.dart';
-import 'package:login/widgets/app_bar/custom_app_bar.dart';
 import 'package:login/widgets/custom_bottom_bar_teacher.dart';
 import 'package:login/widgets/custom_outlined_button.dart';
 import 'package:login/widgets/appbarfortutors.dart';
@@ -23,7 +19,7 @@ class TutorProfilePage extends StatelessWidget {
         body: Container(
           width: double.maxFinite,
           padding: EdgeInsets.symmetric(
-            horizontal: 68.h,
+            horizontal: 70.h,
             vertical: 36.v,
           ),
           child: Column(

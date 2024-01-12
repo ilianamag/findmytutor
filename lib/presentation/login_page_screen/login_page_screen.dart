@@ -106,7 +106,7 @@ class LoginPageScreen extends StatelessWidget {
                                   left: 8.h,
                                   top: 2.v,
                                   right: 8.h,
-                                ),
+                                ),                               
                                 child: Text(
                                   "Login",
                                   style: TextStyle(
@@ -165,6 +165,6 @@ class LoginPageScreen extends StatelessWidget {
   }
   // /// Navigates to the signupPageScreen when the action is triggered.
   onTapTxtSignUp(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.studentoneScreen);
+    Navigator.pushNamed(context, AppRoutes.enaAlloSignUp);
   }
 }

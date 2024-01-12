@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:login/core/app_export.dart';
-import 'package:login/widgets/app_bar/appbar_leading_image.dart';
-import 'package:login/widgets/app_bar/appbar_title.dart';
-import 'package:login/widgets/app_bar/appbar_trailing_image.dart';
-import 'package:login/widgets/app_bar/custom_app_bar.dart';
 import 'package:login/widgets/custom_bottom_bar_teacher.dart';
 import 'package:login/widgets/appbarfortutors.dart';
 
@@ -27,20 +23,30 @@ class FaqsScreenTutor extends StatelessWidget {
             top: 94.v,
             right: 16.h,
           ),
-          child: Column(
+          child:Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Align(
                 alignment: Alignment.center,
                 child: Text(
                   "FAQs",
-                  style: theme.textTheme.displayMedium,
+                  style: TextStyle(
+                    color: appTheme.black900,
+                    fontSize: 40.fSize,
+                    fontFamily: 'Roboto',
+                    fontWeight: FontWeight.w400,
+                  ),
                 ),
               ),
               SizedBox(height: 66.v),
               Text(
                 "Μπορώ να επικοινωνήσω με τον μαθητή;",
-                style: theme.textTheme.titleMedium,
+                style: TextStyle(
+                  color: appTheme.black900,
+                  fontSize: 16.fSize,
+                  fontFamily: 'Roboto',
+                  fontWeight: FontWeight.w700,
+                ),
               ),
               SizedBox(height: 8.v),
               Container(
@@ -58,7 +64,12 @@ class FaqsScreenTutor extends StatelessWidget {
               SizedBox(height: 8.v),
               Text(
                 "Πώς μπορώ να αποκτήσω QR code?",
-                style: theme.textTheme.titleMedium,
+                style: TextStyle(
+                  color: appTheme.black900,
+                  fontSize: 16.fSize,
+                  fontFamily: 'Roboto',
+                  fontWeight: FontWeight.w700,
+                ),
               ),
               SizedBox(height: 7.v),
               Container(

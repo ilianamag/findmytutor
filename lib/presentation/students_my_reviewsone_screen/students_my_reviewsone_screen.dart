@@ -29,7 +29,7 @@ class StudentsMyReviewsoneScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "My",
+                      "    My",
                       style: TextStyle(
                         color: appTheme.black900,
                         fontSize: 40.fSize,
