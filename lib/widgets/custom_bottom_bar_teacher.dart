@@ -1,43 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:login/core/app_export.dart';
 
-class CustomBottomBar extends StatefulWidget {
-  CustomBottomBar({this.onChanged});
+class CustomBottomBar2 extends StatefulWidget {
+  CustomBottomBar2({this.onChanged});
 
-  Function(BottomBarEnum)? onChanged;
+  Function(BottomBarEnum2)? onChanged;
 
   @override
   CustomBottomBarState createState() => CustomBottomBarState();
 }
 
-class CustomBottomBarState extends State<CustomBottomBar> {
+class CustomBottomBarState extends State<CustomBottomBar2> {
   int selectedIndex = 0;
   
   List<BottomMenuModel> bottomMenuList = [
     BottomMenuModel(
-      icon: ImageConstant.imgNavSearch,
-      activeIcon: ImageConstant.imgNavSearch,
-      title: "Search",
-      type: BottomBarEnum.Search,
-    ),
-    BottomMenuModel(
-      icon: ImageConstant.imgNavFavourites,
-      activeIcon: ImageConstant.imgNavFavourites,
-      title: "Favourites",
-      type: BottomBarEnum.Favourites,
+      icon: ImageConstant.imgNavMyStudents,
+      activeIcon: ImageConstant.imgNavMyStudents,
+      title: "My Students",
+      type: BottomBarEnum2.Mystudents,
     ),
     BottomMenuModel(
       icon: ImageConstant.imgNavMessages,
       activeIcon: ImageConstant.imgNavMessages,
       title: "Messages",
-      type: BottomBarEnum.Messages,
+      type: BottomBarEnum2.Messages,
     ),
     BottomMenuModel(
       icon: ImageConstant.imgNavProfile,
       activeIcon: ImageConstant.imgNavProfile,
       title: "Profile",
-      type: BottomBarEnum.Profile,
-    ),
+      type: BottomBarEnum2.Profile,
+    )
   ];
 
   @override
@@ -69,19 +63,15 @@ class CustomBottomBarState extends State<CustomBottomBar> {
           widget.onChanged?.call(bottomMenuList[index].type);
 
           switch (bottomMenuList[index].type) {
-            case BottomBarEnum.Search:
-              Navigator.pushReplacementNamed(context, '/search');
+            case BottomBarEnum2.Mystudents:
+              Navigator.pushReplacementNamed(context, AppRoutes.studentsTutorProfileoneScreen);
               break;
-            case BottomBarEnum.Favourites:
-              Navigator.pushReplacementNamed(
-                  context, AppRoutes.myFavouritesScreen);
-              break;
-            case BottomBarEnum.Messages:
+            case BottomBarEnum2.Messages:
               Navigator.pushReplacementNamed(context, '/messages');
               break;
-            case BottomBarEnum.Profile:
+            case BottomBarEnum2.Profile:
               Navigator.pushReplacementNamed(
-                  context, AppRoutes.studentProfileScreen);
+                  context, AppRoutes.tutorProfilePage);
               break;
           }
           setState(() {});
@@ -130,9 +120,8 @@ class CustomBottomBarState extends State<CustomBottomBar> {
 }
 
 
-enum BottomBarEnum {
-  Search,
-  Favourites,
+enum BottomBarEnum2 {
+  Mystudents,
   Messages,
   Profile,
 }
@@ -151,7 +140,7 @@ class BottomMenuModel {
 
   String? title;
 
-  BottomBarEnum type;
+  BottomBarEnum2 type;
 }
 
 class DefaultWidget extends StatelessWidget {

@@ -21,6 +21,8 @@ class ImageConstant {
 
   static String imgEdit = '$imagePath/img_edit.svg';
 
+  static String imgUserImagesUser = '$imagePath/img_user_images_user.png';
+
   static String imgBackground = '$imagePath/img_background.png';
 
   static String imgIconsMailoutline = '$imagePath/img_icons_mailoutline.svg';
@@ -42,6 +44,10 @@ class ImageConstant {
   static String imgAvatarPlaceholder = '$imagePath/img_avatar_placeholder.svg';
 
   static String imgNavSearch = '$imagePath/img_nav_search.svg';
+
+  static String imgNavMyStudents = '$imagePath/img_nav_my_students.svg';
+
+  static String imgEditGray80001 = '$imagePath/img_edit_gray_800_01.svg';
 
   static String imgNavFavourites = '$imagePath/img_nav_favourites.svg';
 

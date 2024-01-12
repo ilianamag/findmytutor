@@ -115,9 +115,8 @@ class PrimaryColors {
   Color get gray60001 => Color(0XFF857371);
   Color get gray800 => Color(0XFF534341);
   Color get gray900 => Color(0XFF1C1B1F);
+  Color get gray80001 => Color(0XFF534341);
   Color get gray90001 => Color(0XFF1D1C16);
-
-  // Graye
   Color get gray9001e => Color(0X1E1D1B20);
 
   // Red

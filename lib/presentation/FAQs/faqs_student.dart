@@ -5,7 +5,7 @@ import 'package:login/widgets/app_bar/appbar_title.dart';
 import 'package:login/widgets/app_bar/appbar_trailing_button.dart';
 import 'package:login/widgets/app_bar/appbar_trailing_image.dart';
 import 'package:login/widgets/app_bar/custom_app_bar.dart';
-
+import 'package:login/widgets/custom_bottom_bar.dart';
 class FaqsScreen extends StatelessWidget {
   const FaqsScreen({Key? key})
       : super(
@@ -98,6 +98,7 @@ class FaqsScreen extends StatelessWidget {
             ],
           ),
         ),
+        bottomNavigationBar: _buildBottomBar(context),
       ),
     );
   }
@@ -133,5 +134,9 @@ class FaqsScreen extends StatelessWidget {
       ],
       styleType: Style.bgFill,
     );
+  }
+   Widget _buildBottomBar(BuildContext context) {
+    return CustomBottomBar(onChanged: (BottomBarEnum type) {
+    });
   }
 }
