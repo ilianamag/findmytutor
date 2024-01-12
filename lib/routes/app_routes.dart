@@ -23,7 +23,7 @@ import 'package:login/presentation/full_review_screen_teacher/full_review_screen
 class AppRoutes {
   static const String loginPageScreen = '/login_page_screen';
 
-  static const String faqsScreen = '/faqs_student';
+  static const String faqsScreenStudent = '/faqs_student';
 
   static const String myTutorsScreen = '/my_tutors_screen';
 
@@ -59,7 +59,7 @@ class AppRoutes {
     studentsTutorProfileoneScreen: (context) => StudentsTutorProfileoneScreen(),
     tutorProfilePage: (context) => TutorProfilePage(),
     tutorEditProfilePage : (context) => TutorProfilePage(),
-    faqsScreen :(context) => FaqsScreen(),
+    faqsScreenStudent :(context) => FaqsScreen(),
     myFavouritesScreen: (context) => MyFavouritesScreen(),
     studentsMyReviewsoneScreen: (context) => StudentsMyReviewsoneScreen(),
     editProfileOfStudentPage: (context) => EditProfileOfStudentPage(),
@@ -69,6 +69,6 @@ class AppRoutes {
     loginPageScreen: (context) => LoginPageScreen(),
     studentProfileScreen: (context) => StudentProfileScreen(),
     appNavigationScreen: (context) => AppNavigationScreen(),
-    studentoneScreen: (context) => StudentoneScreen()
+    studentoneScreen: (context) => StudentoneScreen(),
   };
 }

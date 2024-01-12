@@ -18,6 +18,7 @@ class MyTutorsScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: _buildAppBar(context),
+        drawer: _buildDrawer(context),
         body: Container(
           width: double.maxFinite,
           padding: EdgeInsets.only(top: 69.v),
@@ -64,41 +65,104 @@ class MyTutorsScreen extends StatelessWidget {
     );
   }
 
-  /// Section Widget
-  PreferredSizeWidget _buildAppBar(BuildContext context) {
-    return CustomAppBar(
-      leadingWidth: 40.h,
-      leading: AppbarLeadingImage(
-        imagePath: ImageConstant.imgMegaphone,
-        margin: EdgeInsets.only(
-          left: 16.h,
-          top: 19.v,
-          bottom: 19.v,
+  AppBar _buildAppBar(BuildContext context) {
+  return AppBar(
+    centerTitle: true,
+    title: Text(
+      'Find My Tutor',
+      style: TextStyle(
+        fontFamily: 'Roboto',
+        fontWeight: FontWeight.w400,
+        color: appTheme.black900, // Replace with your color value
+        fontSize: 20.fSize, // Replace with your font size
+      ),
+    ),
+    backgroundColor: const Color(0xffF8EBEA), // Replace with your color value
+    actions: [
+      IconButton(
+        icon: Icon(
+          Icons.arrow_back,
+          color: appTheme.black900, // Replace with your color value
         ),
+        onPressed: () => Navigator.pushNamed(context, AppRoutes.studentProfileScreen),
       ),
-      title: AppbarTitle(
-        text: "FindmyTutor",
-        margin: EdgeInsets.only(left: 18.h),
-      ),
-      actions: [
-        AppbarTrailingImage(
-          imagePath: ImageConstant.imgArrowLeft,
-          margin: EdgeInsets.fromLTRB(13.h, 13.v, 17.h, 8.v),
+    ],
+  );
+}
+
+Drawer _buildDrawer(BuildContext context) {
+  return Drawer(
+    child: ListView(
+      padding: EdgeInsets.zero,
+      children: [
+        ListTile(
+          leading: Icon(
+            Icons.person_outline,
+            color: appTheme.black900, // Replace with your color value
+          ),
+          title: Text(
+            'My Tutors',
+            style: TextStyle(
+              color: appTheme.black900, // Replace with your color value
+            ),
+          ),
           onTap: () {
-            Navigator.pushReplacementNamed(context, AppRoutes.studentProfileScreen);
+            Navigator.pop(context);
+            Navigator.pushNamed(context, AppRoutes.myTutorsScreen);
           },
         ),
-        AppbarTrailingButton(
-          margin: EdgeInsets.only(
-            left: 29.h,
-            top: 13.v,
-            right: 30.h,
+        ListTile(
+          leading: Icon(
+            Icons.question_answer,
+            color: appTheme.black900, // Replace with your color value
           ),
+          title: Text(
+            'FAQs',
+            style: TextStyle(
+              color: appTheme.black900, // Replace with your color value
+            ),
+          ),
+          onTap: () {
+            Navigator.pop(context);
+            Navigator.pushNamed(context, AppRoutes.faqsScreenStudent);
+          },
+        ),
+        ListTile(
+          leading: Icon(
+            Icons.qr_code,
+            color: appTheme.black900, // Replace with your color value
+          ),
+          title: Text(
+            'QR Code Scanner',
+            style: TextStyle(
+              color: appTheme.black900, // Replace with your color value
+            ),
+          ),
+          onTap: () {
+            Navigator.pop(context);
+            // Add your navigation logic here
+          },
+        ),
+        ListTile(
+          leading: Icon(
+            Icons.logout,
+            color: appTheme.black900, // Replace with your color value
+          ),
+          title: Text(
+            'Logout',
+            style: TextStyle(
+              color: appTheme.black900, // Replace with your color value
+            ),
+          ),
+          onTap: () {
+            Navigator.pop(context);
+            Navigator.pushNamed(context, AppRoutes.loginPageScreen);
+          },
         ),
       ],
-      styleType: Style.bgFill,
-    );
-  }
+    ),
+  );
+}
 
   /// Section Widget
   Widget _buildHorizontalCard(BuildContext context) {
@@ -151,6 +215,7 @@ class MyTutorsScreen extends StatelessWidget {
       ),
     );
   }
+  
   Widget _buildBottomBar(BuildContext context) {
     return CustomBottomBar(onChanged: (BottomBarEnum type) {
     });

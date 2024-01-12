@@ -53,6 +53,7 @@ class StudentsMyReviewsoneScreen extends StatelessWidget {
               title: const Text('FAQs'),
               onTap: () {
                 Navigator.pop(context);
+                Navigator.pushNamed(context, AppRoutes.faqsScreenStudent);
                 
               },
             ),
