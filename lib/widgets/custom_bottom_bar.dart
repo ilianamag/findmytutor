@@ -27,12 +27,6 @@ class CustomBottomBarState extends State<CustomBottomBar> {
       type: BottomBarEnum.Favourites,
     ),
     BottomMenuModel(
-      icon: ImageConstant.imgNavMessages,
-      activeIcon: ImageConstant.imgNavMessages,
-      title: "Messages",
-      type: BottomBarEnum.Messages,
-    ),
-    BottomMenuModel(
       icon: ImageConstant.imgNavProfile,
       activeIcon: ImageConstant.imgNavProfile,
       title: "Profile",
@@ -75,9 +69,6 @@ class CustomBottomBarState extends State<CustomBottomBar> {
             case BottomBarEnum.Favourites:
               Navigator.pushReplacementNamed(
                   context, AppRoutes.myFavouritesScreen);
-              break;
-            case BottomBarEnum.Messages:
-              Navigator.pushReplacementNamed(context, '/messages');
               break;
             case BottomBarEnum.Profile:
               Navigator.pushReplacementNamed(
@@ -133,7 +124,6 @@ class CustomBottomBarState extends State<CustomBottomBar> {
 enum BottomBarEnum {
   Search,
   Favourites,
-  Messages,
   Profile,
 }
 

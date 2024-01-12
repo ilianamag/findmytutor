@@ -21,12 +21,6 @@ class CustomBottomBarState extends State<CustomBottomBar2> {
       type: BottomBarEnum2.Mystudents,
     ),
     BottomMenuModel(
-      icon: ImageConstant.imgNavMessages,
-      activeIcon: ImageConstant.imgNavMessages,
-      title: "Messages",
-      type: BottomBarEnum2.Messages,
-    ),
-    BottomMenuModel(
       icon: ImageConstant.imgNavProfile,
       activeIcon: ImageConstant.imgNavProfile,
       title: "Profile",
@@ -65,9 +59,6 @@ class CustomBottomBarState extends State<CustomBottomBar2> {
           switch (bottomMenuList[index].type) {
             case BottomBarEnum2.Mystudents:
               Navigator.pushReplacementNamed(context, AppRoutes.studentsTutorProfileoneScreen);
-              break;
-            case BottomBarEnum2.Messages:
-              Navigator.pushReplacementNamed(context, '/messages');
               break;
             case BottomBarEnum2.Profile:
               Navigator.pushReplacementNamed(
@@ -122,7 +113,6 @@ class CustomBottomBarState extends State<CustomBottomBar2> {
 
 enum BottomBarEnum2 {
   Mystudents,
-  Messages,
   Profile,
 }
 
