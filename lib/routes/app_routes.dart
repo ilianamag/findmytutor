@@ -18,12 +18,14 @@ import 'package:login/presentation/tutor_profile_page/tutor_profile_page.dart';
 import 'package:login/presentation/my_students/students_tutor_profileone_screen.dart';
 import 'package:login/presentation/my_reviews_tutor_screen/my_reviews_tutor_screen.dart';
 import 'package:login/presentation/full_review_screen_teacher/full_review_screen.dart';
-
+import 'package:login/presentation/FAQs_tutor/faqs_tutor.dart';
 
 class AppRoutes {
   static const String loginPageScreen = '/login_page_screen';
 
   static const String faqsScreenStudent = '/faqs_student';
+
+  static const String faqsScreenTutor = '/faqs_tutor';
 
   static const String myTutorsScreen = '/my_tutors_screen';
 
@@ -54,6 +56,7 @@ class AppRoutes {
   static const String fullReviewScreen = '/full_review_screen';
   
   static Map<String, WidgetBuilder> routes = {
+    faqsScreenTutor: (context) => FaqsScreenTutor(),
     fullReviewScreen: (context) => FullReviewScreen(),
     myReviewsTutorScreen: (context) => MyReviewsTutorScreen(),
     studentsTutorProfileoneScreen: (context) => StudentsTutorProfileoneScreen(),

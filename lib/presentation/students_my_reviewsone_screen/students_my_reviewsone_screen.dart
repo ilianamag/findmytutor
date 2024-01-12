@@ -3,6 +3,7 @@ import 'package:login/core/app_export.dart';
 import 'package:login/presentation/students_my_reviewstwo_screen/students_my_reviewstwo_screen.dart';
 import 'package:login/widgets/custom_rating_bar.dart';
 import 'package:login/widgets/custom_bottom_bar.dart';
+import 'package:login/widgets/appbar.dart';
 
 class StudentsMyReviewsoneScreen extends StatelessWidget {
   const StudentsMyReviewsoneScreen({Key? key})
@@ -14,72 +15,8 @@ class StudentsMyReviewsoneScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          title: const Text(
-            'Find My Tutor',
-              style: TextStyle(
-                fontFamily: 'Roboto',
-                fontWeight: FontWeight.w400,
-              ),
-          ),
-          backgroundColor: const Color(0xffF8EBEA),
-          actions: [ //για να εμφανιζεται δεξια του τιτλου θελει actions αντί για leading
-          IconButton(icon: Icon(Icons.arrow_back),
-            onPressed: () => { Navigator.pushNamed(context, AppRoutes.studentProfileScreen)
-            }
-          ),
-        ],
-        ),
-
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            ListTile(
-              leading: Icon(
-                Icons.person_outline,
-              ),
-              title: const Text('My Tutors'),
-              onTap: () {
-                Navigator.pop(context); // Close the drawer
-                Navigator.pushNamed(context, AppRoutes.myTutorsScreen); // Navigate to the home page
-              },
-            ),
-            ListTile(
-              leading: Icon(
-                Icons.question_answer,
-              ),
-              title: const Text('FAQs'),
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.pushNamed(context, AppRoutes.faqsScreenStudent);
-                
-              },
-            ),
-            ListTile(
-              leading: Icon(
-                Icons.qr_code,
-              ),
-              title: const Text('QR Code Scanner'),
-              onTap: () {
-                Navigator.pop(context);
-                //Navigator.pushNamed(context, AppRoutes.); // Navigate to the home page
-              },
-            ),
-            ListTile(
-              leading: Icon(
-                Icons.logout,
-              ),
-              title: const Text('Logout'),
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.pushNamed(context, AppRoutes.loginPageScreen); // Navigate to the home page
-              },
-            ),
-          ],
-        ),
-    ),
+        appBar: AppWidgets.buildAppBar(context),
+        drawer: AppWidgets.buildDrawer(context),
         body: Container(
           width: double.maxFinite,
           padding: EdgeInsets.symmetric(vertical: 55.v),
@@ -126,41 +63,6 @@ class StudentsMyReviewsoneScreen extends StatelessWidget {
     );
   }
 
-  // /// Section Widget
-  // PreferredSizeWidget _buildAppBar(BuildContext context) {
-  //   return CustomAppBar(
-  //     leadingWidth: 39.h,
-  //     leading: AppbarLeadingImage(
-  //       imagePath: ImageConstant.imgMegaphone,
-  //       margin: EdgeInsets.only(
-  //         left: 15.h,
-  //         top: 19.v,
-  //         bottom: 19.v,
-  //       ),
-  //     ),
-  //     title: AppbarTitle(
-  //       text: "FindmyTutor",
-  //       margin: EdgeInsets.only(left: 18.h),
-  //     ),
-  //     actions: [
-  //       AppbarTrailingImage(
-  //         imagePath: ImageConstant.imgArrowLeft,
-  //         margin: EdgeInsets.fromLTRB(14.h, 13.v, 17.h, 8.v),
-  //         onTap: () {
-  //           Navigator.pushReplacementNamed(context, AppRoutes.studentProfileScreen);
-  //         },
-  //       ),
-  //       AppbarTrailingButton(
-  //         margin: EdgeInsets.only(
-  //           left: 29.h,
-  //           top: 13.v,
-  //           right: 31.h,
-  //         ),
-  //       ),
-  //     ],
-  //     styleType: Style.bgFill,
-  //   );
-  // }
 
   /// Section Widget
   Widget _buildHorizontalCard(BuildContext context) {
@@ -274,9 +176,6 @@ class StudentsMyReviewsoneScreen extends StatelessWidget {
 }
   Widget _buildBottomBar(BuildContext context) {
     return CustomBottomBar(onChanged: (BottomBarEnum type) {
-      // You can handle the navigation logic in the CustomBottomBar widget
-      // instead of doing it in the StudentProfileScreen widget.
-      // This callback will be triggered when a bottom bar item is tapped.
     });
   }
 }

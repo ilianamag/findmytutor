@@ -7,7 +7,7 @@ import 'package:login/widgets/app_bar/custom_app_bar.dart';
 import 'package:login/widgets/custom_floating_text_field.dart';
 import 'package:login/widgets/custom_icon_button.dart';
 import 'package:login/widgets/custom_bottom_bar_teacher.dart';
-
+import 'package:login/widgets/appbarfortutors.dart';
 // ignore_for_file: must_be_immutable
 class TutorEditProfilePage extends StatelessWidget {
   TutorEditProfilePage({Key? key}): super(key: key,);
@@ -27,7 +27,8 @@ class TutorEditProfilePage extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        appBar: _buildAppBar(context),
+        appBar: AppWidgets.buildAppBar2(context),
+        drawer: AppWidgets.buildDrawer2(context),
         body: SizedBox(
           width: SizeUtils.width,
           child: SingleChildScrollView(
@@ -186,34 +187,6 @@ class TutorEditProfilePage extends StatelessWidget {
     );
   }
 
-  /// Section Widget
-  PreferredSizeWidget _buildAppBar(BuildContext context) {
-    return CustomAppBar(
-      leadingWidth: 39.h,
-      leading: AppbarLeadingImage(
-        imagePath: ImageConstant.imgMegaphone,
-        margin: EdgeInsets.only(
-          left: 15.h,
-          top: 19.v,
-          bottom: 19.v,
-        ),
-      ),
-      title: AppbarTitle(
-        text: "FindmyTutor",
-        margin: EdgeInsets.only(left: 18.h),
-      ),
-      actions: [
-        AppbarTrailingImage(
-          imagePath: ImageConstant.imgArrowLeft,
-          margin: EdgeInsets.fromLTRB(62.h, 18.v, 93.h, 20.v),
-           onTap: () {
-            Navigator.pushReplacementNamed(context, AppRoutes.tutorProfilePage);
-          }
-        ),
-      ],
-      styleType: Style.bgFill,
-    );
-  }
 
   /// Section Widget
   Widget _buildFirstName(BuildContext context) {

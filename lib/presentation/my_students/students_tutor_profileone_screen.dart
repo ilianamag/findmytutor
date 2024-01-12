@@ -5,6 +5,7 @@ import 'package:login/widgets/app_bar/appbar_title.dart';
 import 'package:login/widgets/app_bar/appbar_trailing_image.dart';
 import 'package:login/widgets/app_bar/custom_app_bar.dart';
 import 'package:login/widgets/custom_bottom_bar_teacher.dart';
+import 'package:login/widgets/appbarfortutors.dart';
 
 class StudentsTutorProfileoneScreen extends StatelessWidget {
   const StudentsTutorProfileoneScreen({Key? key})
@@ -16,7 +17,8 @@ class StudentsTutorProfileoneScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: _buildAppBar(context),
+        appBar: AppWidgets.buildAppBar2(context),
+        drawer: AppWidgets.buildDrawer2(context),
         body: Container(
           width: double.maxFinite,
           padding: EdgeInsets.only(top: 89.v),
@@ -59,32 +61,6 @@ class StudentsTutorProfileoneScreen extends StatelessWidget {
         ),
        bottomNavigationBar: _buildBottomBar(context),
       ),
-    );
-  }
-
-  /// Section Widget
-  PreferredSizeWidget _buildAppBar(BuildContext context) {
-    return CustomAppBar(
-      leadingWidth: 40.h,
-      leading: AppbarLeadingImage(
-        imagePath: ImageConstant.imgMegaphone,
-        margin: EdgeInsets.only(
-          left: 16.h,
-          top: 19.v,
-          bottom: 19.v,
-        ),
-      ),
-      title: AppbarTitle(
-        text: "FindmyTutor",
-        margin: EdgeInsets.only(left: 18.h),
-      ),
-      actions: [
-        AppbarTrailingImage(
-          imagePath: ImageConstant.imgArrowLeft,
-          margin: EdgeInsets.fromLTRB(62.h, 18.v, 92.h, 20.v),
-        ),
-      ],
-      styleType: Style.bgFill,
     );
   }
 

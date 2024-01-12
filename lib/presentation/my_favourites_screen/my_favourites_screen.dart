@@ -5,8 +5,8 @@ import 'package:login/widgets/app_bar/appbar_title.dart';
 import 'package:login/widgets/app_bar/appbar_trailing_button.dart';
 import 'package:login/widgets/app_bar/appbar_trailing_image.dart';
 import 'package:login/widgets/app_bar/custom_app_bar.dart';
+import 'package:login/widgets/appbar.dart';
 import 'package:login/widgets/custom_bottom_bar.dart';
-
 class MyFavouritesScreen extends StatelessWidget {
   const MyFavouritesScreen({Key? key})
       : super(
@@ -17,7 +17,8 @@ class MyFavouritesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: _buildAppBar(context),
+        appBar: AppWidgets.buildAppBar(context),
+        drawer: AppWidgets.buildDrawer(context),
         body: Container(
           width: double.maxFinite,
           padding: EdgeInsets.symmetric(vertical: 57.v),
@@ -69,38 +70,6 @@ class MyFavouritesScreen extends StatelessWidget {
     );
   }
 
-  /// Section Widget
-  PreferredSizeWidget _buildAppBar(BuildContext context) {
-    return CustomAppBar(
-      leadingWidth: 40.h,
-      leading: AppbarLeadingImage(
-        imagePath: ImageConstant.imgMegaphone,
-        margin: EdgeInsets.only(
-          left: 16.h,
-          top: 19.v,
-          bottom: 19.v,
-        ),
-      ),
-      title: AppbarTitle(
-        text: "FindmyTutor",
-        margin: EdgeInsets.only(left: 18.h),
-      ),
-      actions: [
-        AppbarTrailingImage(
-          imagePath: ImageConstant.imgArrowLeft,
-          margin: EdgeInsets.fromLTRB(13.h, 13.v, 17.h, 8.v),
-        ),
-        AppbarTrailingButton(
-          margin: EdgeInsets.only(
-            left: 29.h,
-            top: 13.v,
-            right: 30.h,
-          ),
-        ),
-      ],
-      styleType: Style.bgFill,
-    );
-  }
 
   /// Section Widget
   Widget _buildHorizontalCard(BuildContext context) {

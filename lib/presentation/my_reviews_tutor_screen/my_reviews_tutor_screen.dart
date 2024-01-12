@@ -7,6 +7,7 @@ import 'package:login/widgets/app_bar/appbar_trailing_image.dart';
 import 'package:login/widgets/app_bar/custom_app_bar.dart';
 import 'package:login/widgets/custom_bottom_bar_teacher.dart';
 import 'package:login/widgets/custom_rating_bar.dart';
+import 'package:login/widgets/appbarfortutors.dart';
 class MyReviewsTutorScreen extends StatelessWidget {
   const MyReviewsTutorScreen({Key? key})
       : super(
@@ -17,7 +18,8 @@ class MyReviewsTutorScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: _buildAppBar(context),
+        appBar: AppWidgets.buildAppBar2(context),
+        drawer: AppWidgets.buildDrawer2(context),
         body: Container(
           width: double.maxFinite,
           padding: EdgeInsets.symmetric(vertical: 57.v),
