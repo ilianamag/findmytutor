@@ -19,7 +19,69 @@ class StudentsMyReviewsoneScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: _buildAppBar(context),
+        appBar: AppBar(
+          centerTitle: true,
+          title: const Text(
+            'Find My Tutor',
+              style: TextStyle(
+                fontFamily: 'Roboto',
+                fontWeight: FontWeight.w400,
+              ),
+          ),
+          backgroundColor: const Color(0xffF8EBEA),
+          leading: IconButton( //pisw velaki
+            icon: Icon(Icons.arrow_back, color: Colors.black),
+            onPressed: () => Navigator.of(context).pop(),
+          )
+        ),
+
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            ListTile(
+              leading: Icon(
+                Icons.person_outline,
+              ),
+              title: const Text('My Tutors'),
+              onTap: () {
+                Navigator.pop(context); // Close the drawer
+                Navigator.pushNamed(context, AppRoutes.myTutorsScreen); // Navigate to the home page
+              },
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.question_answer,
+              ),
+              title: const Text('FAQs'),
+              onTap: () {
+                Navigator.pop(context);
+                
+              },
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.qr_code,
+              ),
+              title: const Text('QR Code Scanner'),
+              onTap: () {
+                Navigator.pop(context);
+                //Navigator.pushNamed(context, AppRoutes.); // Navigate to the home page
+              },
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.logout,
+              ),
+              title: const Text('Logout'),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pushNamed(context, AppRoutes.loginPageScreen); // Navigate to the home page
+              },
+            ),
+          ],
+        ),
+    ),
         body: Container(
           width: double.maxFinite,
           padding: EdgeInsets.symmetric(vertical: 55.v),
@@ -41,7 +103,7 @@ class StudentsMyReviewsoneScreen extends StatelessWidget {
                       ),
                     ),
                     Align(
-                      alignment: Alignment.center,
+                      alignment: Alignment(-0.2, 0.0),
                       child: Text(
                         "Reviews",
                         style: TextStyle(
