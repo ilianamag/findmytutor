@@ -17,6 +17,8 @@ import 'package:login/presentation/my_reviews_tutor_screen/my_reviews_tutor_scre
 import 'package:login/presentation/FAQs_tutor/faqs_tutor.dart';
 import 'package:login/presentation/ena_allo_sign_up/ena_allo_sign_up.dart'; 
 import 'package:login/presentation/tutor_edit_profile_page/tutor_edit_profile_page.dart';
+import 'package:login/presentation/make_a_review_screen/make_a_review_screen.dart';
+
 class AppRoutes {
   static const String loginPageScreen = '/login_page_screen';
 
@@ -46,16 +48,19 @@ class AppRoutes {
   
   static const String tutorProfilePage = '/tutor_profile_page';
   
+  static const String makeAReviewScreen = '/make_a_review_screen';
+
   static const String myReviewsTutorScreen = '/my_reviews_tutor_screen';
 
   static const String studentsTutorProfileoneScreen = '/students_tutor_profileone_screen';
  
   static const String fullReviewScreen = '/full_review_screen';
 
-    static const String enaAlloSignUp = '/ena_allo_sign_up';
+  static const String enaAlloSignUp = '/ena_allo_sign_up';
 
   
   static Map<String, WidgetBuilder> routes = {
+    makeAReviewScreen:(context) => MakeAReviewScreen(),
     enaAlloSignUp: (context) => MyHomePage(),
     faqsScreenTutor: (context) => FaqsScreenTutor(),
     fullReviewScreen: (context) => FullReviewScreen(),

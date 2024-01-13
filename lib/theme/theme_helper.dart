@@ -104,6 +104,7 @@ class PrimaryColors {
 
    // DeepOrange
   Color get deepOrange50 => Color(0XFFF2E5E4);
+  Color get deepOrange200 => Color(0XFFFFB4AC);
 
    // DeepPurple
   Color get deepPurple500 => Color(0XFF6750A4);

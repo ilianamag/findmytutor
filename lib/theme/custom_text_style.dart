@@ -10,6 +10,9 @@ class CustomTextStyles {
   static get bodyLargeGray900 => theme.textTheme.bodyLarge!.copyWith(
         color: appTheme.gray900,
       );
+      static get bodyLargeGray800 => theme.textTheme.bodyLarge!.copyWith(
+        color: appTheme.gray800,
+      );
   static get bodyLargeWhiteA700 => theme.textTheme.bodyLarge!.copyWith(
         color: appTheme.whiteA700,
       );
@@ -32,6 +35,12 @@ class CustomTextStyles {
       );
       static get titleMediumGray90001 => theme.textTheme.titleMedium!.copyWith(
         color: appTheme.gray90001,
+      );
+      static get titleSmallBlack900 => theme.textTheme.titleSmall!.copyWith(
+        color: appTheme.black900,
+      );
+  static get titleSmallDeeporange200 => theme.textTheme.titleSmall!.copyWith(
+        color: appTheme.deepOrange200,
       );
 }
 

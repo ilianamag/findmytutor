@@ -54,5 +54,9 @@ class ImageConstant {
   static String imgNavMessages = '$imagePath/img_nav_messages.svg';
 
   static String imgNavProfile = '$imagePath/img_nav_profile.svg';
+  
+  static String imgPlus = '$imagePath/img_plus.svg';
+
+  static String imgSend = '$imagePath/img_send.svg';
 }
 
