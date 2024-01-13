@@ -77,6 +77,7 @@ class AppWidgets {
           ),
           onTap: () {
             Navigator.pop(context);
+            Navigator.pushNamed(context, AppRoutes.loginPageScreen);
             // Add your navigation logic here
           },
         ),

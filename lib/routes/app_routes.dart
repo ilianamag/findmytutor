@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:login/presentation/FAQs/faqs_student.dart';
 import 'package:login/presentation/full_review_screen_teacher/full_review_screen.dart';
+import 'package:login/presentation/homepage/homepage.dart';
 import 'package:login/presentation/login_page_screen/login_page_screen.dart';
 import 'package:login/presentation/app_navigation_screen/app_navigation_screen.dart';
 import 'package:login/presentation/student_profile_screen/student_profile_screen.dart';
@@ -58,10 +59,12 @@ class AppRoutes {
 
   static const String enaAlloSignUp = '/ena_allo_sign_up';
 
+  static const String HomePage = '/homepage'; 
   
   static Map<String, WidgetBuilder> routes = {
     makeAReviewScreen:(context) => MakeAReviewScreen(),
     enaAlloSignUp: (context) => MyHomePage(),
+    HomePage: (context) => MyHomeScreen(),
     faqsScreenTutor: (context) => FaqsScreenTutor(),
     fullReviewScreen: (context) => FullReviewScreen(),
     myReviewsTutorScreen: (context) => MyReviewsTutorScreen(),
@@ -79,5 +82,6 @@ class AppRoutes {
     studentProfileScreen: (context) => StudentProfileScreen(),
     appNavigationScreen: (context) => AppNavigationScreen(),
     studentoneScreen: (context) => StudentoneScreen(),
+
   };
 }

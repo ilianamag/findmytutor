@@ -2,6 +2,49 @@ class ImageConstant {
   // Image folder path
   static String imagePath = 'assets/images';
 
+  
+
+
+  //Homepage images
+  //MUSIC
+  static String imgbagpipe = '$imagePath/bagpipe.png';
+  static String imgviolin = '$imagePath/violin.png';
+  static String imgbouzouki = '$imagePath/bouzouki.png';
+  static String imgbass = '$imagePath/bass.png';
+  static String imgguitar = '$imagePath/guitar.png';
+  static String imgdrums = '$imagePath/drums.png';
+  static String imglyre = '$imagePath/lyre.png';
+  static String imgoboe = '$imagePath/oboe.png';
+  static String imgsaxophone = '$imagePath/saxophone.png';
+  static String imgtrombone = '$imagePath/trombone.png';
+  static String imgother = '$imagePath/other.png';
+  //DANCE
+  static String imglatin = '$imagePath/latin.png';
+  static String imgsalsa = '$imagePath/salsa.png';
+  static String imgtango = '$imagePath/tango.png';
+  static String imgbellydancing = '$imagePath/bellydancing.png';
+  
+  //LANGUAGES
+  static String imgenglish = '$imagePath/english.png';
+  static String imgfrench = '$imagePath/french.png';
+  static String imgitalian = '$imagePath/italian.png';
+  static String imggerman = '$imagePath/german.png';
+
+  //SPORTS
+  static String imgyoga = '$imagePath/yoga.png';
+  static String imgpilates = '$imagePath/pilates.png';
+  static String imgtennis = '$imagePath/tennis.png';
+  static String imgcrossfit = '$imagePath/crossfit.png';
+  static String imgtrx = '$imagePath/trx.png';
+  //CLASSES
+  static String imgeconomics= '$imagePath/economics.png';
+  static String imgmathematics = '$imagePath/mathematics.png';
+  static String imgphysics = '$imagePath/physics.png';
+  static String imgchemistry = '$imagePath/chemistry.png';
+  static String imgbiology= '$imagePath/biology.png';
+  static String imginformatics = '$imagePath/informatics.png';
+  static String imgphilology = '$imagePath/philology.png';
+ 
   // Login Page images
   static String imgLogo1 = '$imagePath/img_logo_1.png';
 
