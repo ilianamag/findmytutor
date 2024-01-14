@@ -19,7 +19,8 @@ import 'package:login/presentation/FAQs_tutor/faqs_tutor.dart';
 import 'package:login/presentation/ena_allo_sign_up/ena_allo_sign_up.dart'; 
 import 'package:login/presentation/tutor_edit_profile_page/tutor_edit_profile_page.dart';
 import 'package:login/presentation/make_a_review_screen/make_a_review_screen.dart';
-import 'package:login/presentation/qrscanner/qr_code_scanner.dart';
+import 'package:login/presentation/qr_code_scanner/qr_code_scanner.dart';
+import 'package:login/presentation/qr_code_generator/qr_code_generator.dart';
 
 class AppRoutes {
   static const String loginPageScreen = '/login_page_screen';
@@ -63,8 +64,11 @@ class AppRoutes {
   static const String enaAlloSignUp = '/ena_allo_sign_up';
 
   static const String HomePage = '/homepage'; 
-  
+
+  static const String qrCodeGenerator = '/qr_code_generator'; 
+
   static Map<String, WidgetBuilder> routes = {
+    qrCodeGenerator: (context) => QrCodeGenerator(),
     qrCode :(context) => QRcode(),
     makeAReviewScreen:(context) => MakeAReviewScreen(),
     enaAlloSignUp: (context) => MyHomePage(),

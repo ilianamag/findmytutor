@@ -77,6 +77,7 @@ class AppWidgets {
           ),
           onTap: () {
             Navigator.pop(context);
+            Navigator.pushNamed(context, AppRoutes.qrCode);
             // Navigator.pushNamed(context, AppRoutes.HomePage);
             // Add your navigation logic here
           },

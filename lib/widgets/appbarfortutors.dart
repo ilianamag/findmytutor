@@ -77,7 +77,7 @@ class AppWidgets {
           ),
           onTap: () {
             Navigator.pop(context);
-            Navigator.pushNamed(context, AppRoutes.loginPageScreen);
+            Navigator.pushNamed(context, AppRoutes.qrCodeGenerator);
             // Add your navigation logic here
           },
         ),
