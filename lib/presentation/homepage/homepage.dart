@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:login/widgets/appbar.dart';
 import 'package:login/widgets/custom_bottom_bar.dart';
 import 'package:login/widgets/carousel.dart';
-
+import 'package:login/widgets/appbar_homepage.dart';
 class MyHomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppWidgets.buildAppBar(context),
-      drawer: AppWidgets.buildDrawer(context),
+      appBar: AppWidgetsHomepage.buildAppBarHomepage(context),
+      drawer: AppWidgetsHomepage.buildDrawerHomepage(context),
       body: CategoryList(), // Include the HomePage widget here
       bottomNavigationBar: _buildBottomBar(context),
     );

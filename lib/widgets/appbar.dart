@@ -102,4 +102,6 @@ class AppWidgets {
     ),
   );
   }
+
+  static buildAppBarHomepage(BuildContext context) {}
 }

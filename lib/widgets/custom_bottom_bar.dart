@@ -65,7 +65,8 @@ class CustomBottomBarState extends State<CustomBottomBar> {
           switch (bottomMenuList[index].type) {
             case BottomBarEnum.Search:
               // Navigator.pushReplacementNamed(context, '/search');
-              Navigator.pushReplacementNamed(context, AppRoutes.HomePage);
+              Navigator.pushReplacementNamed(
+                context, AppRoutes.HomePage);
               break;
             case BottomBarEnum.Favourites:
               Navigator.pushReplacementNamed(
