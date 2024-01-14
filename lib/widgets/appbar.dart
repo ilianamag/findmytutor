@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:login/core/app_export.dart';
+import 'package:login/presentation/tutor_search_result_container_screen/tutor_search_result_container_screen.dart';
+import 'package:login/presentation/tutor_search_result_container_screen/tutor_search_result_container_screen.dart';
 
 class AppWidgets {
   static AppBar buildAppBar(BuildContext context) {
@@ -96,6 +98,22 @@ class AppWidgets {
           onTap: () {
             Navigator.pop(context);
             Navigator.pushNamed(context, AppRoutes.loginPageScreen);
+          },
+        ),
+        ListTile(
+          leading: Icon(
+            Icons.logout,
+            color: appTheme.black900, // Replace with your color value
+          ),
+          title: Text(
+            'testing screens',
+            style: TextStyle(
+              color: appTheme.black900, // Replace with your color value
+            ),
+          ),
+          onTap: () {
+            Navigator.pop(context);
+            Navigator.pushNamed(context, AppRoutes.searchResultScreen);
           },
         ),
       ],

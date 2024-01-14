@@ -1,3 +1,5 @@
+//import 'dart:js';
+
 import 'package:flutter/material.dart';
 import 'package:login/presentation/FAQs/faqs_student.dart';
 import 'package:login/presentation/full_review_screen_teacher/full_review_screen.dart';
@@ -21,6 +23,7 @@ import 'package:login/presentation/tutor_edit_profile_page/tutor_edit_profile_pa
 import 'package:login/presentation/make_a_review_screen/make_a_review_screen.dart';
 import 'package:login/presentation/qr_code_scanner/qr_code_scanner.dart';
 import 'package:login/presentation/qr_code_generator/qr_code_generator.dart';
+import 'package:login/presentation/tutor_search_result_container_screen/tutor_search_result_container_screen.dart';
 
 class AppRoutes {
   static const String loginPageScreen = '/login_page_screen';
@@ -67,6 +70,9 @@ class AppRoutes {
 
   static const String qrCodeGenerator = '/qr_code_generator'; 
 
+  static const String searchResultScreen = '/tutor_search_result_container_screen'; 
+
+
   static Map<String, WidgetBuilder> routes = {
     qrCodeGenerator: (context) => QrCodeGenerator(),
     qrCode :(context) => QRcode(),
@@ -90,6 +96,6 @@ class AppRoutes {
     studentProfileScreen: (context) => StudentProfileScreen(),
     appNavigationScreen: (context) => AppNavigationScreen(),
     studentoneScreen: (context) => StudentoneScreen(),
-
+    searchResultScreen: (context) => SearchResultScreen(),
   };
 }

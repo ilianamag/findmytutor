@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:login/widgets/appbar.dart';
 import 'package:login/widgets/custom_bottom_bar.dart';
 import 'package:login/widgets/carousel.dart';
 import 'package:login/widgets/appbar_homepage.dart';
@@ -19,8 +18,3 @@ Widget _buildBottomBar(BuildContext context) {
     });
   }
 
-// class CategoryItemWidget extends StatelessWidget {
-//   CategoryItemWidget({
-//     Key? key,
-//     this.onTapImgImage,
-//   }) : super(key: key);
