@@ -21,7 +21,7 @@ import 'package:login/presentation/tutor_edit_profile_page/tutor_edit_profile_pa
 import 'package:login/presentation/make_a_review_screen/make_a_review_screen.dart';
 import 'package:login/presentation/qr_code_scanner/qr_code_scanner.dart';
 import 'package:login/presentation/qr_code_generator/qr_code_generator.dart';
-
+import 'package:login/presentation/category_detail_page/category_detail_page.dart';
 class AppRoutes {
   static const String loginPageScreen = '/login_page_screen';
 
@@ -67,8 +67,11 @@ class AppRoutes {
 
   static const String qrCodeGenerator = '/qr_code_generator'; 
 
+  static const String categoryDetails = '/category_details'; 
+
   static Map<String, WidgetBuilder> routes = {
-    qrCodeGenerator: (context) => QrCodeGenerator(),
+   qrCodeGenerator: (context) => QrCodeGenerator(),
+   categoryDetails: (context) => TutorsPage(),
     qrCode :(context) => QRcode(),
     makeAReviewScreen:(context) => MakeAReviewScreen(),
     enaAlloSignUp: (context) => MyHomePage(),

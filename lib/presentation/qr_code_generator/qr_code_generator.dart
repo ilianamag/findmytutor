@@ -1,4 +1,50 @@
-import 'dart:typed_data';
+// mallon ayto gia na vgainei to qr
+
+import 'package:flutter/material.dart';
+import 'package:qr_flutter/qr_flutter.dart'; 
+import 'package:login/widgets/custom_bottom_bar_teacher.dart';
+import 'package:login/widgets/appbarfortutors.dart';
+
+class QrCodeGenerator extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) { //an theloume prosthetoume kai id 
+        String name = 'name'; //tou tutor
+        String lastname = 'last_name'; //tou tutor
+        String email = 'email'; //prepei na to parw apo ti vasi
+        String qrCodeData = generateQRCodeData(name, lastname, email);   
+         return SafeArea(
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        appBar: AppWidgets.buildAppBar2(context),
+        drawer: AppWidgets.buildDrawer2(context),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            QrImageView(
+              data: qrCodeData,
+              version: QrVersions.auto,
+              size: 200.0,
+            ),
+          ],
+        ),     
+      ),
+      bottomNavigationBar: _buildBottomBar2(context),
+      ),
+    );
+  }
+   Widget _buildBottomBar2(BuildContext context) {
+    return CustomBottomBar2(onChanged: (BottomBarEnum2 type) {
+    });
+  }
+  String generateQRCodeData(String name, String lastname, String email) {
+  return "\nName: $name \nLastName: $lastname \nEmail: $email";
+}
+}
+
+
+
+/*import 'dart:typed_data';
 import 'dart:ui' as ui;
 import 'dart:io';
 import 'package:flutter/material.dart';
@@ -94,4 +140,4 @@ class _QrCodeGenerator extends State<QrCodeGenerator> {
 
   print('QR code image saved at: $imagePath');
 }
-}
+}*/
