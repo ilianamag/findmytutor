@@ -1,12 +1,12 @@
-import 'dart:html' as html;
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:login/core/app_export.dart';
 import 'package:login/theme/app_decoration.dart';
 import 'package:login/widgets/custom_rating_bar.dart';
-import 'package:share/share.dart';
+import 'package:flutter_share/flutter_share.dart';
 import 'package:url_launcher/url_launcher.dart';
-
+import 'package:flutter/material.dart';
+import 'package:flutter_share/flutter_share.dart';
 class VisitProfileStackedCard extends StatefulWidget {
   final String additionalInfoPlaceholder;
   final String imageUrlFromDatabase;
@@ -197,36 +197,31 @@ class _VisitProfileStackedCardState extends State<VisitProfileStackedCard> {
           ),
           // Share icon button at the top right
           Positioned(
-            top: 0.0, // Align with the top of the rating bar
-            right: 0.0, // Align with the right edge
-            child: Container(
-              padding: EdgeInsets.all(8.0),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              child: IconButton(
-                 onPressed: () async {
-                  // Get the current URL dynamically
-                  String currentUrl = html.window.location.href;
-
-                  // Open the link in the browser
-                  // ignore: deprecated_member_use
-                  if (await canLaunch(currentUrl)) {
-                    // ignore: deprecated_member_use
-                    await launch(currentUrl);
-                  } else {
-                    throw 'Could not launch $currentUrl';
-                  }
-                },
-                icon: Icon(Icons.share),
-                color: Colors.black,
-                iconSize: 24.0,
-              ),
-            ),
-          ),
+  top: 0.0,
+  right: 0.0,
+  child: Container(
+    padding: EdgeInsets.all(8.0),
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(10.0),
+    ),
+    child: ElevatedButton(
+      onPressed: () async {
+        await FlutterShare.share(
+          title: 'Share Example',
+          text: 'This is the text you want to share.',
+          linkUrl: 'https://example.com',
+          chooserTitle: 'Share via', // Android only
+        );
+      },
+      child: const Icon(Icons.share),
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Colors.black,
+      ),
+    ),
+  ),
+),
         ],
       ),
     );
   }
 }
-

@@ -9,8 +9,6 @@ class VisitProfileOfTutorScreen extends StatelessWidget {
           key: key,
         );
 
-
-
 @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -254,4 +252,4 @@ class VisitProfileOfTutorScreen extends StatelessWidget {
 //   bool shouldRepaint(CustomPainter oldDelegate) {
 //     return false;
 //   }
-// }
+// }*/

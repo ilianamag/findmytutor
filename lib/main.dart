@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
           theme: theme,
           title: 'login',
           debugShowCheckedModeBanner: false,
-          initialRoute: AppRoutes.searchResultScreen,
+          initialRoute: AppRoutes.loginPageScreen,
           routes: AppRoutes.routes,
         );
       },
