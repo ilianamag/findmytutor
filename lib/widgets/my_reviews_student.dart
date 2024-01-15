@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:login/core/app_export.dart';
-import 'package:login/presentation/full_review_screen_teacher/full_review_screen.dart';
 import 'package:login/widgets/custom_rating_bar.dart';
 import 'package:login/presentation/students_my_reviewstwo_screen/students_my_reviewstwo_screen.dart';
 

@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:login/core/app_export.dart';
-import 'package:login/widgets/custom_bottom_bar.dart';
-import 'package:login/widgets/appbar.dart';
-import 'package:login/widgets/my_reviews_tutor.dart';
 
 class TutorCardWidget extends StatelessWidget {
   const TutorCardWidget({

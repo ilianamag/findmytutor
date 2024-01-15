@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:login/core/app_export.dart';
 import 'package:login/widgets/custom_bottom_bar.dart';
 import 'package:login/widgets/appbar.dart';
-import 'package:login/widgets/my_reviews_tutor.dart';
 import 'package:login/widgets/my_tutors.dart';
-import 'package:url_launcher/url_launcher.dart';
 class MyTutorsScreen extends StatelessWidget {
   const MyTutorsScreen({Key? key}) : super(key: key);
 
