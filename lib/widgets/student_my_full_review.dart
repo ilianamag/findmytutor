@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:login/core/app_export.dart';
 import 'package:login/presentation/reviews_of_a_tutor_screen/reviews_of_a_tutor_screen.dart';
-import 'package:login/widgets/appbar.dart';
 import 'package:login/widgets/custom_elevated_button.dart';
 import 'package:login/widgets/custom_rating_bar.dart';
-import 'package:login/widgets/custom_bottom_bar.dart';
 
 class ReviewSectionWidget extends StatelessWidget {
   const ReviewSectionWidget({

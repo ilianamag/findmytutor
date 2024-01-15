@@ -101,13 +101,10 @@ class EditProfileOfStudentPage extends StatelessWidget {
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:login/core/app_export.dart';
-import 'package:login/widgets/custom_icon_button.dart';
 import 'package:login/widgets/custom_outlined_button.dart';
 import 'package:login/widgets/custom_floating_text_field.dart';
 import 'package:login/widgets/custom_bottom_bar.dart';
 import 'package:login/widgets/appbar.dart';
-import 'package:path/path.dart' as path;
-import 'package:path_provider/path_provider.dart';
 import 'package:image_picker/image_picker.dart';
 
 class EditProfileOfStudentPage extends StatefulWidget {
