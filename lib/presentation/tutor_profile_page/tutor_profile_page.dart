@@ -5,10 +5,9 @@ import 'package:login/widgets/custom_outlined_button.dart';
 import 'package:login/widgets/appbarfortutors.dart';
 // ignore_for_file: must_be_immutable
 class TutorProfilePage extends StatelessWidget {
-  const TutorProfilePage({Key? key})
-      : super(
-          key: key,
-        );
+  String? qrCodeData;
+  
+  TutorProfilePage({Key? key, this.qrCodeData}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -66,6 +65,9 @@ class TutorProfilePage extends StatelessWidget {
   /// Section Widget
   Widget _buildGetMyQR(BuildContext context) {
     return CustomOutlinedButton(
+      onPressed: () {
+        onTapSt(context);
+      },
       width: 115.h,
       text: "Get My QR",
       margin: EdgeInsets.only(left: 48.h),
@@ -117,6 +119,10 @@ class TutorProfilePage extends StatelessWidget {
 
   void onTapStat(BuildContext context){
   Navigator.pushReplacementNamed(context, AppRoutes.myReviewsTutorScreen);
+  }
+
+  void onTapSt(BuildContext context) {
+    Navigator.pushReplacementNamed(context, AppRoutes.qrCodeGenerator, arguments: qrCodeData);
   }
 
   Widget _buildBottomBar2(BuildContext context) {

@@ -17,6 +17,7 @@ dependencies:
   camera: 0.10.5+9
   image_gallery_saver: 2.0.3
   toast: 0.3.0
+  uuid: ^3.0.4
 dev_dependencies: 
   flutter_test: 
     sdk: flutter

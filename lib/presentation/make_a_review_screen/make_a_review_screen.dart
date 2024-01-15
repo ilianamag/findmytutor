@@ -10,7 +10,7 @@ class MakeAReviewScreen extends StatelessWidget {
   MakeAReviewScreen({Key? key}) : super(key: key);
 
   TextEditingController reviewvalueController = TextEditingController();
-  double rating = 0;
+  int rating = 0;
 
   @override
   Widget build(BuildContext context) {

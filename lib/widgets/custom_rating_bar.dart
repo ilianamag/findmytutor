@@ -18,20 +18,13 @@ class CustomRatingBar extends StatelessWidget {
         );
 
   final Alignment? alignment;
-
   final bool? ignoreGestures;
-
-  final double? initialRating;
-
+  final int? initialRating; // Assuming initialRating is now an int
   final double? itemSize;
-
   final int? itemCount;
-
   final Color? color;
-
   final Color? unselectedColor;
-
-  Function(double)? onRatingUpdate;
+  Function(int)? onRatingUpdate; // Change the function type to accept an int
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +38,7 @@ class CustomRatingBar extends StatelessWidget {
 
   Widget get ratingBarWidget => RatingBar.builder(
         ignoreGestures: ignoreGestures ?? false,
-        initialRating: initialRating ?? 0,
+        initialRating: (initialRating ?? 0).toDouble(), // Convert int to double
         minRating: 0,
         direction: Axis.horizontal,
         allowHalfRating: false,
@@ -63,7 +56,7 @@ class CustomRatingBar extends StatelessWidget {
           );
         },
         onRatingUpdate: (rating) {
-          onRatingUpdate!.call(rating);
+          onRatingUpdate!.call(rating.toInt()); // Convert double to int
         },
       );
 }

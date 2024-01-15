@@ -4,6 +4,8 @@ import 'package:login/widgets/custom_drop_down.dart';
 import 'package:login/widgets/custom_text_form_field.dart';
 import 'package:login/widgets/custom_icon_button.dart';
 import 'package:login/widgets/custom_outlined_button.dart';
+import 'package:uuid/uuid.dart';
+
 
 void main() {
   runApp(MyApp());
@@ -122,36 +124,36 @@ class _MyHomePageState extends State<MyHomePage> {
                     SizedBox(height: 36.v),
                    
                     Padding(
-  padding: EdgeInsets.only(left: 17.h),
-  child: Column(
-    children: [
-      CustomDropDown(
-        width: 180.h,
-        icon: Container(
-          margin: EdgeInsets.fromLTRB(30.h, 8.v, 9.h, 7.v),
-          child: CustomImageView(
-            height: 24.adaptSize,
-            width: 24.adaptSize,
-          ),
-        ),
-        hintText: "Role",
-        items: dropdownItemList,
-        prefix: Container(
-          margin: EdgeInsets.fromLTRB(8.h, 8.v, 16.h, 7.v),
-          child: CustomImageView(
-            height: 24.adaptSize,
-            width: 20.adaptSize,
-          ),
-        ),
-        prefixConstraints: BoxConstraints(
-          maxHeight: 39.v,
-        ),
-        onChanged: (value) {
-          setState(() {
-            isTeacherSelected = value == "Teacher";
-          });
-        },
-      ),
+                    padding: EdgeInsets.only(left: 17.h),
+                    child: Column(
+                      children: [
+                        CustomDropDown(
+                           width: 180.h,
+                           icon: Container(
+                           margin: EdgeInsets.fromLTRB(30.h, 8.v, 9.h, 7.v),
+                           child: CustomImageView(
+                           height: 24.adaptSize,
+                           width: 24.adaptSize,
+                          ),
+                        ),
+                        hintText: "Role",
+                        items: dropdownItemList,
+                        prefix: Container(
+                        margin: EdgeInsets.fromLTRB(8.h, 8.v, 16.h, 7.v),
+                        child: CustomImageView(
+                        height: 24.adaptSize,
+                        width: 20.adaptSize,
+                        ),
+                       ),
+                     prefixConstraints: BoxConstraints(
+                    maxHeight: 39.v,
+                    ),
+                   onChanged: (value) {
+                    setState(() {
+                    isTeacherSelected = value == "Teacher";
+                    });
+                    },
+                ),
 
       if (isTeacherSelected) ...[
         SizedBox(height: 5.v),
@@ -286,28 +288,68 @@ Widget _buildDestination (BuildContext context) {
 
   /// Section Widget
   Widget _buildCreateAccountButton(BuildContext context) {
-    return CustomOutlinedButton(
-        onPressed: () {
-    if (isTeacherSelected) {
-      // Navigate to tutor profile page
-      Navigator.pushNamed(context, AppRoutes.tutorProfilePage);
-    } else {
-      // Navigate to student profile page
-      Navigator.pushNamed(context, AppRoutes.studentProfileScreen);
-    }
-  },
-      width: 163.h,
-      text: "Create Account",
-      leftIcon: Container(
-        margin: EdgeInsets.only(right: 8.h),
-        child: CustomImageView(
-          height: 18.adaptSize,
-          width: 18.adaptSize,
-        ),
-      ),
-    );
-  }
+  return CustomOutlinedButton(
+    onPressed: () {
+      if (isTeacherSelected) {
+        String tutorId = generateUniqueTutorId();
+        String name = nameEditTextController.text;
+        String email = emailEditTextController.text;
+        String qrCodeData = generateQRCodeData(tutorId, name, email);
+        //gia na ta kanei save
+        saveTutorToDatabase(
+          tutorId: tutorId,
+          name: name,
+          email: email,
+          password: passwordEditTextController.text,
+          qrCodeData: qrCodeData,
+        );
 
+        // Navigate to tutor profile page
+        Navigator.pushNamed(context, AppRoutes.tutorProfilePage, arguments: qrCodeData);
+      } else {
+        // Navigate to student profile page
+        Navigator.pushNamed(context, AppRoutes.studentProfileScreen);
+      }
+    },
+    width: 163.h,
+    text: "Create Account",
+    leftIcon: Container(
+      margin: EdgeInsets.only(right: 8.h),
+      child: CustomImageView(
+        height: 18.adaptSize,
+        width: 18.adaptSize,
+      ),
+    ),
+  );
+}
+
+String generateUniqueTutorId() {
+  final Uuid uuid = Uuid();
+  return uuid.v4();
+}
+
+String generateQRCodeData(String tutorId, String name, String email) {
+  return "TutorID: $tutorId\nName: $name\nEmail: $email";
+}
+
+void saveTutorToDatabase({
+  required String tutorId,
+  required String name,
+  required String email,
+  required String password,
+  required String qrCodeData,
+}) {
+  // Implement logic to save the tutor's data to your database
+  // You can use a database package like 'sqflite' or 'firebase' for this purpose
+  // For example, you can use Firebase Firestore:
+  // FirebaseFirestore.instance.collection('tutors').doc(tutorId).set({
+  //   'name': name,
+  //   'email': email,
+  //   'password': password,
+  //   'qrCodeData': qrCodeData,
+  // });
+  print("Saving tutor data to the database...");
+}
   /// Section Widget
   Widget _buildSignUpButtonRow(BuildContext context) {
     return Padding(
@@ -383,4 +425,5 @@ Widget _buildDestination (BuildContext context) {
       ],
     );
   }
+  
 }
