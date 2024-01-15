@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:login/core/app_export.dart';
-import 'package:login/presentation/tutor_search_result_container_screen/tutor_search_result_container_screen.dart';
-import 'package:login/presentation/tutor_search_result_container_screen/tutor_search_result_container_screen.dart';
 
 class AppWidgets {
   static AppBar buildAppBar(BuildContext context) {

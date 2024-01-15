@@ -4,7 +4,20 @@ import 'package:login/widgets/horizontal_card_for_search.dart';
 import 'package:login/widgets/price_card_container.dart';
 import 'package:login/widgets/stacked_card_search.dart';
 
-
+// //χωρις παραδειγμα για την βαση
+// Widget WholeCardSearch(BuildContext context) {
+//   return Column(
+//     children: [
+//       HorizontalCardSearch(
+//         photoUrl,name, additionalPhotoAsset
+//       ),
+//       PriceContainer(price: ),
+//       StackedCardSearch(
+//         additionalInfoPlaceholder
+//       ),
+//     ],
+//   );
+// }
 
 Widget WholeCardSearch(BuildContext context) {
   return Column(

@@ -2,12 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:login/core/app_export.dart';
 
 
-class StackedCardSearch extends StatelessWidget {
+
+class StackedCardSearch extends StatefulWidget {
   final String additionalInfoPlaceholder;
 
   StackedCardSearch({
     required this.additionalInfoPlaceholder,
   });
+
+  @override
+  _StackedCardSearchState createState() => _StackedCardSearchState();
+}
+
+class _StackedCardSearchState extends State<StackedCardSearch> {
+  bool addedToFavourites = false;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +33,7 @@ class StackedCardSearch extends StatelessWidget {
               ),
               child: TextField(
                 decoration: InputDecoration(
-                  hintText: additionalInfoPlaceholder,
+                  hintText: widget.additionalInfoPlaceholder,
                   border: InputBorder.none, // Remove the border
                 ),
                 maxLines: 10,
@@ -33,7 +41,7 @@ class StackedCardSearch extends StatelessWidget {
             ),
           ],
         ),
-        // "Add to Favorites" button at the bottom left
+        // "Add to Favorites" or "Added to Favourites" button at the bottom left
         Positioned(
           bottom: 16.0,
           left: 16.0,
@@ -45,11 +53,15 @@ class StackedCardSearch extends StatelessWidget {
             ),
             child: GestureDetector(
               onTap: () {
-                // Add to favorites action
-                print('Add to favorites button pressed');
+                // Toggle the state
+                setState(() {
+                  addedToFavourites = !addedToFavourites;
+                });
+                // Perform your add to favourites action here
+                //print('Add to favourites button pressed');
               },
               child: Text(
-                "Add to Favorites",
+                addedToFavourites ? "Added to Favourites!" : "Add to Favourites",
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 14.0,
@@ -73,6 +85,7 @@ class StackedCardSearch extends StatelessWidget {
             child: GestureDetector(
               onTap: () {
                 // Navigate to the profile page
+                Navigator.pushNamed(context, AppRoutes.visitProfileOfTutorScreen);
                 print('Visit Profile button pressed');
               },
               child: Text(

@@ -24,6 +24,14 @@ import 'package:login/presentation/make_a_review_screen/make_a_review_screen.dar
 import 'package:login/presentation/qr_code_scanner/qr_code_scanner.dart';
 import 'package:login/presentation/qr_code_generator/qr_code_generator.dart';
 import 'package:login/presentation/category_detail_page/category_detail_page.dart';
+<<<<<<< HEAD
+=======
+=======
+import 'package:login/presentation/tutor_search_result_container_screen/tutor_search_result_container_screen.dart';
+import 'package:login/presentation/visit_profile_of_tutor_screen/visit_profile_of_tutor_screen.dart';
+
+>>>>>>> 2da94902b00d21a2f6ea912e516c61a2dcc5d8db
+>>>>>>> 7777e79874150fbdd4e96dc475c4f5320d2bf18c
 class AppRoutes {
   static const String loginPageScreen = '/login_page_screen';
 
@@ -70,7 +78,19 @@ class AppRoutes {
   static const String qrCodeGenerator = '/qr_code_generator'; 
 
   static const String categoryDetails = '/category_details'; 
+<<<<<<< HEAD
+=======
+=======
+  static const String searchResultScreen = '/tutor_search_result_container_screen'; 
 
+<<<<<<< HEAD
+  static const String visitProfileOfTutorScreen = '/visit_profile_of_tutor_screen';
+ 
+=======
+>>>>>>> 2da94902b00d21a2f6ea912e516c61a2dcc5d8db
+>>>>>>> 7777e79874150fbdd4e96dc475c4f5320d2bf18c
+
+>>>>>>> b3009927d8f22f8b2358371164eb142b2eff6a4f
   static Map<String, WidgetBuilder> routes = {
    qrCodeGenerator: (context) => QrCodeGenerator(),
    categoryDetails: (context) => TutorsPage(),
@@ -95,5 +115,10 @@ class AppRoutes {
     studentProfileScreen: (context) => StudentProfileScreen(),
     appNavigationScreen: (context) => AppNavigationScreen(),
     studentoneScreen: (context) => StudentoneScreen(),
+<<<<<<< HEAD
+=======
+    searchResultScreen: (context) => SearchResultScreen(),
+    visitProfileOfTutorScreen: (context) => VisitProfileOfTutorScreen(),
+>>>>>>> 7777e79874150fbdd4e96dc475c4f5320d2bf18c
   };
 }
