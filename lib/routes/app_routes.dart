@@ -24,6 +24,7 @@ import 'package:login/presentation/make_a_review_screen/make_a_review_screen.dar
 import 'package:login/presentation/qr_code_scanner/qr_code_scanner.dart';
 import 'package:login/presentation/qr_code_generator/qr_code_generator.dart';
 import 'package:login/presentation/tutor_search_result_container_screen/tutor_search_result_container_screen.dart';
+import 'package:login/presentation/visit_profile_of_tutor_screen/visit_profile_of_tutor_screen.dart';
 
 class AppRoutes {
   static const String loginPageScreen = '/login_page_screen';
@@ -72,7 +73,8 @@ class AppRoutes {
 
   static const String searchResultScreen = '/tutor_search_result_container_screen'; 
 
-
+  static const String visitProfileOfTutorScreen = '/visit_profile_of_tutor_screen';
+ 
   static Map<String, WidgetBuilder> routes = {
     qrCodeGenerator: (context) => QrCodeGenerator(),
     qrCode :(context) => QRcode(),
@@ -97,5 +99,6 @@ class AppRoutes {
     appNavigationScreen: (context) => AppNavigationScreen(),
     studentoneScreen: (context) => StudentoneScreen(),
     searchResultScreen: (context) => SearchResultScreen(),
+    visitProfileOfTutorScreen: (context) => VisitProfileOfTutorScreen(),
   };
 }
