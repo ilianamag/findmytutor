@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-import 'package:flutter/material.dart';
+/*import 'package:flutter/material.dart';
 import 'package:login/core/app_export.dart';
 import 'package:login/widgets/custom_outlined_button.dart';
 import 'package:login/widgets/custom_floating_text_field.dart';
@@ -98,9 +97,7 @@ class EditProfileOfStudentPage extends StatelessWidget {
     );
   }
 
-/*
-=======
->>>>>>> b3009927d8f22f8b2358371164eb142b2eff6a4f
+*/
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:login/core/app_export.dart';

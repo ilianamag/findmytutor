@@ -18,6 +18,7 @@ dependencies:
   image_gallery_saver: 2.0.3
   toast: 0.3.0
   uuid: ^3.0.4
+  url_launcher: ^6.0.12
 dev_dependencies: 
   flutter_test: 
     sdk: flutter

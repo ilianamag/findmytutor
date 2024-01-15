@@ -4,11 +4,9 @@ import 'package:login/widgets/custom_bottom_bar.dart';
 import 'package:login/widgets/appbar.dart';
 import 'package:login/widgets/my_reviews_tutor.dart';
 import 'package:login/widgets/my_tutors.dart';
+import 'package:url_launcher/url_launcher.dart';
 class MyTutorsScreen extends StatelessWidget {
-  const MyTutorsScreen({Key? key})
-      : super(
-          key: key,
-        );
+  const MyTutorsScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,8 +20,8 @@ class MyTutorsScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-             Padding(
-                padding: EdgeInsets.only(left: 70.h),
+              Padding(
+                padding: EdgeInsets.only(left: 1.h),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -64,7 +62,6 @@ class MyTutorsScreen extends StatelessWidget {
       ),
     );
   }
-
   
   Widget _buildBottomBar(BuildContext context) {
     return CustomBottomBar(onChanged: (BottomBarEnum type) {
