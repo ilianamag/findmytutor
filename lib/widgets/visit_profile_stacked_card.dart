@@ -7,6 +7,8 @@ import 'package:flutter_share/flutter_share.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_share/flutter_share.dart';
+
+
 class VisitProfileStackedCard extends StatefulWidget {
   final String additionalInfoPlaceholder;
   final String imageUrlFromDatabase;
