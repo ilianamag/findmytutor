@@ -19,7 +19,8 @@ class MakeAReviewScreen extends StatelessWidget {
         resizeToAvoidBottomInset: false,
         appBar: AppWidgets.buildAppBar(context),
         drawer: AppWidgets.buildDrawer(context),
-        body: SizedBox(
+         body: SingleChildScrollView(
+          child: SizedBox(
           width: double.maxFinite,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -81,7 +82,7 @@ class MakeAReviewScreen extends StatelessWidget {
                 textInputAction: TextInputAction.done,
                 maxLines: 13,
               ),
-              SizedBox(height: 80.v),
+              SizedBox(height: 15.v),
               CustomElevatedButton(
                 width: 95.h,
                 text: "Publish",
@@ -93,12 +94,16 @@ class MakeAReviewScreen extends StatelessWidget {
                   print("Review: ${reviewvalueController.text}");
                   // Add logic to publish the review
                 },
+                buttonTextStyle: TextStyle(
+                color: Colors.white, // Text color
+              ),
               ),
               SizedBox(height: 5.v),
             ],
           ),
         ),
-       bottomNavigationBar: _buildBottomBar(context),
+      ),
+      bottomNavigationBar: _buildBottomBar(context),
       ),
     );
   }

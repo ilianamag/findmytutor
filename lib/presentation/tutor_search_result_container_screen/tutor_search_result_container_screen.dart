@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
-
 import 'package:login/widgets/custom_bottom_bar.dart';
-
 import 'package:login/widgets/appbar.dart' as AppbarWidget;
 import 'package:login/widgets/whole_card_search.dart';
+
+class Tutor {
+  final String name;
+  final double price;
+  final double rating;
+
+  Tutor({required this.name, required this.price, required this.rating});
+}
 
 class SearchResultScreen extends StatefulWidget {
   @override
@@ -12,6 +18,20 @@ class SearchResultScreen extends StatefulWidget {
 
 class _SearchResultScreenState extends State<SearchResultScreen> {
   String _selectedSortOption = 'Best Rated';
+
+  List<Tutor> _tutors = [
+    Tutor(name: 'John Doe', price: 30.0, rating: 4.5),
+    Tutor(name: 'Jane Smith', price: 25.0, rating: 4.0),
+    Tutor(name: 'Alice Johnson', price: 35.0, rating: 4.8),
+    Tutor(name: 'Bob Anderson', price: 22.0, rating: 3.5),
+    Tutor(name: 'Eva Williams', price: 40.0, rating: 4.2),
+    Tutor(name: 'Mike Davis', price: 28.0, rating: 4.7),
+    Tutor(name: 'Olivia Wilson', price: 33.0, rating: 4.6),
+    Tutor(name: 'Sam Robinson', price: 19.0, rating: 4.9),
+    Tutor(name: 'Sophia Lee', price: 42.0, rating: 3.9),
+    Tutor(name: 'William Taylor', price: 37.0, rating: 4.4),
+    // Add more tutors
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -24,11 +44,17 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
             _buildSortDropdown(),
             Expanded(
               child: ListView.builder(
-                itemCount: 10,
+                itemCount: _tutors.length,
                 itemBuilder: (context, index) {
+                  Tutor tutor = _tutors[index];
                   return Column(
                     children: [
-                      WholeCardSearch(context),
+                      WholeCardSearch(
+                        context,
+                        tutorName: tutor.name,
+                        tutorPrice: tutor.price,
+                        tutorRating: tutor.rating,
+                      ),
                       SizedBox(height: 16.0),
                     ],
                   );
@@ -55,7 +81,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
             onChanged: (String? newValue) {
               setState(() {
                 _selectedSortOption = newValue!;
-                // Implement your sorting logic here based on _selectedSortOption
+                _sortTutors();
               });
             },
             items: ['Best Rated', 'Lowest Price', 'Highest Price']
@@ -69,6 +95,20 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
         ],
       ),
     );
+  }
+
+  void _sortTutors() {
+    switch (_selectedSortOption) {
+      case 'Best Rated':
+        _tutors.sort((a, b) => b.rating.compareTo(a.rating));
+        break;
+      case 'Lowest Price':
+        _tutors.sort((a, b) => a.price.compareTo(b.price));
+        break;
+      case 'Highest Price':
+        _tutors.sort((a, b) => b.price.compareTo(a.price));
+        break;
+    }
   }
 
   Widget _buildBottomBar(BuildContext context) {

@@ -151,41 +151,41 @@ class _EditProfileOfStudentPageState extends State<EditProfileOfStudentPage> {
                 ),
                 child: Column(
                   children: [
-                    SizedBox(
-                      height: 102.v,
-                      width: 110.h,
-                      child: Stack(
-                        alignment: Alignment.bottomRight,
-                        children: [
-                          Align(
-                            alignment: Alignment.topLeft,
-                            child: GestureDetector(
-                              onTap: () {
-                                _openCamera();
-                              },
-                              child: Container(
-                                height: 90.v,
-                                width: 92.h,
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: 13.h,
-                                  vertical: 9.v,
-                                ),
-                                decoration: AppDecoration.fillRed.copyWith(
-                                  borderRadius: BorderRadiusStyle.circleBorder45,
-                                ),
-                                child: CustomImageView(
-  imagePath: _image.path.isNotEmpty ? _image.path : ImageConstant.imgSettings,
-  height: 57.v,
-  width: 64.h,
-  alignment: Alignment.bottomCenter,
-),
+                   SizedBox(
+  height: 102.v,
+  width: 110.h,
+  child: Stack(
+    alignment: Alignment.bottomRight,
+    children: [
+      Align(
+        alignment: Alignment.topLeft,
+        child: GestureDetector(
+          onTap: () {
+            _openCamera();
+          },
+          child: Container(
+            height: 90.v,
+            width: 92.h,
+            padding: EdgeInsets.symmetric(
+              horizontal: 13.h,
+              vertical: 9.v,
+            ),
+            decoration: AppDecoration.fillRed.copyWith(
+              borderRadius: BorderRadiusStyle.circleBorder45,
+            ),
+            child: CustomImageView(
+              imagePath: _image.path, // Assuming _image is not null here
+              height: 57.v,
+              width: 64.h,
+              alignment: Alignment.bottomCenter,
+            ),
+          ),
+        ),
       ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(height: 15.v),
+    ],
+  ),
+),
+     SizedBox(height: 15.v),
                     _buildFirstNameField(context),
                     SizedBox(height: 16.v),
                     _buildLastNameField(context),
