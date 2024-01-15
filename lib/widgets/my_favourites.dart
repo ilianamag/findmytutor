@@ -1,125 +1,97 @@
 import 'package:flutter/material.dart';
 import 'package:login/core/app_export.dart';
 
-class FavouriteCardWidget extends StatelessWidget {
-  const FavouriteCardWidget({
-    Key? key,
-    required this.leftImagePath,
-    required this.tutorName,
-    required this.rightImagePath,
-  }) : super(key: key);
+class HorizontalCardSearch extends StatelessWidget {
+  final String photoUrl;
+  final String name;
+  final String additionalPhotoAsset; // Path to the additional photo in the project
 
-  final String leftImagePath;
-  final String tutorName;
-  final String rightImagePath;
+  HorizontalCardSearch({
+    required this.photoUrl,
+    required this.name,
+    required this.additionalPhotoAsset,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.only(right: 1.h),
       decoration: AppDecoration.outlineGray.copyWith(
         borderRadius: BorderRadiusStyle.roundedBorder12,
       ),
-      child: Card(
-        clipBehavior: Clip.antiAlias,
-        elevation: 0,
-        margin: EdgeInsets.all(0),
-        shape: RoundedRectangleBorder(
-          side: BorderSide(
-            color: appTheme.gray400,
-            width: 1.h,
-          ),
+      child: Container(
+        padding: EdgeInsets.symmetric(
+          horizontal: 8.h,
+          vertical: 3.v,
+        ),
+        decoration: AppDecoration.outlineGray400.copyWith(
           borderRadius: BorderRadiusStyle.roundedBorder12,
         ),
-        child: Container(
-          height: 80.v,
-          width: double.maxFinite,
-          decoration: AppDecoration.outlineGray400.copyWith(
-            borderRadius: BorderRadiusStyle.roundedBorder12,
-          ),
-          child: Stack(
-            alignment: Alignment.bottomLeft,
-            children: [
-              Align(
-                alignment: Alignment.center,
-                child: Container(
-                  margin: EdgeInsets.only(left: 20.h),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadiusStyle.roundedBorder12,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        margin: EdgeInsets.symmetric(vertical: 20.v),
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 13.h,
-                          vertical: 9.v,
-                        ),
-                        decoration: AppDecoration.fillRed.copyWith(
-                          borderRadius: BorderRadiusStyle.circleBorder20,
-                        ),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SizedBox(height: 1.v),
-                            CustomImageView(
-                              imagePath: leftImagePath,
-                              height: 20.v,
-                              width: 20.h,
-                            ),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(
-                          left: 16.h,
-                          top: 29.v,
-                          bottom: 31.v,
-                        ),
-                        child: Text(
-                          tutorName,
-                          style: TextStyle(
-                            color: appTheme.gray900,
-                            fontSize: 16.fSize,
-                            fontFamily: 'Roboto',
-                            fontWeight: FontWeight.w500,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              height: 80.v, // Adjusted height for better fit
+              width: 221.h,
+              margin: EdgeInsets.only(
+                left: 6.h,
+                bottom: 16.v,
+              ),
+              child: Stack(
+                alignment: Alignment.topLeft,
+                children: [
+                  Align(
+                    alignment: Alignment.bottomLeft,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center, // Adjusted to center vertically
+                      children: [
+                        ClipOval(
+                          child: CustomImageView(
+                            imagePath: photoUrl,
+                            height: 70.adaptSize, // Adjusted height for better fit
+                            width: 70.adaptSize, // Adjusted width for better fit
+                            fit: BoxFit.cover, // or BoxFit.contain, BoxFit.fill, etc.
                           ),
                         ),
-                      ),
-                      Spacer(),
-                      CustomImageView(
-                        imagePath: rightImagePath,
-                        height: 80.adaptSize,
-                        width: 80.adaptSize,
-                      ),
-                    ],
+                        Padding(
+                          padding: EdgeInsets.only(
+                            left: 16.h,
+                          ),
+                          child: Text(
+                            name,
+                            style: TextStyle(
+                              color: appTheme.gray900,
+                              fontSize: 16.fSize,
+                              fontFamily: 'Roboto',
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
+                ],
               ),
-              Align(
-                alignment: Alignment.bottomLeft,
-                child: Container(
-                  height: 25.adaptSize,
-                  width: 25.adaptSize,
-                  margin: EdgeInsets.only(
-                    left: 1.h,
-                    bottom: 3.v,
-                  ),
-                  padding: EdgeInsets.symmetric(horizontal: 1.h),
-                  decoration: AppDecoration.fillWhiteA.copyWith(
-                    borderRadius: BorderRadiusStyle.roundedBorder12,
-                  ),
-                  child: CustomImageView(
-                    imagePath: ImageConstant.imgFavorite,
-                    height: 20.v,
-                    width: 20.h,
-                    alignment: Alignment.bottomCenter,
-                  ),
-                ),
+            ),
+
+            // Additional photo holder at the right end
+            Container(
+              //height: 60.adaptSize, // Adjusted height for better fit
+              //width: 100.adaptSize, // Adjusted width for better fit
+              margin: EdgeInsets.only(
+                top: 5,
+                right: 6.h,
+                bottom: 5.v,
               ),
-            ],
-          ),
+              child: CustomImageView(
+                imagePath: additionalPhotoAsset,
+                //height: 60.adaptSize, // Adjusted height for better fit
+                width: 80.adaptSize, // Adjusted width for better fit
+                fit: BoxFit.contain, // or BoxFit.contain, BoxFit.fill, etc.
+              ),
+            ),
+          ],
         ),
       ),
     );

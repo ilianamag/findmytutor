@@ -3,6 +3,7 @@ import 'package:login/core/app_export.dart';
 import 'package:login/widgets/custom_bottom_bar.dart';
 import 'package:login/widgets/appbar.dart';
 import 'package:login/widgets/my_reviews_tutor.dart';
+import 'package:login/widgets/my_tutors.dart';
 class MyTutorsScreen extends StatelessWidget {
   const MyTutorsScreen({Key? key})
       : super(
@@ -54,7 +55,7 @@ class MyTutorsScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 51.v),
-              _buildHorizontalCard(context),
+              TutorCardWidget(leftImagePath: ImageConstant.imgMonogram, tutorName: 'iliana', rightImagePath: ImageConstant.imgMedia),
               SizedBox(height: 5.v),
             ],
           ),
@@ -64,58 +65,6 @@ class MyTutorsScreen extends StatelessWidget {
     );
   }
 
-
-  /// Section Widget
-  Widget _buildHorizontalCard(BuildContext context) {
-    return Container(
-      decoration: AppDecoration.outlineGray.copyWith(
-        borderRadius: BorderRadiusStyle.roundedBorder12,
-      ),
-      child: Container(
-        width: double.maxFinite,
-        decoration: AppDecoration.outlineGray400.copyWith(
-          borderRadius: BorderRadiusStyle.roundedBorder12,
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            CustomImageView(
-              imagePath: ImageConstant.imgMonogram,
-              height: 40.adaptSize,
-              width: 40.adaptSize,
-              margin: EdgeInsets.only(
-                left: 16.h,
-                top: 20.v,
-                bottom: 20.v,
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(
-                left: 16.h,
-                top: 29.v,
-                bottom: 31.v,
-              ),
-              child: Text(
-                "Tutor Name",
-                style: TextStyle(
-                  color: appTheme.gray900,
-                  fontSize: 16.fSize,
-                  fontFamily: 'Roboto',
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ),
-            Spacer(),
-            CustomImageView(
-              imagePath: ImageConstant.imgMedia,
-              height: 80.adaptSize,
-              width: 80.adaptSize,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
   
   Widget _buildBottomBar(BuildContext context) {
     return CustomBottomBar(onChanged: (BottomBarEnum type) {

@@ -23,12 +23,7 @@ import 'package:login/presentation/tutor_edit_profile_page/tutor_edit_profile_pa
 import 'package:login/presentation/make_a_review_screen/make_a_review_screen.dart';
 import 'package:login/presentation/qr_code_scanner/qr_code_scanner.dart';
 import 'package:login/presentation/qr_code_generator/qr_code_generator.dart';
-<<<<<<< HEAD
 import 'package:login/presentation/category_detail_page/category_detail_page.dart';
-=======
-import 'package:login/presentation/tutor_search_result_container_screen/tutor_search_result_container_screen.dart';
-
->>>>>>> 2da94902b00d21a2f6ea912e516c61a2dcc5d8db
 class AppRoutes {
   static const String loginPageScreen = '/login_page_screen';
 
@@ -74,12 +69,7 @@ class AppRoutes {
 
   static const String qrCodeGenerator = '/qr_code_generator'; 
 
-<<<<<<< HEAD
   static const String categoryDetails = '/category_details'; 
-=======
-  static const String searchResultScreen = '/tutor_search_result_container_screen'; 
-
->>>>>>> 2da94902b00d21a2f6ea912e516c61a2dcc5d8db
 
   static Map<String, WidgetBuilder> routes = {
    qrCodeGenerator: (context) => QrCodeGenerator(),
@@ -105,6 +95,5 @@ class AppRoutes {
     studentProfileScreen: (context) => StudentProfileScreen(),
     appNavigationScreen: (context) => AppNavigationScreen(),
     studentoneScreen: (context) => StudentoneScreen(),
-    searchResultScreen: (context) => SearchResultScreen(),
   };
 }

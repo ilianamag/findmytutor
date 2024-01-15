@@ -100,7 +100,7 @@ class AppWidgets {
             Navigator.pushNamed(context, AppRoutes.loginPageScreen);
           },
         ),
-        ListTile(
+        /*ListTile(
           leading: Icon(
             Icons.logout,
             color: appTheme.black900, // Replace with your color value
@@ -115,7 +115,7 @@ class AppWidgets {
             Navigator.pop(context);
             Navigator.pushNamed(context, AppRoutes.searchResultScreen);
           },
-        ),
+        ),*/
       ],
     ),
   );
