@@ -1,10 +1,63 @@
 import 'package:flutter/material.dart';
+import 'package:login/routes/app_routes.dart';
 import 'package:login/widgets/Pair/Pair.dart';
+import 'package:http/http.dart' as http;
+import 'package:login/api_connection/api_connection.dart';
+import 'dart:convert';
 
 class CustomSearchDelegate extends SearchDelegate<String> {
   final List<Pair<String, String>> suggestions;
 
   CustomSearchDelegate(this.suggestions);
+
+  _checkTile(BuildContext context, String query) async {
+    var res = await http.post(
+      Uri.parse(API.searchProf),
+      body: {
+        "profession": query,
+      }
+    );
+
+    if (res.statusCode == 200) {
+      var resBodyOfLogin;
+      print(res.body);
+      try{
+        resBodyOfLogin = jsonDecode(res.body);
+      }
+      catch(e) {
+        print(e);
+      }
+      if (resBodyOfLogin['success'] == true) {
+        Navigator.pushNamed(context, AppRoutes.searchResultScreen);
+      }
+      else {
+        _checkTut(context, query);
+      }
+    }
+  }
+
+  _checkTut(BuildContext context, String query) async {
+    var res = await http.post(
+      Uri.parse(API.searchTut),
+      body: {
+        "fullname": query,
+      }
+    );
+
+    if (res.statusCode == 200) {
+      var resBodyOfLogin;
+      print(res.body);
+      try{
+        resBodyOfLogin = jsonDecode(res.body);
+      }
+      catch(e) {
+        print(e);
+      }
+      if (resBodyOfLogin['success'] == true) {
+        Navigator.pushNamed(context, AppRoutes.visitProfileOfTutorScreen);
+      }
+    }
+  }
 
   @override
   List<Widget> buildActions(BuildContext context) {
@@ -53,6 +106,11 @@ class CustomSearchDelegate extends SearchDelegate<String> {
           leading: Icon(Icons.search, size: 25),
           title: Text(result.first),
           subtitle: Text(result.second),
+          onTap:() {
+            query = result.first;
+            _checkTile(context, query);
+            close(context, query);
+          },
         );
       },
     );
@@ -128,6 +186,11 @@ class CustomSearchDelegate extends SearchDelegate<String> {
           leading: Icon(Icons.search, size: 25),
           title: Text(result.first),
           subtitle: Text(result.second),
+          onTap:() {
+            query = result.first;
+            _checkTile(context, query);
+            close(context, query);
+          },
         );
       },
     );

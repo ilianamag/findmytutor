@@ -16,6 +16,8 @@ class API {
   static const fProfs = "$hostConnect/PROFESSION/fetch_professions.php";
   //fetch profession Suggestions
   static const fProfSug = "$hostConnect/PROFESSION/fetch_profession_suggestions.php";
+  //search profession
+  static const searchProf = "$hostConnect/PROFESSION/search_profession.php";
   //signup student
   static const signUpStud = "$hostConnect/STUDENT/signup.php";
   //login student
@@ -24,4 +26,8 @@ class API {
   static const signUpTut = "$hostConnect/TUTOR/signup.php";
   //login tutor
   static const loginTut = "$hostConnect/TUTOR/login.php";
+  //fetch tutor Suggestions
+  static const fTutSug = "$hostConnect/TUTOR/fetch_tutor_suggestions.php";
+  //search tutor
+  static const searchTut = "$hostConnect/TUTOR/search_tutor.php";
 }
