@@ -13,42 +13,49 @@ class StudentProfileScreen extends StatelessWidget {
       child: Scaffold(
         appBar: AppWidgets.buildAppBar(context),
         drawer: AppWidgets.buildDrawer(context),
-        body: Container(
-          width: double.maxFinite,
-          padding: EdgeInsets.only(
-            left: 38.h,
-            top: 41.v,
-            bottom: 41.v,
-          ),
-          child: Column(
-            children: [
+        body: Center (
+          child: SizedBox (
+            width: double.maxFinite,
+            child: Column (children: [
               Container(
-                height: 200.adaptSize,
-                width: 200.adaptSize,
-                padding: EdgeInsets.symmetric(
-                  horizontal: 29.h,
-                  vertical: 21.v,
+                width: double.maxFinite,
+                padding: EdgeInsets.only(
+                  left: 38.h,
+                  top: 41.v,
+                  bottom: 41.v,
                 ),
-                decoration: AppDecoration.fillRed.copyWith(
-                  borderRadius: BorderRadiusStyle.circleBorder100,
-                ),
-                child: CustomImageView(
-                  imagePath: ImageConstant.imgAvatarPlaceholder,
-                  height: 128.v,
-                  width: 140.h,
-                  alignment: Alignment.bottomCenter,
+                child: Column(
+                  children: [
+                    Container(
+                      height: 200.adaptSize,
+                      width: 200.adaptSize,
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 29.h,
+                        vertical: 21.v,
+                      ),
+                      decoration: AppDecoration.fillRed.copyWith(
+                        borderRadius: BorderRadiusStyle.circleBorder100,
+                      ),
+                      child: CustomImageView(
+                        imagePath: ImageConstant.imgAvatarPlaceholder,
+                        height: 128.v,
+                        width: 140.h,
+                        alignment: Alignment.bottomCenter,
+                      ),
+                    ),
+                    SizedBox(height: 60.v),
+                    _buildMyTutors(context),
+                    SizedBox(height: 9.v),
+                    _buildMyReviews(context),
+                    SizedBox(height: 9.v),
+                    _buildEditProfile(context),
+                    SizedBox(height: 9.v),
+                    _buildLogout(context),
+                    SizedBox(height: 5.v),
+                  ],
                 ),
               ),
-              SizedBox(height: 60.v),
-              _buildMyTutors(context),
-              SizedBox(height: 9.v),
-              _buildMyReviews(context),
-              SizedBox(height: 9.v),
-              _buildEditProfile(context),
-              SizedBox(height: 9.v),
-              _buildLogout(context),
-              SizedBox(height: 5.v),
-            ],
+            ]),
           ),
         ),
         bottomNavigationBar: _buildBottomBar(context),
