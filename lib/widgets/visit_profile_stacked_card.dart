@@ -9,10 +9,7 @@ import 'package:flutter_share/flutter_share.dart';
 import 'package:login/widgets/search_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/material.dart';
-import 'package:uni_links/uni_links.dart';
-import 'package:flutter/services.dart' show PlatformException;
 import 'package:flutter_share/flutter_share.dart';
-import 'package:login/presentation/visit_profile_of_tutor_screen/visit_profile_of_tutor_screen.dart';
 class VisitProfileStackedCard extends StatefulWidget {
   final String additionalInfoPlaceholder;
   final String imageUrlFromDatabase;
