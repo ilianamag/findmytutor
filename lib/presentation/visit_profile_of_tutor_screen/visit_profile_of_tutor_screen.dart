@@ -15,7 +15,7 @@ class VisitProfileOfTutorScreen extends StatelessWidget {
       child: Scaffold(
         appBar: AppbarWidget.AppWidgets.buildAppBar(context),
         drawer: AppbarWidget.AppWidgets.buildDrawer(context),
-        body: VisitProfileStackedCard( context,nameFromDatabase: 'Iliana',additionalInfoPlaceholder: 'γεια', imageUrlFromDatabase: 'https://mackenziebagpiping.com/wp-content/uploads/2022/12/1.png',),
+        body: VisitProfileStackedCard( context,nameFromDatabase: 'Iliana',additionalInfoPlaceholder: 'γεια', imageUrlFromDatabase: 'https://mackenziebagpiping.com/wp-content/uploads/2022/12/1.png', emailFromDatabase: 'iliana@gmail.com',),
         bottomNavigationBar: _buildBottomBar(context),
       ),
     );

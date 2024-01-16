@@ -319,16 +319,21 @@ class TutorEditProfilePage extends StatelessWidget {
   }
 
   Widget _buildEditButton(BuildContext context) {
-    return CustomOutlinedButton(
-      onPressed: () {
-        onTapTxtSignUp(context);
-      },
-      height: 40.v,
-      width: 72.h,
-      text: "Edit",
-      buttonStyle: CustomButtonStyles.outlineGrayTL20,
-    );
-  }
+  return Positioned(
+    child: Center(
+      child: CustomOutlinedButton(
+        onPressed: () {
+          onTapTxtSignUp(context);
+        },
+        height: 40.v,
+        width: 72.h,
+        text: "Edit",
+        buttonStyle: CustomButtonStyles.outlineGrayTL20,
+       ),
+     ),
+   );
+ }
+
   void onTapTxtSignUp(BuildContext context) {
     Navigator.pushReplacementNamed(context, AppRoutes.tutorProfilePage);
   }
