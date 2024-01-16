@@ -15,29 +15,31 @@ class TutorInfoWidget extends StatelessWidget {
   final int rating;
   final String imagePath;
 
+
+
   @override
   Widget build(BuildContext context) {
     return Align(
       alignment: Alignment.centerRight,
       child: Container(
-        height: 77.v,
-        width: 277.h,
+        height: 100.v, // Adjust the height as needed
+        width: 300.h,  // Adjust the width as needed
         margin: EdgeInsets.only(right: 19.h),
         child: Stack(
           alignment: Alignment.center,
           children: [
             CustomImageView(
               imagePath: imagePath,
-              height: 40.adaptSize,
-              width: 40.adaptSize,
+              height: 60.adaptSize, // Adjust the height as needed
+              width: 60.adaptSize,  // Adjust the width as needed
               alignment: Alignment.topLeft,
               margin: EdgeInsets.only(top: 7.v),
             ),
             Align(
               alignment: Alignment.center,
               child: SizedBox(
-                height: 77.v,
-                width: 270.h,
+                height: 100.v,
+                width: 290.h,
                 child: Stack(
                   alignment: Alignment.bottomLeft,
                   children: [

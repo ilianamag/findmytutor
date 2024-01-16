@@ -114,6 +114,22 @@ class AppWidgets {
             Navigator.pushNamed(context, AppRoutes.searchResultScreen);
           },
         ),
+        ListTile(
+          leading: Icon(
+            Icons.logout,
+            color: appTheme.black900, // Replace with your color value
+          ),
+          title: Text(
+            'reviews of a tutor',
+            style: TextStyle(
+              color: appTheme.black900, // Replace with your color value
+            ),
+          ),
+          onTap: () {
+            Navigator.pop(context);
+            Navigator.pushNamed(context, AppRoutes.reviewsOfATutorScreen);
+          },
+        ),
       ],
     ),
   );

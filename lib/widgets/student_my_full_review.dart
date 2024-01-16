@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:login/core/app_export.dart';
-import 'package:login/presentation/reviews_of_a_tutor_screen/reviews_of_a_tutor_screen.dart';
+import 'package:login/presentation/students_my_reviewsone_screen/students_my_reviewsone_screen.dart';
 import 'package:login/widgets/custom_elevated_button.dart';
 import 'package:login/widgets/custom_rating_bar.dart';
 
@@ -52,14 +52,14 @@ class ReviewSectionWidget extends StatelessWidget {
         CustomElevatedButton(
           buttonTextStyle: TextStyle(color: Colors.white),
           width: 96.h,
-          text: "See all \nreviews",
+          text: "See my \nreviews",
           margin: EdgeInsets.only(right: 8.h),
           alignment: Alignment.centerRight,
           onPressed: () {
             // Navigate to the ReviewsOfATutorScreen
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => ReviewsOfATutorScreen()),
+              MaterialPageRoute(builder: (context) => StudentsMyReviewsoneScreen()),
             );
           },
         ),
