@@ -1,6 +1,9 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:login/core/app_export.dart';
+import 'package:login/models/student_model/student.dart';
+import 'package:login/models/student_model/studentPreferences.dart';
+import 'package:login/models/tutor_model/tutor.dart';
 import 'package:login/widgets/text_field_stateful.dart';
 import 'package:http/http.dart' as http;
 import 'package:login/api_connection/api_connection.dart';
@@ -115,7 +118,7 @@ class _LoginPageRemasteredState extends State<LoginPageRemastered> {
                     ElevatedButton.icon(
                       onPressed: enableLogin
                       ? () {
-                        _checkCredentials();
+                        if(_formKey.currentState!.validate()) _checkCredentials();
                       } :null,
                       icon: Icon(
                         Icons.arrow_forward
@@ -226,6 +229,8 @@ class _LoginPageRemasteredState extends State<LoginPageRemastered> {
         print(e);
       }
       if (resBodyOfLogin['success'] == true) {
+        Student studentInfo = Student.fromJson(resBodyOfLogin["userData"]);
+        await RememberStudentPreferences.storeStudentInfo(studentInfo);
         Navigator.pushNamed(context, AppRoutes.studentProfileScreen);
         emailAddress.clear();
         password.clear();
@@ -253,6 +258,7 @@ class _LoginPageRemasteredState extends State<LoginPageRemastered> {
         print(e);
       }
       if (resBodyOfLoginT['success'] == true) {
+        Tutor TutorInfo = Tutor.fromJson(resBodyOfLoginT["userData"]);
         Navigator.pushNamed(context, AppRoutes.tutorProfilePage);
         emailAddress.clear();
         password.clear();

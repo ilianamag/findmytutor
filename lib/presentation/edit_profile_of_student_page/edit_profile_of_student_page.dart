@@ -101,6 +101,8 @@ class EditProfileOfStudentPage extends StatelessWidget {
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:login/core/app_export.dart';
+import 'package:login/models/student_model/student.dart';
+import 'package:login/models/student_model/studentPreferences.dart';
 import 'package:login/widgets/custom_outlined_button.dart';
 import 'package:login/widgets/custom_floating_text_field.dart';
 import 'package:login/widgets/custom_bottom_bar.dart';
@@ -123,6 +125,21 @@ class _EditProfileOfStudentPageState extends State<EditProfileOfStudentPage> {
   TextEditingController emailFieldController = TextEditingController();
   TextEditingController passwordFieldController = TextEditingController();
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  //Student? studentInfo;
+
+  @override
+  void initState() {
+    super.initState();
+    _initializeData();
+  }
+
+  Future<void> _initializeData() async {
+    Student? studentInfo = await RememberStudentPreferences.readStudentInfo();
+    firstNameFieldController.text = studentInfo?.firstname ?? "";
+    lastNameFieldController.text = studentInfo?.lastname ?? "";
+    emailFieldController.text = studentInfo?.email ?? "";
+    passwordFieldController.text = studentInfo?.password ?? "";
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -149,59 +166,59 @@ class _EditProfileOfStudentPageState extends State<EditProfileOfStudentPage> {
                 child: Column(
                   children: [
                    SizedBox(
-  height: 102.v,
-  width: 110.h,
-  child: Stack(
-    alignment: Alignment.bottomRight,
-    children: [
-      Align(
-        alignment: Alignment.topLeft,
-        child: GestureDetector(
-          onTap: () {
-            _openCamera();
-          },
-          child: Container(
-            height: 90.v,
-            width: 92.h,
-            padding: EdgeInsets.symmetric(
-              horizontal: 13.h,
-              vertical: 9.v,
-            ),
-            decoration: AppDecoration.fillRed.copyWith(
-              borderRadius: BorderRadiusStyle.circleBorder45,
-            ),
-            child: CustomImageView(
-              imagePath: _image.path, // Assuming _image is not null here
-              height: 57.v,
-              width: 64.h,
-              alignment: Alignment.bottomCenter,
-            ),
-          ),
-        ),
-      ),
-    ],
-  ),
-),
-     SizedBox(height: 15.v),
-                    _buildFirstNameField(context),
-                    SizedBox(height: 16.v),
-                    _buildLastNameField(context),
-                    SizedBox(height: 19.v),
-                    _buildEmailField(context),
-                    SizedBox(height: 19.v),
-                    _buildPasswordField(context),
-                    SizedBox(height: 46.v),
-                    _buildEditButton(context),
-                    SizedBox(height: 5.v),
-                  ],
-                ),
+                    height: 102.v,
+                    width: 110.h,
+                    child: Stack(
+                      alignment: Alignment.bottomRight,
+                      children: [
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: GestureDetector(
+                            onTap: () {
+                              _openCamera();
+                            },
+                            child: Container(
+                              height: 90.v,
+                              width: 92.h,
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 13.h,
+                                vertical: 9.v,
+                              ),
+                              decoration: AppDecoration.fillRed.copyWith(
+                                borderRadius: BorderRadiusStyle.circleBorder45,
+                              ),
+                              child: CustomImageView(
+                                imagePath: _image.path, // Assuming _image is not null here
+                                height: 57.v,
+                                width: 64.h,
+                                alignment: Alignment.bottomCenter,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 15.v),
+                  _buildFirstNameField(context),
+                  SizedBox(height: 16.v),
+                  _buildLastNameField(context),
+                  SizedBox(height: 19.v),
+                  _buildEmailField(context),
+                  SizedBox(height: 19.v),
+                  _buildPasswordField(context),
+                  SizedBox(height: 46.v),
+                  _buildEditButton(context),
+                  SizedBox(height: 5.v),
+                ],
               ),
             ),
           ),
         ),
-        bottomNavigationBar: _buildBottomBar(context),
       ),
-    );
+      bottomNavigationBar: _buildBottomBar(context),
+    ),
+  );
   }
 
  void _openCamera() async {
