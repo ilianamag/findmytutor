@@ -4,19 +4,26 @@ import 'package:login/widgets/custom_floating_text_field.dart';
 import 'package:login/widgets/custom_icon_button.dart';
 import 'package:login/widgets/custom_bottom_bar_teacher.dart';
 import 'package:login/widgets/appbarfortutors.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:login/widgets/custom_outlined_button.dart';
+import 'dart:io';
+
 // ignore_for_file: must_be_immutable
-class TutorEditProfilePage extends StatelessWidget {
-  TutorEditProfilePage({Key? key}): super(key: key,);
+  class TutorEditProfilePage extends StatefulWidget {
+  TutorEditProfilePage({Key? key}) : super(key: key);
+
+  @override
+  _TutorEditProfilePageState createState() => _TutorEditProfilePageState();
+}
+
+class _TutorEditProfilePageState extends State<TutorEditProfilePage> {
+  File _image = File(""); // File to hold the selected or captured image
+  final ImagePicker _imagePicker = ImagePicker();
 
   TextEditingController firstNameController = TextEditingController();
-
   TextEditingController lastNameController = TextEditingController();
-
   TextEditingController emailController = TextEditingController();
-
   TextEditingController passwordController = TextEditingController();
-
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
@@ -51,37 +58,56 @@ class TutorEditProfilePage extends StatelessWidget {
                         width: 106.h,
                         child: Stack(
                           alignment: Alignment.bottomRight,
-                          children: [
-                            Align(
-                              alignment: Alignment.topLeft,
-                              child: Container(
-                                height: 90.v,
-                                width: 92.h,
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: 13.h,
-                                  vertical: 9.v,
-                                ),
-                                decoration: AppDecoration.fillRed.copyWith(
-                                  borderRadius:
-                                      BorderRadiusStyle.circleBorder45,
-                                ),
-                                child: CustomImageView(
-                                  imagePath: ImageConstant.imgSettings,
-                                  height: 57.v,
-                                  width: 64.h,
-                                  alignment: Alignment.bottomCenter,
-                                ),
-                              ),
-                            ),
-                            CustomIconButton(
-                              height: 43.v,
-                              width: 46.h,
-                              padding: EdgeInsets.all(9.h),
-                              alignment: Alignment.bottomRight,
-                              child: CustomImageView(
-                                imagePath: ImageConstant.imgEdit,
-                              ),
-                            ),
+    children: [
+      Align(
+        alignment: Alignment.topLeft,
+        child: GestureDetector(
+          onTap: () {
+            _openCamera();
+          },
+          child: Container(
+  height: 90.v,
+  width: 92.h,
+  padding: EdgeInsets.symmetric(
+    horizontal: 13.h,
+    vertical: 9.v,
+  ),
+ decoration: BoxDecoration(
+    color: Colors.transparent,  // Replace AppDecoration.fillRed with this line
+    borderRadius: BorderRadiusStyle.circleBorder45,
+  ),
+  child: Stack(
+    alignment: Alignment.bottomCenter,
+    children: [
+      GestureDetector(
+        onTap: () {
+          _openCamera();
+        },
+        child: Container(
+          height: double.infinity,
+          width: double.infinity,
+          child: ClipOval(
+            child: _image.path.isNotEmpty
+                ? Image.file(
+                    File(_image.path),
+                    fit: BoxFit.contain,  // Change BoxFit.cover to BoxFit.contain
+                  )
+                : SizedBox(),
+          ),
+        ),
+      ),
+      if (_image.path.isEmpty)
+        CustomImageView(
+          imagePath: ImageConstant.imgSettings,
+          height: 57.v,
+          width: 64.h,
+          alignment: Alignment.bottomCenter,
+        ),
+    ],
+  ),
+),
+        ),
+      ),
                           ],
                         ),
                       ),
@@ -185,6 +211,18 @@ class TutorEditProfilePage extends StatelessWidget {
       ),
     );
   }
+
+  void _openCamera() async {
+  final image = await _imagePicker.pickImage(
+    source: ImageSource.camera,
+  );
+
+  if (image != null) {
+    setState(() {
+      _image = File(image.path);
+    });
+  }
+}
 
 
   /// Section Widget

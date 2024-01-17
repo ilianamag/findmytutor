@@ -161,22 +161,46 @@ class _EditProfileOfStudentPageState extends State<EditProfileOfStudentPage> {
             _openCamera();
           },
           child: Container(
-            height: 90.v,
-            width: 92.h,
-            padding: EdgeInsets.symmetric(
-              horizontal: 13.h,
-              vertical: 9.v,
-            ),
-            decoration: AppDecoration.fillRed.copyWith(
-              borderRadius: BorderRadiusStyle.circleBorder45,
-            ),
-            child: CustomImageView(
-              imagePath: _image.path, // Assuming _image is not null here
-              height: 57.v,
-              width: 64.h,
-              alignment: Alignment.bottomCenter,
-            ),
+  height: 90.v,
+  width: 92.h,
+  padding: EdgeInsets.symmetric(
+    horizontal: 13.h,
+    vertical: 9.v,
+  ),
+ decoration: BoxDecoration(
+    color: Colors.transparent,  // Replace AppDecoration.fillRed with this line
+    borderRadius: BorderRadiusStyle.circleBorder45,
+  ),
+  child: Stack(
+    alignment: Alignment.bottomCenter,
+    children: [
+      GestureDetector(
+        onTap: () {
+          _openCamera();
+        },
+        child: Container(
+          height: double.infinity,
+          width: double.infinity,
+          child: ClipOval(
+            child: _image.path.isNotEmpty
+                ? Image.file(
+                    File(_image.path),
+                    fit: BoxFit.contain,  // Change BoxFit.cover to BoxFit.contain
+                  )
+                : SizedBox(),
           ),
+        ),
+      ),
+      if (_image.path.isEmpty)
+        CustomImageView(
+          imagePath: ImageConstant.imgSettings,
+          height: 57.v,
+          width: 64.h,
+          alignment: Alignment.bottomCenter,
+        ),
+    ],
+  ),
+),
         ),
       ),
     ],
