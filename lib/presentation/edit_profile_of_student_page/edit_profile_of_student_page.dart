@@ -101,11 +101,15 @@ class EditProfileOfStudentPage extends StatelessWidget {
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:login/core/app_export.dart';
-import 'package:login/widgets/custom_outlined_button.dart';
-import 'package:login/widgets/custom_floating_text_field.dart';
+import 'package:login/models/student_model/student.dart';
+import 'package:login/models/student_model/studentPreferences.dart';
 import 'package:login/widgets/custom_bottom_bar.dart';
 import 'package:login/widgets/appbar.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:login/widgets/text_field_stateful.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+import 'package:login/api_connection/api_connection.dart';
 
 class EditProfileOfStudentPage extends StatefulWidget {
   EditProfileOfStudentPage({Key? key}) : super(key: key);
@@ -123,6 +127,21 @@ class _EditProfileOfStudentPageState extends State<EditProfileOfStudentPage> {
   TextEditingController emailFieldController = TextEditingController();
   TextEditingController passwordFieldController = TextEditingController();
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  bool pInvisibility = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _initializeData();
+  }
+
+  Future<void> _initializeData() async {
+    Student? studentInfo = await RememberStudentPreferences.readStudentInfo();
+    firstNameFieldController.text = studentInfo?.firstname ?? "";
+    lastNameFieldController.text = studentInfo?.lastname ?? "";
+    emailFieldController.text = studentInfo?.email ?? "";
+    passwordFieldController.text = studentInfo?.password ?? "";
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -242,144 +261,233 @@ class _EditProfileOfStudentPageState extends State<EditProfileOfStudentPage> {
 
   /// Section Widget
   Widget _buildFirstNameField(BuildContext context) {
-    return CustomFloatingTextField(
+    return TextFieldStateful(
       width: 210.h,
       controller: firstNameFieldController,
-      labelText: "Name",
+      //hintText: "First Name",
+      labelText: "First Name",
       labelStyle: TextStyle(
         color: appTheme.gray800,
-        fontSize: 12.fSize,
+        fontSize: 16.fSize,
         fontFamily: 'Roboto',
         fontWeight: FontWeight.w400,
       ),
-      hintText: "Name",
-      suffix: Container(
-        margin: EdgeInsets.symmetric(horizontal: 12.h),
-        child: CustomImageView(
-          imagePath: ImageConstant.imgEditGray90001,
-          height: 24.adaptSize,
-          width: 24.adaptSize,
-        ),
-      ),
-      suffixConstraints: BoxConstraints(
-        maxHeight: 64.v,
+      prefix: Icon(Icons.person, size: 25),
+      suffix: IconButton(
+        onPressed: () => firstNameFieldController.clear(),
+        icon: Icon(Icons.clear, size: 25)
       ),
     );
   }
 
   /// Section Widget
   Widget _buildLastNameField(BuildContext context) {
-    return CustomFloatingTextField(
+    return TextFieldStateful(
       width: 210.h,
       controller: lastNameFieldController,
+      //hintText: "Last Name",
       labelText: "Last Name",
       labelStyle: TextStyle(
         color: appTheme.gray800,
-        fontSize: 12.fSize,
+        fontSize: 16.fSize,
         fontFamily: 'Roboto',
         fontWeight: FontWeight.w400,
       ),
-      hintText: "Last Name",
-      suffix: Container(
-        margin: EdgeInsets.symmetric(horizontal: 12.h),
-        child: CustomImageView(
-          imagePath: ImageConstant.imgEditGray90001,
-          height: 24.adaptSize,
-          width: 24.adaptSize,
-        ),
-      ),
-      suffixConstraints: BoxConstraints(
-        maxHeight: 64.v,
+      prefix: Icon(Icons.person, size: 25),
+      suffix: IconButton(
+        onPressed: () => lastNameFieldController.clear(),
+        icon: Icon(Icons.clear, size: 25)
       ),
     );
   }
 
   /// Section Widget
   Widget _buildEmailField(BuildContext context) {
-    return CustomFloatingTextField(
+    final focusNode = FocusNode();
+
+    focusNode.addListener(() {
+      if (focusNode.hasFocus) {
+        setState(() {
+          _buildErrorSnackBar(context);
+        });
+      }
+    });
+    return TextFieldStateful(
+      focusNode: focusNode,
+      textStyle: TextStyle(color: appTheme.gray600),
+      readOnly: true,
       width: 210.h,
       controller: emailFieldController,
       labelText: "Email",
       labelStyle: TextStyle(
-        color: appTheme.gray800,
-        fontSize: 12.fSize,
+        color: appTheme.gray600,
+        fontSize: 16.fSize,
         fontFamily: 'Roboto',
         fontWeight: FontWeight.w400,
       ),
-      hintText: "Email",
-      textInputType: TextInputType.emailAddress,
-      prefix: Container(
-        margin: EdgeInsets.symmetric(horizontal: 12.h),
-        child: CustomImageView(
-          imagePath: ImageConstant.imgIconsMailoutline,
-          height: 24.adaptSize,
-          width: 24.adaptSize,
-        ),
-      ),
-      prefixConstraints: BoxConstraints(
-        maxHeight: 64.v,
-      ),
-      suffix: Container(
-        margin: EdgeInsets.symmetric(horizontal: 12.h),
-        child: CustomImageView(
-          imagePath: ImageConstant.imgEditGray90001,
-          height: 24.adaptSize,
-          width: 24.adaptSize,
-        ),
-      ),
-      suffixConstraints: BoxConstraints(
-        maxHeight: 64.v,
-      ),
+      prefix:Icon(Icons.email, size: 25, color: appTheme.gray600,),
     );
   }
 
   /// Section Widget
   Widget _buildPasswordField(BuildContext context) {
-    return CustomFloatingTextField(
+    return TextFieldStateful(
       width: 210.h,
       controller: passwordFieldController,
+      //hintText: "Password ",
       labelText: "Password",
       labelStyle: TextStyle(
         color: appTheme.gray800,
-        fontSize: 12.fSize,
+        fontSize: 16.fSize,
         fontFamily: 'Roboto',
         fontWeight: FontWeight.w400,
       ),
-      hintText: "Password",
-      textInputAction: TextInputAction.done,
-      textInputType: TextInputType.visiblePassword,
-      obscureText: true,
-      suffix: Container(
-        margin: EdgeInsets.symmetric(horizontal: 12.h),
-        child: CustomImageView(
-          imagePath: ImageConstant.imgEditGray90001,
-          height: 24.adaptSize,
-          width: 24.adaptSize,
-        ),
+      prefix: Icon(Icons.lock, size: 25),
+      suffix: IconButton (
+        onPressed: () {
+          setState(() => pInvisibility = !pInvisibility);
+        },
+        icon: Icon(
+          pInvisibility
+          ? Icons.visibility_off
+          : Icons.visibility,
+          size: 25
+        )
       ),
-      suffixConstraints: BoxConstraints(
-        maxHeight: 64.v,
-      ),
-      contentPadding: EdgeInsets.fromLTRB(16.h, -7.v, 16.h, 48.v),
+      obscureText: pInvisibility,
     );
   }
 
   /// Section Widget
   Widget _buildEditButton(BuildContext context) {
-    return CustomOutlinedButton(
+    return ElevatedButton.icon(
       onPressed: () {
-        onTapTxtSignUp(context);
+        _updateInfo();
       },
-      height: 40.v,
-      width: 72.h,
-      text: "Edit",
-      buttonStyle: CustomButtonStyles.outlineGrayTL20,
+      icon: Icon(
+        Icons.edit,
+        size: 25,
+      ),
+      label: Text(
+          "Save Changes",
+          style: TextStyle(
+            //color: appTheme.gray90001,
+            fontSize: 16.fSize,
+            fontFamily: 'Roboto',
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Color(0xFFDC2E2E),
+        foregroundColor: Colors.white,
+        elevation: 0,
+        fixedSize: Size(200, 40),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadiusStyle.circleBorder20,
+        ),
+      ),
     );
   }
-  
-  void onTapTxtSignUp(BuildContext context) {
-    Navigator.pushReplacementNamed(context, AppRoutes.studentProfileScreen);
+
+  ScaffoldFeatureController<SnackBar, SnackBarClosedReason> _buildErrorSnackBar(BuildContext context) {
+    return ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        elevation: 6,
+        backgroundColor: Colors.transparent,
+        content: Container (
+          width: 252,
+          height:63,
+          decoration: BoxDecoration(
+            color: Colors.grey[850],
+            borderRadius: BorderRadius.circular(16.0),
+          ),
+          child: Center (
+            child: Row (
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Δυστυχώς, δεν μπορείτε\nνα αλλάξετε το email σας!',
+                  style: TextStyle(
+                    fontSize: 16.fSize,
+                    fontFamily: 'Roboto'
+                  )
+                )
+              ]
+            )
+          )
+        ),
+        duration: Duration(seconds: 3)
+      )
+    );
   }
+
+  ScaffoldFeatureController<SnackBar, SnackBarClosedReason> _buildErrorSnackBar2(BuildContext context) {
+    return ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        elevation: 6,
+        backgroundColor: Colors.transparent,
+        content: Container (
+          width: 252,
+          height:63,
+          decoration: BoxDecoration(
+            color: Colors.grey[850],
+            borderRadius: BorderRadius.circular(16.0),
+          ),
+          child: Center (
+            child: Row (
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Ουπς! Κάτι πήγε λάθος.\nΠαρακαλώ, ελέγξτε τα στοιχεία σας!',
+                  style: TextStyle(
+                    fontSize: 16.fSize,
+                    fontFamily: 'Roboto'
+                  )
+                )
+              ]
+            )
+          )
+        ),
+        duration: Duration(seconds: 3)
+      )
+    );
+  }
+
+  _updateInfo() async {
+    var response = await http.post(
+      Uri.parse(API.updateStud),
+      body: {
+        "email": emailFieldController.text.trim(),
+        "firstname": firstNameFieldController.text.trim(),
+        "lastname": lastNameFieldController.text.trim(),
+        "password": passwordFieldController.text.trim(),
+        "profilepic": "",
+      }
+    );
+
+    if (response.statusCode == 200) {
+      var resBody;
+      print(response.body);
+      try{ resBody= jsonDecode(response.body); }
+      catch(e) { print(e); }
+      
+      if (resBody['success'] == true) {
+        Student studentInfo = Student.fromJson(resBody["userData"]);
+        await RememberStudentPreferences.storeStudentInfo(studentInfo);
+        Navigator.pushReplacementNamed(context, AppRoutes.studentProfileScreen);
+        _clearTextControllers();
+      }
+      else _buildErrorSnackBar2(context);
+    }
+  }
+
+  void _clearTextControllers() {
+    firstNameFieldController.clear();
+    lastNameFieldController.clear();
+    emailFieldController.clear();
+    passwordFieldController.clear();
+  }
+  
   Widget _buildBottomBar(BuildContext context) {
     return CustomBottomBar(onChanged: (BottomBarEnum type) {
     });

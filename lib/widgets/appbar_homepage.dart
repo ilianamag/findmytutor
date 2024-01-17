@@ -1,8 +1,47 @@
 import 'package:flutter/material.dart';
 import 'package:login/core/app_export.dart';
 import 'package:login/widgets/custom_search_delegate.dart';
+import 'package:http/http.dart' as http;
+import 'package:login/api_connection/api_connection.dart';
+import 'dart:convert';
+import 'package:login/widgets/Pair/Pair.dart';
 
 class AppWidgetsHomepage {
+  static Future<List<Pair<String, String>>> _fetchSuggestions() async {
+    List<Pair<String, String>> pairListP;
+    List<Pair<String, String>> pairListT;
+    final response = await http.get(Uri.parse(API.fProfSug));
+    if (response.statusCode == 200) {
+      final List<dynamic> data = json.decode(response.body);
+    
+      // Convert List<dynamic> to List<Pair<String, String>>
+      pairListP = data.map((item) {
+        return Pair<String, String>(
+          item['profession'] as String,
+          item['category'] as String,
+        );
+      }).toList();
+    } else {
+      throw Exception('Failed to load suggestions');
+    }
+    final response2 = await http.get(Uri.parse(API.fTutSug));
+    if (response2.statusCode == 200) {
+      final List<dynamic> data = json.decode(response2.body);
+    
+      // Convert List<dynamic> to List<Pair<String, String>>
+      pairListT = data.map((item) {
+        return Pair<String, String>(
+          item['fullname'] as String,
+          item['profession'] as String,
+        );
+      }).toList();
+    } else {
+      throw Exception('Failed to load suggestions');
+    }
+    final List<Pair<String, String>> pairList = pairListP + pairListT;
+    return pairList;
+  }
+
   static AppBar buildAppBarHomepage(BuildContext context) {
     return AppBar(
       centerTitle: true,
@@ -22,8 +61,9 @@ class AppWidgetsHomepage {
             Icons.search,
             color: appTheme.black900,
           ),
-          onPressed: () {
-            showSearch(context: context, delegate: CustomSearchDelegate(),
+          onPressed: () async {
+            List<Pair<String, String>> suggestions = await _fetchSuggestions();
+            showSearch(context: context, delegate: CustomSearchDelegate(suggestions),
             );
             // Add your search functionality here
           },

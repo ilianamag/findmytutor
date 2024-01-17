@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:login/presentation/FAQs/faqs_student.dart';
 import 'package:login/presentation/full_review_screen_teacher/full_review_screen.dart';
 import 'package:login/presentation/homepage/homepage.dart';
-import 'package:login/presentation/login_page_screen/login_page_screen.dart';
+import 'package:login/presentation/login_page_remastered/login_page_remastered.dart';
 import 'package:login/presentation/app_navigation_screen/app_navigation_screen.dart';
 import 'package:login/presentation/student_profile_screen/student_profile_screen.dart';
 import 'package:login/presentation/student_screen_one/student_screen_one.dart';
@@ -18,7 +18,7 @@ import 'package:login/presentation/tutor_profile_page/tutor_profile_page.dart';
 import 'package:login/presentation/my_students/students_tutor_profileone_screen.dart';
 import 'package:login/presentation/my_reviews_tutor_screen/my_reviews_tutor_screen.dart';
 import 'package:login/presentation/FAQs_tutor/faqs_tutor.dart';
-import 'package:login/presentation/ena_allo_sign_up/ena_allo_sign_up.dart'; 
+import 'package:login/presentation/signup_page_remastered/signup_page_remastered.dart'; 
 import 'package:login/presentation/tutor_edit_profile_page/tutor_edit_profile_page.dart';
 import 'package:login/presentation/make_a_review_screen/make_a_review_screen.dart';
 import 'package:login/presentation/qr_code_scanner/qr_code_scanner.dart';
@@ -27,7 +27,7 @@ import 'package:login/presentation/tutor_search_result_container_screen/tutor_se
 import 'package:login/presentation/visit_profile_of_tutor_screen/visit_profile_of_tutor_screen.dart';
 
 class AppRoutes {
-  static const String loginPageScreen = '/login_page_screen';
+  static const String loginPageScreen = '/login_page_remastered';
 
   static const String faqsScreenStudent = '/faqs_student';
 
@@ -65,7 +65,7 @@ class AppRoutes {
  
   static const String fullReviewScreen = '/full_review_screen';
 
-  static const String enaAlloSignUp = '/ena_allo_sign_up';
+  static const String enaAlloSignUp = '/signup_page_remastered';
 
   static const String HomePage = '/homepage'; 
 
@@ -94,7 +94,7 @@ class AppRoutes {
     reviewsOfATutorScreen:(context) => ReviewsOfATutorScreen(),
     studentsMyReviewstwoScreen: (context) => StudentsMyReviewstwoScreen(),
     myTutorsScreen: (context) => MyTutorsScreen(),
-    loginPageScreen: (context) => LoginPageScreen(),
+    loginPageScreen: (context) => LoginPageRemastered(),
     studentProfileScreen: (context) => StudentProfileScreen(),
     appNavigationScreen: (context) => AppNavigationScreen(),
     studentoneScreen: (context) => StudentoneScreen(),
