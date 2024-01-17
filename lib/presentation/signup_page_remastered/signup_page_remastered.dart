@@ -389,7 +389,14 @@ class _MyHomePageState extends State<MyHomePage> {
     return TextFieldStateful(
       width: 210.h,
       controller: nameEditTextController,
-      hintText: "First Name",
+      //hintText: "First Name",
+      labelText: "First Name",
+      labelStyle: TextStyle(
+        color: appTheme.gray800,
+        fontSize: 16.fSize,
+        fontFamily: 'Roboto',
+        fontWeight: FontWeight.w400,
+      ),
       prefix: Icon(Icons.person, size: 25),
       suffix: IconButton(
         onPressed: () => nameEditTextController.clear(),
@@ -403,7 +410,14 @@ class _MyHomePageState extends State<MyHomePage> {
     return TextFieldStateful(
       width: 210.h,
       controller: lastNameEditTextController,
-      hintText: "Last Name",
+      //hintText: "Last Name",
+      labelText: "Last Name",
+      labelStyle: TextStyle(
+        color: appTheme.gray800,
+        fontSize: 16.fSize,
+        fontFamily: 'Roboto',
+        fontWeight: FontWeight.w400,
+      ),
       prefix: Icon(Icons.person, size: 25),
       suffix: IconButton(
         onPressed: () => lastNameEditTextController.clear(),
@@ -417,7 +431,14 @@ class _MyHomePageState extends State<MyHomePage> {
     return TextFieldStateful(
       width: 210.h,
       controller: emailEditTextController,
-      hintText: "Email",
+      //hintText: "Email",
+      labelText: "Email",
+      labelStyle: TextStyle(
+        color: appTheme.gray800,
+        fontSize: 16.fSize,
+        fontFamily: 'Roboto',
+        fontWeight: FontWeight.w400,
+      ),
       textInputType: TextInputType.emailAddress,
       prefix: Icon(Icons.email, size: 25),
       suffix: IconButton(
@@ -432,7 +453,14 @@ class _MyHomePageState extends State<MyHomePage> {
     return TextFieldStateful(
       width: 210.h,
       controller: passwordEditTextController,
-      hintText: "Password ",
+      //hintText: "Password ",
+      labelText: "Password",
+      labelStyle: TextStyle(
+        color: appTheme.gray800,
+        fontSize: 16.fSize,
+        fontFamily: 'Roboto',
+        fontWeight: FontWeight.w400,
+      ),
       prefix: Icon(Icons.lock, size: 25),
       suffix: IconButton (
         onPressed: () {
@@ -453,7 +481,14 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget _buildRoleDropDownMenu(BuildContext context) {
     return CustomDropDownList (
       width: 210.h,
-      hintText: 'Role',
+      //hintText: 'Role',
+      labelText: "Role",
+      labelStyle: TextStyle(
+        color: appTheme.gray800,
+        fontSize: 16.fSize,
+        fontFamily: 'Roboto',
+        fontWeight: FontWeight.w400,
+      ),
       prefix: Icon(Icons.person, size: 25),
       suffix: Icon(Icons.arrow_drop_down, size: 30),
       controller: roleController,
@@ -466,7 +501,14 @@ class _MyHomePageState extends State<MyHomePage> {
     return TextFieldStateful(
       width: 210.h,
       controller: priceController,
-      hintText: "Price/hour",
+      //hintText: "Price/hour",
+      labelText: "Rrice/hour",
+      labelStyle: TextStyle(
+        color: appTheme.gray800,
+        fontSize: 16.fSize,
+        fontFamily: 'Roboto',
+        fontWeight: FontWeight.w400,
+      ),
       textInputType: TextInputType.number,
       prefix: Icon(Icons.euro, size: 25),
       suffix: IconButton(
@@ -481,7 +523,14 @@ class _MyHomePageState extends State<MyHomePage> {
     return TextFieldStateful(
       width: 210.h,
       controller: radiusController,
-      hintText: "Radius (km)",
+      //hintText: "Radius (km)",
+      labelText: "Radius (km)",
+      labelStyle: TextStyle(
+        color: appTheme.gray800,
+        fontSize: 16.fSize,
+        fontFamily: 'Roboto',
+        fontWeight: FontWeight.w400,
+      ),
       textInputType: TextInputType.number,
       prefix: Icon(Icons.flag, size: 25),
       suffix: IconButton(
@@ -495,7 +544,14 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget _buildCategoryDropdown(BuildContext context) {
     return CustomDropDownList (
       width: 210.h,
-      hintText: 'Category',
+      //hintText: 'Category',
+      labelText: "Category",
+      labelStyle: TextStyle(
+        color: appTheme.gray800,
+        fontSize: 16.fSize,
+        fontFamily: 'Roboto',
+        fontWeight: FontWeight.w400,
+      ),
       prefix: Icon(Icons.category_rounded, size: 25),
       suffix: Icon(Icons.arrow_drop_down, size: 30),
       controller: categoryController,
@@ -507,7 +563,14 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget _buildProfessionDropdown(BuildContext context) {
     return CustomDropDownList (
       width: 210.h,
-      hintText: 'Profession',
+      //hintText: 'Profession',
+      labelText: "Profession",
+      labelStyle: TextStyle(
+        color: appTheme.gray800,
+        fontSize: 16.fSize,
+        fontFamily: 'Roboto',
+        fontWeight: FontWeight.w400,
+      ),
       prefix: Icon(Icons.business_center, size: 25),
       suffix: Icon(Icons.arrow_drop_down, size: 30),
       controller: professionController,
@@ -519,7 +582,14 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget _buildInfo(BuildContext context) {
     return TextFieldStateful(
       width: 210.h,
-      hintText: '*Type more info (not required)',
+      //hintText: '*Type more info (not required)',
+      labelText: "Information",
+      labelStyle: TextStyle(
+        color: appTheme.gray800,
+        fontSize: 16.fSize,
+        fontFamily: 'Roboto',
+        fontWeight: FontWeight.w400,
+      ),
       hintStyle: TextStyle(fontSize: 10.fSize, fontFamily: 'Roboto'),
       controller: infoController,
       maxLines: null,
@@ -611,7 +681,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         elevation: 6,
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.transparent,
         content: Container (
           width: 252,
           height:63,

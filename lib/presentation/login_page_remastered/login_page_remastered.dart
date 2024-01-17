@@ -80,7 +80,13 @@ class _LoginPageRemasteredState extends State<LoginPageRemastered> {
                       width: 210.h,
                       controller: emailAddress,
                       prefix: Icon(Icons.email, size: 25),
-                      hintText: "Email",
+                      labelText: "Email",
+                      labelStyle: TextStyle(
+                        color: appTheme.gray800,
+                        fontSize: 16.fSize,
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.w400,
+                      ),
                       suffix:
                         IconButton (
                           icon: Icon(Icons.clear, size:25),
@@ -97,7 +103,13 @@ class _LoginPageRemasteredState extends State<LoginPageRemastered> {
                       width: 210.h,
                       controller: password,
                       prefix: Icon(Icons.lock, size: 25),
-                      hintText: "Password",
+                      labelText: "Password",
+                      labelStyle: TextStyle(
+                        color: appTheme.gray800,
+                        fontSize: 16.fSize,
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.w400,
+                      ),
                       suffix: IconButton (
                         onPressed: () {
                           setState(() => pInvisibility = !pInvisibility);
@@ -302,7 +314,7 @@ class _LoginPageRemasteredState extends State<LoginPageRemastered> {
     return ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         elevation: 6,
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.transparent,
         content: Container (
           width: 252,
           height:63,

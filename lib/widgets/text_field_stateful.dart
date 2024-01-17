@@ -17,6 +17,8 @@ class TextFieldStateful extends StatefulWidget {
     this.maxLines,
     this.hintText,
     this.hintStyle,
+    this.labelText,
+    this.labelStyle,
     this.prefix,
     this.prefixConstraints,
     this.suffix,
@@ -56,6 +58,10 @@ class TextFieldStateful extends StatefulWidget {
   final String? hintText;
 
   final TextStyle? hintStyle;
+
+  final String? labelText;
+
+  final TextStyle? labelStyle;
 
   final Widget? prefix;
 
@@ -118,7 +124,7 @@ class _CustomTextFormFieldState extends State<TextFieldStateful> {
 
   Widget textFormFieldWidget(BuildContext context) => SizedBox(
         width: widget.width ?? double.maxFinite,
-        child: TextField(
+        child: TextFormField(
           readOnly: widget.readOnly ?? false,
           maxLines: widget.maxLines ?? 1,
           onChanged:(value) {
@@ -143,6 +149,8 @@ class _CustomTextFormFieldState extends State<TextFieldStateful> {
   InputDecoration get decoration => InputDecoration(
         hintText: widget.hintText ?? "",
         hintStyle: widget.hintStyle,
+        labelText: widget.labelText ?? "",
+        labelStyle: widget.labelStyle,
         prefixIcon: widget.prefix,
         prefixIconConstraints: widget.prefixConstraints,
         suffixIcon: isIconVisible

@@ -22,6 +22,8 @@ class API {
   static const signUpStud = "$hostConnect/STUDENT/signup.php";
   //login student
   static const loginStud = "$hostConnect/STUDENT/login.php";
+  //update student info
+  static const updateStud = "$hostConnect/STUDENT/update.php";
   //signup tutor
   static const signUpTut = "$hostConnect/TUTOR/signup.php";
   //login tutor

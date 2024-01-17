@@ -20,6 +20,8 @@ class CustomDropDownList extends StatefulWidget {
     this.maxLines,
     this.hintText,
     this.hintStyle,
+    this.labelText,
+    this.labelStyle,
     this.prefix,
     this.prefixConstraints,
     this.suffix,
@@ -56,6 +58,10 @@ class CustomDropDownList extends StatefulWidget {
   final String? hintText;
 
   final TextStyle? hintStyle;
+
+  final String? labelText;
+
+  final TextStyle? labelStyle;
 
   final Widget? prefix;
 
@@ -139,6 +145,8 @@ class _CustomDropDownListState extends State<CustomDropDownList> {
    Widget customDropDownWidget(BuildContext context) => CustomTextField(
       width: widget.width,
       hintText: widget.hintText,
+      labelText: widget.labelText,
+      labelStyle: widget.labelStyle,
       prefix: widget.prefix,
       suffix: widget.suffix,
       controller: widget.controller,
@@ -166,6 +174,8 @@ class CustomTextField extends StatefulWidget {
     this.maxLines,
     this.hintText,
     this.hintStyle,
+    this.labelText,
+    this.labelStyle,
     this.prefix,
     this.prefixConstraints,
     this.suffix,
@@ -205,6 +215,10 @@ class CustomTextField extends StatefulWidget {
   final String? hintText;
 
   final TextStyle? hintStyle;
+
+  final String? labelText;
+
+  final TextStyle? labelStyle;
 
   final Widget? prefix;
 
@@ -262,6 +276,8 @@ class _CustomTextFormFieldState extends State<CustomTextField> {
   InputDecoration get decoration => InputDecoration(
         hintText: widget.hintText ?? "",
         hintStyle: widget.hintStyle,
+        labelText: widget.labelText ?? "",
+        labelStyle: widget.labelStyle,
         prefixIcon: widget.prefix,
         prefixIconConstraints: widget.prefixConstraints,
         suffixIcon: GestureDetector(
