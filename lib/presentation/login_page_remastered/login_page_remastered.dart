@@ -26,7 +26,6 @@ class LoginPageRemastered extends StatefulWidget {
 class _LoginPageRemasteredState extends State<LoginPageRemastered> {
   bool pInvisibility = true;
   bool enableLogin = false;
-  final FocusNode _focusNode = FocusNode();
 
   @override
   void initState() {
@@ -39,7 +38,6 @@ class _LoginPageRemasteredState extends State<LoginPageRemastered> {
 
   @override
   void dispose() {
-    _focusNode.dispose();
     // Remove listeners when the widget is disposed
     emailAddress.removeListener(updateButtonStatus);
     password.removeListener(updateButtonStatus);
@@ -134,7 +132,6 @@ class _LoginPageRemasteredState extends State<LoginPageRemastered> {
                       onPressed: enableLogin
                       ? () {
                         if(_formKey.currentState!.validate()) {
-                          _focusNode.unfocus();
                           _checkCredentials();
                         }
                       } :null,
