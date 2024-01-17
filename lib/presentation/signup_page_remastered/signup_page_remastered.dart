@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:login/core/app_export.dart';
+import 'package:login/models/student_model/student.dart';
+import 'package:login/models/student_model/studentPreferences.dart';
 import 'package:login/widgets/custom_drop_down_menu.dart';
 import 'package:login/widgets/custom_icon_button.dart';
 import 'package:login/widgets/text_field_stateful.dart';
@@ -207,6 +209,8 @@ class _MyHomePageState extends State<MyHomePage> {
             print(e);
           }
           if (resBodyOfSignUp['success'] == true) {
+            Student studentInfo = Student.fromJson(resBodyOfSignUp["userData"]);
+            await RememberStudentPreferences.storeStudentInfo(studentInfo);
             Navigator.pushNamed(context, AppRoutes.studentProfileScreen);
             nameEditTextController.clear();
             lastNameEditTextController.clear();

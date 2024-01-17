@@ -1,5 +1,5 @@
 class API {
-  static const String hostConnect = "http://192.168.1.232/find_my_tutor_api";
+  static const String hostConnect = "http://172.20.10.3/find_my_tutor_api";
   static const String hostConnectUser = "$hostConnect/USER";
   static const String hostConnectCategory = "$hostConnect/CATEGORY";
   static const String hostConnectProfession = "$hostConnect/PROFESSION";
