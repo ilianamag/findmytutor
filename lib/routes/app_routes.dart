@@ -76,7 +76,7 @@ class AppRoutes {
   static const String visitProfileOfTutorScreen = '/visit_profile_of_tutor_screen';
  
   static Map<String, WidgetBuilder> routes = {
-    qrCodeGenerator: (context) => QrCodeGenerator(),
+    qrCodeGenerator: (context) => TutorQRCode(),
     qrCode :(context) => QRcode(),
     makeAReviewScreen:(context) => MakeAReviewScreen(),
     enaAlloSignUp: (context) => MyHomePage(),

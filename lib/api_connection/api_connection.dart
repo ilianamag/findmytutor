@@ -1,5 +1,5 @@
 class API {
-  static const String hostConnect = "http://172.20.10.3/find_my_tutor_api";
+  static const String hostConnect = "http://192.168.1.2/find_my_tutor_api";
   static const String hostConnectUser = "$hostConnect/USER";
   static const String hostConnectCategory = "$hostConnect/CATEGORY";
   static const String hostConnectProfession = "$hostConnect/PROFESSION";
@@ -32,4 +32,6 @@ class API {
   static const fTutSug = "$hostConnect/TUTOR/fetch_tutor_suggestions.php";
   //search tutor
   static const searchTut = "$hostConnect/TUTOR/search_tutor.php";
+  //myqrgenerator  
+  static const myQr = "$hostConnect/TUTOR/my_qr_generator.php";
 }

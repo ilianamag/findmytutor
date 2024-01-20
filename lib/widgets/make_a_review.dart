@@ -5,7 +5,7 @@ import 'package:login/widgets/custom_rating_bar.dart';
 import 'package:login/widgets/custom_text_form_field.dart';
 import 'package:login/widgets/appbar.dart';
 import 'package:login/widgets/custom_bottom_bar.dart';
-
+import 'package:login/presentation/students_my_reviewsone_screen/students_my_reviewsone_screen.dart';
 class RatingAndReviewWidget extends StatefulWidget {
   const RatingAndReviewWidget({Key? key}) : super(key: key);
 
@@ -67,10 +67,12 @@ class _RatingAndReviewWidgetState extends State<RatingAndReviewWidget> {
           margin: EdgeInsets.only(right: 10.h),
           alignment: Alignment.centerRight,
           onPressed: () {
-            // Handle the publish button press
             print("Rating: $rating");
             print("Review: ${reviewvalueController.text}");
-            // Add logic to publish the review
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => StudentsMyReviewsoneScreen()),
+            );
           },
           buttonTextStyle: TextStyle(
             color: Colors.white, // Text color
@@ -81,3 +83,4 @@ class _RatingAndReviewWidgetState extends State<RatingAndReviewWidget> {
     );
   }
 }
+

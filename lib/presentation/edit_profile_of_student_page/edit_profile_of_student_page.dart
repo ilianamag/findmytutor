@@ -110,7 +110,7 @@ import 'package:login/widgets/text_field_stateful.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:login/api_connection/api_connection.dart';
-
+import 'package:login/widgets/custom_icon_button.dart';
 class EditProfileOfStudentPage extends StatefulWidget {
   EditProfileOfStudentPage({Key? key}) : super(key: key);
 
@@ -166,10 +166,11 @@ class _EditProfileOfStudentPageState extends State<EditProfileOfStudentPage> {
                   bottom: 48.v,
                 ),
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                   SizedBox(
-  height: 102.v,
-  width: 110.h,
+                    Container(
+  height: 98.v,
+  width: 88.h,
   child: Stack(
     alignment: Alignment.bottomRight,
     children: [
@@ -180,48 +181,59 @@ class _EditProfileOfStudentPageState extends State<EditProfileOfStudentPage> {
             _openCamera();
           },
           child: Container(
-  height: 90.v,
-  width: 92.h,
-  padding: EdgeInsets.symmetric(
-    horizontal: 13.h,
-    vertical: 9.v,
-  ),
- decoration: BoxDecoration(
-    color: Colors.transparent,  // Replace AppDecoration.fillRed with this line
-    borderRadius: BorderRadiusStyle.circleBorder45,
-  ),
-  child: Stack(
-    alignment: Alignment.bottomCenter,
-    children: [
-      GestureDetector(
-        onTap: () {
-          _openCamera();
-        },
-        child: Container(
-          height: double.infinity,
-          width: double.infinity,
-          child: ClipOval(
-            child: _image.path.isNotEmpty
-                ? Image.file(
-                    File(_image.path),
-                    fit: BoxFit.contain,  // Change BoxFit.cover to BoxFit.contain
-                  )
-                : SizedBox(),
+            height: 98.v,
+            width: 88.h,
+            /*padding: EdgeInsets.symmetric(
+              horizontal: 13.h,
+              vertical: 9.v,
+            ),*/
+            decoration: AppDecoration.fillRed.copyWith(
+              borderRadius: BorderRadiusStyle.circleBorder45,
+            ),
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    _openCamera();
+                  },
+                  child: ClipPath(
+                    clipper: ShapeBorderClipper(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(50),
+                      ),
+                    ),
+                    child: _image.path.isNotEmpty
+                        ? Image.file(
+                            File(_image.path),
+                            fit: BoxFit.cover,
+                            width: double.infinity,
+                            height: double.infinity,
+                          )
+                        : SizedBox(),
+                  ),
+                ),
+                if (_image.path.isEmpty)
+                  CustomImageView(
+                    imagePath: ImageConstant.imgSettings,
+                    height: 80.v,
+                    width: 60.h,
+                    alignment: Alignment.bottomCenter,
+                  ),
+              ],
+            ),
           ),
         ),
       ),
-      if (_image.path.isEmpty)
-        CustomImageView(
-          imagePath: ImageConstant.imgSettings,
-          height: 57.v,
-          width: 64.h,
-          alignment: Alignment.bottomCenter,
-        ),
-    ],
-  ),
-),
-        ),
-      ),
+      CustomIconButton(
+                            height: 35.v,
+                            width: 35.h,
+                            padding: EdgeInsets.all(9.h),
+                            alignment: Alignment.bottomRight,
+                            child: CustomImageView(
+                              imagePath: ImageConstant.imgEdit,
+                            ),
+                          ),
     ],
   ),
 ),

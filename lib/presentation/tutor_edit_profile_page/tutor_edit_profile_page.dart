@@ -48,16 +48,13 @@ class _TutorEditProfilePageState extends State<TutorEditProfilePage> {
                   vertical: 13.v,
                 ),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SizedBox(height: 22.v),
-                    Align(
-                      alignment: Alignment.center,
-                      child: SizedBox(
-                        height: 95.v,
-                        width: 106.h,
-                        child: Stack(
-                          alignment: Alignment.bottomRight,
+                    Container(
+  height: 98.v,
+  width: 88.h,
+  child: Stack(
+    alignment: Alignment.bottomRight,
     children: [
       Align(
         alignment: Alignment.topLeft,
@@ -66,52 +63,62 @@ class _TutorEditProfilePageState extends State<TutorEditProfilePage> {
             _openCamera();
           },
           child: Container(
-  height: 90.v,
-  width: 92.h,
-  padding: EdgeInsets.symmetric(
-    horizontal: 13.h,
-    vertical: 9.v,
-  ),
- decoration: BoxDecoration(
-    color: Colors.transparent,  // Replace AppDecoration.fillRed with this line
-    borderRadius: BorderRadiusStyle.circleBorder45,
-  ),
-  child: Stack(
-    alignment: Alignment.bottomCenter,
-    children: [
-      GestureDetector(
-        onTap: () {
-          _openCamera();
-        },
-        child: Container(
-          height: double.infinity,
-          width: double.infinity,
-          child: ClipOval(
-            child: _image.path.isNotEmpty
-                ? Image.file(
-                    File(_image.path),
-                    fit: BoxFit.contain,  // Change BoxFit.cover to BoxFit.contain
-                  )
-                : SizedBox(),
+            height: 98.v,
+            width: 88.h,
+            /*padding: EdgeInsets.symmetric(
+              horizontal: 13.h,
+              vertical: 9.v,
+            ),*/
+            decoration: AppDecoration.fillRed.copyWith(
+              borderRadius: BorderRadiusStyle.circleBorder45,
+            ),
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    _openCamera();
+                  },
+                  child: ClipPath(
+                    clipper: ShapeBorderClipper(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(50),
+                      ),
+                    ),
+                    child: _image.path.isNotEmpty
+                        ? Image.file(
+                            File(_image.path),
+                            fit: BoxFit.cover,
+                            width: double.infinity,
+                            height: double.infinity,
+                          )
+                        : SizedBox(),
+                  ),
+                ),
+                if (_image.path.isEmpty)
+                  CustomImageView(
+                    imagePath: ImageConstant.imgSettings,
+                    height: 80.v,
+                    width: 60.h,
+                    alignment: Alignment.bottomCenter,
+                  ),
+              ],
+            ),
           ),
         ),
       ),
-      if (_image.path.isEmpty)
-        CustomImageView(
-          imagePath: ImageConstant.imgSettings,
-          height: 57.v,
-          width: 64.h,
-          alignment: Alignment.bottomCenter,
-        ),
+      CustomIconButton(
+                            height: 35.v,
+                            width: 35.h,
+                            padding: EdgeInsets.all(9.h),
+                            alignment: Alignment.bottomRight,
+                            child: CustomImageView(
+                              imagePath: ImageConstant.imgEdit,
+                            ),
+                          ),
     ],
   ),
 ),
-        ),
-      ),
-                          ],
-                        ),
-                      ),
-                    ),
                     SizedBox(height: 27.v),
                     _buildFirstName(context),
                     SizedBox(height: 6.v),
@@ -375,6 +382,7 @@ class _TutorEditProfilePageState extends State<TutorEditProfilePage> {
   void onTapTxtSignUp(BuildContext context) {
     Navigator.pushReplacementNamed(context, AppRoutes.tutorProfilePage);
   }
+  
    Widget _buildBottomBar2(BuildContext context) {
     return CustomBottomBar2(onChanged: (BottomBarEnum2 type) {
     });

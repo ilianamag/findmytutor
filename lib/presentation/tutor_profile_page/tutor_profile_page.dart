@@ -108,7 +108,7 @@ class TutorProfilePage extends StatelessWidget {
       text: "Logout",
       margin: EdgeInsets.only(left: 62.h),
     );
-  }
+  }  
   void onTap(BuildContext context) {
   Navigator.pushReplacementNamed(context, AppRoutes.tutorEditProfilePage);
   }

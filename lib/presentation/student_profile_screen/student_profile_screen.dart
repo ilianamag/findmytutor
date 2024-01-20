@@ -9,22 +9,26 @@ class StudentProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppWidgets.buildAppBar(context),
-        drawer: AppWidgets.buildDrawer(context),
-        body: Center (
-          child: SizedBox (
-            width: double.maxFinite,
-            child: Column (children: [
+  return SafeArea(
+    child: Scaffold(
+      appBar: AppWidgets.buildAppBar(context),
+      drawer: AppWidgets.buildDrawer(context),
+      body: Center(
+        child: SizedBox(
+          width: double.maxFinite,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start, // Align children at the top
+            children: [
               Container(
                 width: double.maxFinite,
                 padding: EdgeInsets.only(
-                  left: 38.h,
+                  left: 10.h,
                   top: 41.v,
                   bottom: 41.v,
                 ),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(
                       height: 200.adaptSize,
@@ -55,13 +59,15 @@ class StudentProfileScreen extends StatelessWidget {
                   ],
                 ),
               ),
-            ]),
+            ],
           ),
         ),
-        bottomNavigationBar: _buildBottomBar(context),
       ),
-    );
-  }
+      bottomNavigationBar: _buildBottomBar(context),
+    ),
+  );
+}
+
 
   Widget _buildMyTutors(BuildContext context) {
     return CustomOutlinedButton(
@@ -120,9 +126,6 @@ class StudentProfileScreen extends StatelessWidget {
 
   Widget _buildBottomBar(BuildContext context) {
     return CustomBottomBar(onChanged: (BottomBarEnum type) {
-      // You can handle the navigation logic in the CustomBottomBar widget
-      // instead of doing it in the StudentProfileScreen widget.
-      // This callback will be triggered when a bottom bar item is tapped.
     });
   }
 }
