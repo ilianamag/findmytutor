@@ -1,108 +1,9 @@
-/*import 'package:flutter/material.dart';
-import 'package:login/core/app_export.dart';
-import 'package:login/widgets/custom_outlined_button.dart';
-import 'package:login/widgets/custom_floating_text_field.dart';
-import 'package:login/widgets/custom_bottom_bar.dart';
-import 'package:login/widgets/appbar.dart';
-
-// ignore_for_file: must_be_immutable
-class EditProfileOfStudentPage extends StatelessWidget {
-  EditProfileOfStudentPage({Key? key})
-      : super(
-          key: key,
-        );
-
-  TextEditingController firstNameFieldController = TextEditingController();
-
-  TextEditingController lastNameFieldController = TextEditingController();
-
-  TextEditingController emailFieldController = TextEditingController();
-
-  TextEditingController passwordFieldController = TextEditingController();
-
-  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
-  @override
-  Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        appBar: AppWidgets.buildAppBar(context),
-        drawer: AppWidgets.buildDrawer(context),
-        body: SizedBox(
-          width: SizeUtils.width,
-          child: SingleChildScrollView(
-            padding: EdgeInsets.only(
-              bottom: MediaQuery.of(context).viewInsets.bottom,
-            ),
-            child: Form(
-              key: _formKey,
-              child: Container(
-                width: double.maxFinite,
-                padding: EdgeInsets.only(
-                  left: 18.h,
-                  top: 48.v,
-                  bottom: 48.v,
-                ),
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: 102.v,
-                      width: 110.h,
-                      child: Stack(
-                        alignment: Alignment.bottomRight,
-                        children: [
-                          Align(
-                            alignment: Alignment.topLeft,
-                            child: Container(
-                              height: 90.v,
-                              width: 92.h,
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 13.h,
-                                vertical: 9.v,
-                              ),
-                              decoration: AppDecoration.fillRed.copyWith(
-                                borderRadius: BorderRadiusStyle.circleBorder45,
-                              ),
-                              child: CustomImageView(
-                                imagePath: ImageConstant.imgSettings,
-                                height: 57.v,
-                                width: 64.h,
-                                alignment: Alignment.bottomCenter,
-                              ),
-                            ),
-                          ),                       
-                        ],
-                      ),
-                    ),
-                    SizedBox(height: 15.v),
-                    _buildFirstNameField(context),
-                    SizedBox(height: 16.v),
-                    _buildLastNameField(context),
-                    SizedBox(height: 19.v),
-                    _buildEmailField(context),
-                    SizedBox(height: 19.v),
-                    _buildPasswordField(context),
-                    SizedBox(height: 46.v),
-                    _buildEditButton(context),
-                    SizedBox(height: 5.v),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ),
-        bottomNavigationBar: _buildBottomBar(context),
-      ),
-    );
-  }
-
-*/
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:login/core/app_export.dart';
 import 'package:login/models/student_model/student.dart';
 import 'package:login/models/student_model/studentPreferences.dart';
+import 'package:login/presentation/edit3.dart';
 import 'package:login/widgets/custom_bottom_bar.dart';
 import 'package:login/widgets/appbar.dart';
 import 'package:image_picker/image_picker.dart';
@@ -110,6 +11,9 @@ import 'package:login/widgets/text_field_stateful.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:login/api_connection/api_connection.dart';
+import 'package:login/widgets/custom_icon_button.dart';
+import 'package:path_provider/path_provider.dart';
+
 
 class EditProfileOfStudentPage extends StatefulWidget {
   EditProfileOfStudentPage({Key? key}) : super(key: key);
@@ -121,6 +25,8 @@ class EditProfileOfStudentPage extends StatefulWidget {
 class _EditProfileOfStudentPageState extends State<EditProfileOfStudentPage> {
   File _image = File(""); // File to hold the selected or captured image
   final ImagePicker _imagePicker = ImagePicker();
+  Student? studentInfo;
+
 
   TextEditingController firstNameFieldController = TextEditingController();
   TextEditingController lastNameFieldController = TextEditingController();
@@ -129,134 +35,215 @@ class _EditProfileOfStudentPageState extends State<EditProfileOfStudentPage> {
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool pInvisibility = true;
 
-  //FocusNodes
-  late FocusNode firstNameFocusNode;
-  late FocusNode lastNameFocusNode;
-  late FocusNode emailFocusNode;
-  late FocusNode passwordFocusNode;
-
   @override
   void initState() {
     super.initState();
-    firstNameFocusNode = FocusNode();
-    lastNameFocusNode = FocusNode();
-    emailFocusNode = FocusNode();
-    passwordFocusNode = FocusNode();
     _initializeData();
-    emailFocusNode.addListener(() {
-      if (emailFocusNode.hasFocus) {
-        setState(() {
-          _buildErrorSnackBar(context);
-        });
-      }
-    });
-  }
-
-  @override
-  void dispose() {
-    //Remove FocusNodes
-    firstNameFocusNode.dispose();
-    lastNameFocusNode.dispose();
-    emailFocusNode.dispose();
-    passwordFocusNode.dispose();
-
-    super.dispose();
   }
 
   Future<void> _initializeData() async {
-    Student? studentInfo = await RememberStudentPreferences.readStudentInfo();
-    firstNameFieldController.text = studentInfo?.firstname ?? "";
-    lastNameFieldController.text = studentInfo?.lastname ?? "";
-    emailFieldController.text = studentInfo?.email ?? "";
-    passwordFieldController.text = studentInfo?.password ?? "";
+  studentInfo = await RememberStudentPreferences.readStudentInfo();
+
+  if (studentInfo != null) {
+    firstNameFieldController.text = studentInfo!.firstname ?? "";
+    lastNameFieldController.text = studentInfo!.lastname ?? "";
+    emailFieldController.text = studentInfo!.email ?? "";
+    passwordFieldController.text = studentInfo!.password ?? "";
+
+    // Check if there's an updated profile picture in the database
+    String? updatedImagePath = await getProfileImagePath(studentInfo!.email);
+    if (updatedImagePath != null) {
+      setState(() {
+        _image = File(updatedImagePath);
+      });
+    }
+  }
+}
+
+Future<void> UpdateUserProfilePicture(String userEmail) async {
+  //File? imageFile = await pickImageFromGallery();
+
+  String? imagePath = _image?.path;
+
+  if (imagePath != null) {
+    await updateProfilePicture(userEmail, imagePath);
+  }
+}
+
+Future<File?> captureImageFromCamera() async {
+  final picker = ImagePicker();
+  final pickedFile = await picker.pickImage(source: ImageSource.camera);
+
+  if (pickedFile != null) {
+    return await _saveImage(pickedFile.path);
   }
 
+  return null;
+}
+
+Future<File?> pickImageFromGallery() async {
+  final picker = ImagePicker();
+  final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+
+  if (pickedFile != null) {
+    return await _saveImage(pickedFile.path);
+  }
+
+  return null;
+}
+
+Future<File> _saveImage(String imagePath) async {
+  final appDir = await getApplicationDocumentsDirectory();
+  final fileName = DateTime.now().millisecondsSinceEpoch.toString();
+  final filePath = "${appDir.path}/$fileName.jpg";
+
+  await File(imagePath).copy(filePath);
+
+  return File(filePath);
+}
+
+
+  Future<String?> getProfileImagePath(String userEmail) async {
+  if (studentInfo == null) {
+    return null; // or handle the case when studentInfo is null
+  }
+
+  final response = await http.get(
+    Uri.parse(API.updateStud),
+  );
+
+  if (response.statusCode == 200) {
+    Map<String, dynamic> data = json.decode(response.body);
+    String? imagePath = data['imagePath'];
+    return imagePath;
+  } else {
+    // Handle errors, e.g., return null or throw an exception
+    return null;
+  }
+}
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: GestureDetector (
-        onTap: () {
-          FocusScope.of(context).unfocus();
-        },
-        child: Scaffold(
-          resizeToAvoidBottomInset: false,
-          appBar: AppWidgets.buildAppBar(context),
-          drawer: AppWidgets.buildDrawer(context),
-          body: SizedBox(
-            width: SizeUtils.width,
-            child: SingleChildScrollView(
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        appBar: AppWidgets.buildAppBar(context),
+        drawer: AppWidgets.buildDrawer(context),
+        body: SingleChildScrollView( // Wrap with SingleChildScrollView
+          child: Form(
+            key: _formKey,
+            child: Container(
+              width: double.maxFinite,
               padding: EdgeInsets.only(
-                bottom: MediaQuery.of(context).viewInsets.bottom,
+                left: 18.h,
+                top: 48.v,
+                bottom: 48.v,
               ),
-              child: Form(
-                key: _formKey,
-                child: Container(
-                  width: double.maxFinite,
-                  padding: EdgeInsets.only(
-                    left: 18.h,
-                    top: 48.v,
-                    bottom: 48.v,
-                  ),
-                  child: Column(
-                    children: [
-                    SizedBox(
-                      height: 102.v,
-                      width: 110.h,
-                      child: Stack(
-                        alignment: Alignment.bottomRight,
-                        children: [
-                          Align(
-                            alignment: Alignment.topLeft,
-                            child: GestureDetector(
-                              onTap: () {
-                                _openCamera();
-                              },
-                              child: Container(
-                                height: 90.v,
-                                width: 92.h,
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: 13.h,
-                                  vertical: 9.v,
-                                ),
-                                decoration: AppDecoration.fillRed.copyWith(
-                                  borderRadius: BorderRadiusStyle.circleBorder45,
-                                ),
-                                child: CustomImageView(
-                                  imagePath: _image.path, // Assuming _image is not null here
-                                  height: 57.v,
-                                  width: 64.h,
-                                  alignment: Alignment.bottomCenter,
-                                ),
-                              ),
-                            ),
+              child: Column(
+                children: [
+                  Container(
+                    height: 98.v,
+                    width: 88.h,
+                    child: Stack(
+                      alignment: Alignment.bottomRight,
+                      children: [
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: GestureDetector(
+                            onTap: () {
+                              _openCamera();
+                            },
+                            child: CircleAvatar(
+  radius: 49.0,
+  backgroundColor: Colors.pink,
+  backgroundImage: _image != null ? FileImage(_image!) : null,
+  child: Stack(
+    alignment: Alignment.center,
+    children: [
+      if (_image != null && _image!.path.isNotEmpty)
+        ClipOval(
+          child: Image.file(
+            _image!,
+            fit: BoxFit.cover,
+            width: double.infinity,
+            height: double.infinity,
+          ),
+        ),
+      if (_image == null || _image!.path.isEmpty)
+  ClipOval(
+    child: Container(
+      decoration: AppDecoration.fillRed.copyWith(
+        borderRadius: BorderRadiusStyle.circleBorder45,
+      ),
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          CustomImageView(
+            imagePath: ImageConstant.imgSettings,
+            height: 80.v,
+            width: 60.h,
+            alignment: Alignment.bottomCenter,
+          ),
+          FutureBuilder<String?>(
+            future: getProfileImagePath(studentInfo?.email ?? ""),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.done) {
+                return snapshot.data != null
+                    ? Image.network(
+                        snapshot.data!,
+                        fit: BoxFit.cover,
+                        width: double.infinity,
+                        height: double.infinity,
+                      )
+                    : Container();
+              } else {
+                return CircularProgressIndicator();
+              }
+            },
+          ),
+        ],
+      ),
+    ),
+  ),
+    ],
+  ),
+),
+
                           ),
-                        ],
-                      ),
+                        ),
+                        CustomIconButton(
+                          height: 35.v,
+                          width: 35.h,
+                          padding: EdgeInsets.all(9.h),
+                          alignment: Alignment.bottomRight,
+                          child: CustomImageView(
+                            imagePath: ImageConstant.imgEdit,
+                          ),
+                        ),
+                      ],
                     ),
-                    SizedBox(height: 15.v),
-                    _buildFirstNameField(context),
-                    SizedBox(height: 27.v),
-                    _buildLastNameField(context),
-                    SizedBox(height: 27.v),
-                    _buildEmailField(context),
-                    SizedBox(height: 27.v),
-                    _buildPasswordField(context),
-                    SizedBox(height: 46.v),
-                    _buildEditButton(context),
-                    SizedBox(height: 5.v),
-                  ],
-                ),
+                  ),
+                  SizedBox(height: 15.v),
+                  _buildFirstNameField(context),
+                  SizedBox(height: 16.v),
+                  _buildLastNameField(context),
+                  SizedBox(height: 19.v),
+                  _buildEmailField(context),
+                  SizedBox(height: 19.v),
+                  _buildPasswordField(context),
+                  SizedBox(height: 46.v),
+                  _buildEditButton(context),
+                  SizedBox(height: 5.v),
+                ],
               ),
             ),
           ),
         ),
         bottomNavigationBar: _buildBottomBar(context),
       ),
-    ),
-  );
+    );
   }
 
- void _openCamera() async {
+ /*void _openCamera() async {
   final image = await _imagePicker.pickImage(
     source: ImageSource.camera,
   );
@@ -265,13 +252,72 @@ class _EditProfileOfStudentPageState extends State<EditProfileOfStudentPage> {
     setState(() {
       _image = File(image.path);
     });
+    String imagePath = _image!.path;
+  }
+}*/
+
+void _openCamera() async {
+  final result = await showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text("Choose an option"),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context, "camera");
+            },
+            child: Text("Camera"),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context, "gallery");
+            },
+            child: Text("Gallery"),
+          ),
+        ],
+      );
+    },
+  );
+
+  if (result != null) {
+    if (result == "camera") {
+      _captureImageFromCamera();
+    } else if (result == "gallery") {
+      _pickImageFromGallery();
+    }
   }
 }
+
+Future<void> _captureImageFromCamera() async {
+  final pickedFile = await _imagePicker.pickImage(source: ImageSource.camera);
+
+  if (pickedFile != null) {
+    _saveImageAndPerformUpdate(pickedFile.path);
+  }
+}
+
+Future<void> _pickImageFromGallery() async {
+  final pickedFile = await _imagePicker.pickImage(source: ImageSource.gallery);
+
+  if (pickedFile != null) {
+    _saveImageAndPerformUpdate(pickedFile.path);
+  }
+}
+
+void _saveImageAndPerformUpdate(String imagePath) async {
+  setState(() {
+    _image = File(imagePath);
+  });
+
+  // Save image path to the database
+  await UpdateUserProfilePicture(emailFieldController.text.trim());
+}
+
 
   /// Section Widget
   Widget _buildFirstNameField(BuildContext context) {
     return TextFieldStateful(
-      focusNode: firstNameFocusNode,
       width: 210.h,
       controller: firstNameFieldController,
       //hintText: "First Name",
@@ -293,7 +339,6 @@ class _EditProfileOfStudentPageState extends State<EditProfileOfStudentPage> {
   /// Section Widget
   Widget _buildLastNameField(BuildContext context) {
     return TextFieldStateful(
-      focusNode: lastNameFocusNode,
       width: 210.h,
       controller: lastNameFieldController,
       //hintText: "Last Name",
@@ -314,8 +359,17 @@ class _EditProfileOfStudentPageState extends State<EditProfileOfStudentPage> {
 
   /// Section Widget
   Widget _buildEmailField(BuildContext context) {
+    final focusNode = FocusNode();
+
+    focusNode.addListener(() {
+      if (focusNode.hasFocus) {
+        setState(() {
+          _buildErrorSnackBar(context);
+        });
+      }
+    });
     return TextFieldStateful(
-      focusNode: emailFocusNode,
+      focusNode: focusNode,
       textStyle: TextStyle(color: appTheme.gray600),
       readOnly: true,
       width: 210.h,
@@ -334,7 +388,6 @@ class _EditProfileOfStudentPageState extends State<EditProfileOfStudentPage> {
   /// Section Widget
   Widget _buildPasswordField(BuildContext context) {
     return TextFieldStateful(
-      focusNode: passwordFocusNode,
       width: 210.h,
       controller: passwordFieldController,
       //hintText: "Password ",
@@ -366,6 +419,7 @@ class _EditProfileOfStudentPageState extends State<EditProfileOfStudentPage> {
     return ElevatedButton.icon(
       onPressed: () {
         _updateInfo();
+        //UpdateUserProfilePicture(emailFieldController.text.trim());
       },
       icon: Icon(
         Icons.edit,
@@ -457,32 +511,40 @@ class _EditProfileOfStudentPageState extends State<EditProfileOfStudentPage> {
   }
 
   _updateInfo() async {
-    var response = await http.post(
-      Uri.parse(API.updateStud),
-      body: {
-        "email": emailFieldController.text.trim(),
-        "firstname": firstNameFieldController.text.trim(),
-        "lastname": lastNameFieldController.text.trim(),
-        "password": passwordFieldController.text.trim(),
-        "profilepic": "",
-      }
-    );
-
-    if (response.statusCode == 200) {
-      var resBody;
-      print(response.body);
-      try{ resBody= jsonDecode(response.body); }
-      catch(e) { print(e); }
-      
-      if (resBody['success'] == true) {
-        Student studentInfo = Student.fromJson(resBody["userData"]);
-        await RememberStudentPreferences.storeStudentInfo(studentInfo);
-        Navigator.pushReplacementNamed(context, AppRoutes.studentProfileScreen);
-        _clearTextControllers();
-      }
-      else _buildErrorSnackBar2(context);
+  var response = await http.post(
+    Uri.parse(API.updateStud),
+    body: {
+      "email": emailFieldController.text.trim(),
+      "firstname": firstNameFieldController.text.trim(),
+      "lastname": lastNameFieldController.text.trim(),
+      "password": passwordFieldController.text.trim(),
+      "profilepic": _image != null ? _image.path : "",
     }
+  );
+
+  if (response.statusCode == 200) {
+    var resBody;
+    print(response.body);
+    try{ resBody= jsonDecode(response.body); }
+    catch(e) { print(e); }
+
+    if (resBody['success'] == true) {
+      Student studentInfo = Student.fromJson(resBody["userData"]);
+
+      // Save image path to the database
+      await RememberStudentPreferences.storeStudentInfo(studentInfo);
+
+      setState(() {
+        // Update the UI with the new profile picture
+        _image = File(studentInfo.profilepic ?? "");
+      });
+
+      Navigator.pushReplacementNamed(context, AppRoutes.studentProfileScreen);
+      _clearTextControllers();
+    }
+    else _buildErrorSnackBar2(context);
   }
+}
 
   void _clearTextControllers() {
     firstNameFieldController.clear();
@@ -496,104 +558,3 @@ class _EditProfileOfStudentPageState extends State<EditProfileOfStudentPage> {
     });
   }
 }
-
-  /* import 'package:flutter/material.dart';
-import 'package:login/core/app_export.dart';
-import 'package:login/widgets/custom_icon_button.dart';
-import 'package:login/widgets/custom_outlined_button.dart';
-import 'package:login/widgets/custom_floating_text_field.dart';
-import 'package:login/widgets/custom_bottom_bar.dart';
-import 'package:login/widgets/appbar.dart';
-
-// ignore_for_file: must_be_immutable
-class EditProfileOfStudentPage extends StatelessWidget {
-  EditProfileOfStudentPage({Key? key})
-      : super(
-          key: key,
-        );
-
-  TextEditingController firstNameFieldController = TextEditingController();
-
-  TextEditingController lastNameFieldController = TextEditingController();
-
-  TextEditingController emailFieldController = TextEditingController();
-
-  TextEditingController passwordFieldController = TextEditingController();
-
-  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
-  @override
-  Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        appBar: AppWidgets.buildAppBar(context),
-        drawer: AppWidgets.buildDrawer(context),
-        body: SizedBox(
-          width: SizeUtils.width,
-          child: SingleChildScrollView(
-            padding: EdgeInsets.only(
-              bottom: MediaQuery.of(context).viewInsets.bottom,
-            ),
-            child: Form(
-              key: _formKey,
-              child: Container(
-                width: double.maxFinite,
-                padding: EdgeInsets.only(
-                  left: 18.h,
-                  top: 48.v,
-                  bottom: 48.v,
-                ),
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: 102.v,
-                      width: 110.h,
-                      child: Stack(
-                        alignment: Alignment.bottomRight,
-                        children: [
-                          Align(
-                            alignment: Alignment.topLeft,
-                            child: Container(
-                              height: 90.v,
-                              width: 92.h,
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 13.h,
-                                vertical: 9.v,
-                              ),
-                              decoration: AppDecoration.fillRed.copyWith(
-                                borderRadius: BorderRadiusStyle.circleBorder45,
-                              ),
-                              child: CustomImageView(
-                                imagePath: ImageConstant.imgSettings,
-                                height: 57.v,
-                                width: 64.h,
-                                alignment: Alignment.bottomCenter,
-                              ),
-                            ),
-                          ),                       
-                        ],
-                      ),
-                    ),
-                    SizedBox(height: 15.v),
-                    _buildFirstNameField(context),
-                    SizedBox(height: 16.v),
-                    _buildLastNameField(context),
-                    SizedBox(height: 19.v),
-                    _buildEmailField(context),
-                    SizedBox(height: 19.v),
-                    _buildPasswordField(context),
-                    SizedBox(height: 46.v),
-                    _buildEditButton(context),
-                    SizedBox(height: 5.v),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ),
-        bottomNavigationBar: _buildBottomBar(context),
-      ),
-    );
-  }*/
-

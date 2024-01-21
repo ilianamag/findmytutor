@@ -110,6 +110,7 @@ class TutorCardWidget extends StatelessWidget {
         return Tutor.fromJson(resBodyOfLogin["userData"]);
       }
     }
+    return null;
   }
 
   Future<void> _navigateToProfile(BuildContext context) async {
@@ -123,7 +124,7 @@ class TutorCardWidget extends StatelessWidget {
     }
   }
 
-  Future<void> _sendemail(BuildContext context) async {
+   Future<void> _sendemail(BuildContext context) async {
     Tutor tutorInfo = await _createTutor(context) ?? Tutor("", "", "", "", "", 0, 0, "", 0, 0, 0);
     final Uri emailUri = Uri(
       scheme: "mailto",
@@ -142,12 +143,12 @@ class TutorCardWidget extends StatelessWidget {
     );
   }
 
-  Future<void> _removeFavorite(BuildContext context) async{
+  Future<void> _removetutor(BuildContext context) async{
     Student? studentInfo = await RememberStudentPreferences.readStudentInfo();
     print(studentInfo?.email);
     Tutor tutorInfo = await _createTutor(context) ?? Tutor("", "", "", "", "", 0, 0, "", 0, 0, 0);
     var rest = await http.post(
-      Uri.parse(API.removeFavorite),
+      Uri.parse(API.removeTut),
       body: {
         "stud_email": studentInfo?.email,
         "tut_email": tutorInfo.email,
@@ -192,8 +193,8 @@ class TutorCardWidget extends StatelessWidget {
           child: Text('Send email'),
         ),
         PopupMenuItem<String>(
-          value: 'Remove from favorites',
-          child: Text('Remove from favorites'),
+          value: 'Remove from tutors',
+          child: Text('Remove from tutors'),
         ),
         PopupMenuItem<String>(
           value: 'Share',
@@ -211,8 +212,8 @@ class TutorCardWidget extends StatelessWidget {
         case 'Send email':
           _sendemail(context);
         break;
-        case 'Remove from favorites':
-          _removeFavorite(context);
+        case 'Remove from tutors':
+          _removetutor(context);
         break;
         case 'Share':
           _share(context);

@@ -47,8 +47,6 @@ class TutorProfilePage extends StatelessWidget {
               SizedBox(height: 61.v),
               _buildGetMyQR(context),
               SizedBox(height: 11.v),
-              _buildMyReviews(context),
-              SizedBox(height: 11.v),
               _buildEditProfile(context),
               SizedBox(height: 11.v),
               _buildLogout(context),
@@ -71,18 +69,6 @@ class TutorProfilePage extends StatelessWidget {
       width: 115.h,
       text: "Get My QR",
       margin: EdgeInsets.only(left: 48.h),
-    );
-  }
-
-  /// Section Widget
-  Widget _buildMyReviews(BuildContext context) {
-    return CustomOutlinedButton(
-      onPressed: () {
-        onTapStat(context);
-      },
-      width: 123.h,
-      text: "My Reviews",
-      margin: EdgeInsets.only(left: 45.h),
     );
   }
 

@@ -63,4 +63,19 @@ class API {
   static const removeStudTut = "$hostConnect/STUDTUT/remove.php";
   //check if in Stud-Tut
   static const checkStudTut = "$hostConnect/STUDTUT/check.php";
+
+  static const updateProfile = "$hostConnect/STUDENT/update_profile.php";
+
+  static const myStud = "$hostConnect/TUTOR/my_students.php";
+  //search student
+  static const searchStud = "$hostConnect/STUDENT/search_student.php";
+  //removestudent
+  static const removeStud = "$hostConnect/STUDENT/remove_student.php";
+  //mytutors
+  static const myTut = "$hostConnect/STUDENT/my_tutors.php";
+  //removetutor
+  static const removeTut = "$hostConnect/STUDENT/remove_tutors.php";
+
+  static const myQr = "$hostConnect/TUTOR/my_qr_generator.php";
+
 }

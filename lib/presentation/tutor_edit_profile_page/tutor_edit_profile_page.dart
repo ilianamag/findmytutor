@@ -1,15 +1,18 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:login/api_connection/api_connection.dart';
 import 'package:login/core/app_export.dart';
 import 'package:login/models/tutor_model/tutor.dart';
 import 'package:login/models/tutor_model/tutorPreferences.dart';
 import 'package:login/widgets/custom_drop_down_menu.dart';
-import 'package:login/widgets/custom_icon_button.dart';
 import 'package:login/widgets/custom_bottom_bar_teacher.dart';
-import 'package:login/widgets/appbarfortutors.dart';
 import 'package:login/widgets/text_field_stateful.dart';
+import 'package:login/presentation/edit3.dart';
+//import 'package:login/widgets/appbar.dart';
+import 'package:login/widgets/appbarfortutors.dart';
 
 // ignore_for_file: must_be_immutable
 class TutorEditProfilePage extends StatefulWidget {
@@ -20,6 +23,10 @@ class TutorEditProfilePage extends StatefulWidget {
 }
 
 class _TutorEditProfilePageState extends State<TutorEditProfilePage> {
+  File _image = File(""); // File to hold the selected or captured image
+  final ImagePicker _imagePicker = ImagePicker();
+  Tutor? tutorInfo;
+
   TextEditingController firstNameController = TextEditingController();
 
   TextEditingController lastNameController = TextEditingController();
@@ -151,6 +158,25 @@ class _TutorEditProfilePageState extends State<TutorEditProfilePage> {
     informationController.text = tutorInfo?.information ?? "None Available";
   }
 
+Future<String?> getProfileImagePath(String userEmail) async {
+  if (studentInfo == null) {
+    return null; // or handle the case when studentInfo is null
+  }
+
+  final response = await http.get(
+    Uri.parse(API.updateStud),
+  );
+
+  if (response.statusCode == 200) {
+    Map<String, dynamic> data = json.decode(response.body);
+    String? imagePath = data['imagePath'];
+    return imagePath;
+  } else {
+    // Handle errors, e.g., return null or throw an exception
+    return null;
+  }
+}
+
   _fetchCategories() async {
     var response = await http.get(
       Uri.parse(API.fCats),
@@ -219,37 +245,67 @@ class _TutorEditProfilePageState extends State<TutorEditProfilePage> {
                               alignment: Alignment.bottomRight,
                               children: [
                                 Align(
-                                  alignment: Alignment.topLeft,
-                                  child: Container(
-                                    height: 90.v,
-                                    width: 92.h,
-                                    padding: EdgeInsets.symmetric(
-                                      horizontal: 13.h,
-                                      vertical: 9.v,
-                                    ),
-                                    decoration: AppDecoration.fillRed.copyWith(
-                                      borderRadius:
-                                          BorderRadiusStyle.circleBorder45,
-                                    ),
-                                    child: CustomImageView(
-                                      imagePath: ImageConstant.imgSettings,
-                                      height: 57.v,
-                                      width: 64.h,
-                                      alignment: Alignment.bottomCenter,
-                                    ),
-                                  ),
-                                ),
-                                CustomIconButton(
-                                  height: 43.v,
-                                  width: 46.h,
-                                  padding: EdgeInsets.all(9.h),
-                                  alignment: Alignment.bottomRight,
-                                  child: CustomImageView(
-                                    imagePath: ImageConstant.imgEdit,
-                                  ),
-                                ),
-                              ],
-                            ),
+                          alignment: Alignment.topLeft,
+                          child: GestureDetector(
+                            onTap: () {
+                              _openCamera();
+                            },
+                            child: CircleAvatar(
+  radius: 49.0,
+  backgroundColor: Colors.pink,
+  backgroundImage: _image != null ? FileImage(_image!) : null,
+  child: Stack(
+    alignment: Alignment.center,
+    children: [
+      if (_image != null && _image!.path.isNotEmpty)
+        ClipOval(
+          child: Image.file(
+            _image!,
+            fit: BoxFit.cover,
+            width: double.infinity,
+            height: double.infinity,
+          ),
+        ),
+      if (_image == null || _image!.path.isEmpty)
+  ClipOval(
+    child: Container(
+      decoration: AppDecoration.fillRed.copyWith(
+        borderRadius: BorderRadiusStyle.circleBorder45,
+      ),
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          CustomImageView(
+            imagePath: ImageConstant.imgSettings,
+            height: 80.v,
+            width: 60.h,
+            alignment: Alignment.bottomCenter,
+          ),
+          FutureBuilder<String?>(
+            future: getProfileImagePath(studentInfo?.email ?? ""),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.done) {
+                return snapshot.data != null
+                    ? Image.network(
+                        snapshot.data!,
+                        fit: BoxFit.cover,
+                        width: double.infinity,
+                        height: double.infinity,
+                      )
+                    : Container();
+              } else {
+                return CircularProgressIndicator();
+              }
+            },
+          ),
+        ],
+      ),
+    ),
+  ),
+    ],
+  ),
+),
+
                           ),
                         ),
                         Align(
@@ -284,14 +340,77 @@ class _TutorEditProfilePageState extends State<TutorEditProfilePage> {
                     ),
                   ),
                 ),
+                      ],
               ),
             ),
           ),
-          bottomNavigationBar: _buildBottomBar2(context),
+        ),
+      ),
+          ),
+        bottomNavigationBar: _buildBottomBar2(context),
         ),
       ),
     );
   }
+
+  void _openCamera() async {
+  final result = await showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text("Choose an option"),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context, "camera");
+            },
+            child: Text("Camera"),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context, "gallery");
+            },
+            child: Text("Gallery"),
+          ),
+        ],
+      );
+    },
+  );
+
+  if (result != null) {
+    if (result == "camera") {
+      _captureImageFromCamera();
+    } else if (result == "gallery") {
+      _pickImageFromGallery();
+    }
+  }
+}
+
+Future<void> _captureImageFromCamera() async {
+  final pickedFile = await _imagePicker.pickImage(source: ImageSource.camera);
+
+  if (pickedFile != null) {
+    _saveImageAndPerformUpdate(pickedFile.path);
+  }
+}
+
+Future<void> _pickImageFromGallery() async {
+  final pickedFile = await _imagePicker.pickImage(source: ImageSource.gallery);
+
+  if (pickedFile != null) {
+    _saveImageAndPerformUpdate(pickedFile.path);
+  }
+}
+
+void _saveImageAndPerformUpdate(String imagePath) async {
+  setState(() {
+    _image = File(imagePath);
+  });
+
+  // Save image path to the database
+  await UpdateUserProfilePicture(emailController.text);
+}
+
 
   /// First Name
   Widget _buildFirstName(BuildContext context) {

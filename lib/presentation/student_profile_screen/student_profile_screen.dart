@@ -9,59 +9,55 @@ class StudentProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppWidgets.buildAppBar(context),
-        drawer: AppWidgets.buildDrawer(context),
-        body: Center (
-          child: SizedBox (
-            width: double.maxFinite,
-            child: Column (children: [
-              Container(
-                width: double.maxFinite,
-                padding: EdgeInsets.only(
-                  left: 38.h,
-                  top: 41.v,
-                  bottom: 41.v,
-                ),
-                child: Column(
-                  children: [
-                    Container(
-                      height: 200.adaptSize,
-                      width: 200.adaptSize,
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 29.h,
-                        vertical: 21.v,
-                      ),
-                      decoration: AppDecoration.fillRed.copyWith(
-                        borderRadius: BorderRadiusStyle.circleBorder100,
-                      ),
-                      child: CustomImageView(
-                        imagePath: ImageConstant.imgAvatarPlaceholder,
-                        height: 128.v,
-                        width: 140.h,
-                        alignment: Alignment.bottomCenter,
-                      ),
-                    ),
-                    SizedBox(height: 60.v),
-                    _buildMyTutors(context),
-                    SizedBox(height: 9.v),
-                    _buildMyReviews(context),
-                    SizedBox(height: 9.v),
-                    _buildEditProfile(context),
-                    SizedBox(height: 9.v),
-                    _buildLogout(context),
-                    SizedBox(height: 5.v),
-                  ],
-                ),
-              ),
-            ]),
+  return SafeArea(
+    child: Scaffold(
+      appBar: AppWidgets.buildAppBar(context),
+      drawer: AppWidgets.buildDrawer(context),
+      body: Center(
+        child: SizedBox(
+          width: double.maxFinite,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+mainAxisAlignment: MainAxisAlignment.start, // Align children at the top
+children: [
+  Container(
+    width: double.maxFinite,
+    padding: EdgeInsets.only(
+      left: 10.h,
+      top: 41.v,
+      bottom: 41.v,
+    ),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        CircleAvatar(
+          radius: 70.0, // Adjust as needed
+            backgroundColor: AppDecoration.fillRed.color,          child: CustomImageView(
+            imagePath: ImageConstant.imgAvatarPlaceholder,
+            height: 130.v,
+            width: 80.h,
+            alignment: Alignment.bottomCenter,
           ),
         ),
-        bottomNavigationBar: _buildBottomBar(context),
+        SizedBox(height: 60.v),
+        _buildMyTutors(context),
+        SizedBox(height: 9.v),
+        _buildEditProfile(context),
+        SizedBox(height: 9.v),
+        _buildLogout(context),
+        SizedBox(height: 5.v),
+      ],
+    ),
+  ),
+],
+          ),
+        ),
       ),
-    );
-  }
+      bottomNavigationBar: _buildBottomBar(context),
+    ),
+  );
+}
+
 
   Widget _buildMyTutors(BuildContext context) {
     return CustomOutlinedButton(
@@ -70,16 +66,6 @@ class StudentProfileScreen extends StatelessWidget {
       },
       width: 111.h,
       text: "My Tutors",
-    );
-  }
-
-  Widget _buildMyReviews(BuildContext context) {
-    return CustomOutlinedButton(
-      onPressed: () {
-        onTapState(context);
-      },
-      width: 123.h,
-      text: "My Reviews",
     );
   }
 
@@ -110,20 +96,12 @@ class StudentProfileScreen extends StatelessWidget {
   void onTap(BuildContext context) {
     Navigator.pushReplacementNamed(context, AppRoutes.editProfileOfStudentPage);
   }
-
-  void onTapState(BuildContext context) {
-    Navigator.pushReplacementNamed(context, AppRoutes.studentsMyReviewsoneScreen);
-  }
   void onTapStatel(BuildContext context) {
     Navigator.pushReplacementNamed(context, AppRoutes.myTutorsScreen);
   }
 
   Widget _buildBottomBar(BuildContext context) {
     return CustomBottomBar(onChanged: (BottomBarEnum type) {
-      // You can handle the navigation logic in the CustomBottomBar widget
-      // instead of doing it in the StudentProfileScreen widget.
-      // This callback will be triggered when a bottom bar item is tapped.
     });
   }
 }
-      
