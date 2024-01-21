@@ -35,7 +35,7 @@ class _VisitProfileStackedCardState extends State<VisitProfileStackedCard> {
   @override
   Widget build(BuildContext context) {
     // Set the default initial rating for the CustomRatingBar
-    int defaultInitialRating = 3; // Change this to the desired default value
+    int defaultInitialRating = 4; // Change this to the desired default value
 
     return Container(
       margin: EdgeInsets.only(bottom: 16.0),
@@ -145,8 +145,8 @@ class _VisitProfileStackedCardState extends State<VisitProfileStackedCard> {
           launchUrl(emailUri);
         },
         child: Container(
-         padding: EdgeInsets.only(top: 20.0),
-         child: OutlinedButton(
+          padding: EdgeInsets.only(top: 20.0),
+          child: OutlinedButton(
         onPressed: () async {
           final Uri emailUri = Uri(
               scheme: "mailto", path: widget.emailFromDatabase);
@@ -184,7 +184,7 @@ class _VisitProfileStackedCardState extends State<VisitProfileStackedCard> {
             Padding(
               padding: EdgeInsets.only(right: 28.0),
               child: Text(
-                widget.emailFromDatabase,
+                'Send Email',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 14.0,

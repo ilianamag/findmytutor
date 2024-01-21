@@ -9,6 +9,7 @@ class Tutor {
   String information;
   int cat_id;
   int prof_id;
+  int rating;
 
   Tutor (
     this.email,
@@ -20,7 +21,8 @@ class Tutor {
     this.radius,
     this.information,
     this.cat_id,
-    this.prof_id
+    this.prof_id,
+    this.rating,
   );
 
   factory Tutor.fromJson(Map<String, dynamic> json) => Tutor(
@@ -34,6 +36,7 @@ class Tutor {
     json["information"],
     int.parse(json["cat_id"]),
     int.parse(json["prof_id"]),
+    int.parse(json["rating"]),
   );
 
   Map<String, dynamic> toJson() => {
@@ -46,7 +49,8 @@ class Tutor {
     'radius': radius.toString(),
     'information': information,
     'cat_id': cat_id.toString(),
-    'prof_id': prof_id.toString()
+    'prof_id': prof_id.toString(),
+    'rating': rating.toString(),
   };
 
 }

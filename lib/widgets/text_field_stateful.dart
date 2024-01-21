@@ -29,6 +29,7 @@ class TextFieldStateful extends StatefulWidget {
     this.filled = false,
     this.validator,
     this.readOnly,
+    this.height,
   }) : super(
           key: key,
         );
@@ -36,6 +37,8 @@ class TextFieldStateful extends StatefulWidget {
   final Alignment? alignment;
 
   final double? width;
+
+  final double? height;
 
   final TextEditingController? scrollPadding;
 
@@ -161,7 +164,7 @@ class _CustomTextFormFieldState extends State<TextFieldStateful> {
         contentPadding: widget.contentPadding ??
             EdgeInsets.symmetric(
               horizontal: 16.h,
-              vertical: 18.v,
+              vertical: widget.height ?? 18.v,
             ),
         fillColor: widget.fillColor,
         filled: widget.filled,

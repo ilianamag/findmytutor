@@ -7,7 +7,7 @@ class RememberTutorPreferences {
   static Future<void> storeTutorInfo(Tutor tutorInfo) async{
     SharedPreferences preferences = await SharedPreferences.getInstance();
     String tutorJsonData = jsonEncode(tutorInfo.toJson());
-    await preferences.setString("currentStudent", tutorJsonData);
+    await preferences.setString("currentTutor", tutorJsonData);
   }
 
   //Read Tutor Info

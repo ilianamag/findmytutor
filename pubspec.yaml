@@ -23,6 +23,8 @@ dependencies:
   uuid: ^3.0.4
   url_launcher: ^6.0.12
   shared_preferences: ^2.2.2
+  readmore: ^2.0.0
+  marquee: ^2.0.0
 dev_dependencies: 
   flutter_test: 
     sdk: flutter

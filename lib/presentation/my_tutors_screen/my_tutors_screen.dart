@@ -51,7 +51,7 @@ class MyTutorsScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 51.v),
-              TutorCardWidget(leftImagePath: ImageConstant.imgMonogram, tutorName: 'iliana', rightImagePath: ImageConstant.imgMedia),
+              TutorCardWidget(tutorProfilePic: ImageConstant.imgMonogram, tutorName: 'Γιάννης Δημουλάς', profession: 'Γκάιντα'),
               SizedBox(height: 5.v),
             ],
           ),

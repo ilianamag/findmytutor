@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:login/models/profession_model/profession.dart';
+import 'package:login/models/profession_model/professionPreferences.dart';
+import 'package:login/models/tutor_model/tutor.dart';
+import 'package:login/models/tutor_model/tutorPreferences.dart';
 import 'package:login/routes/app_routes.dart';
 import 'package:login/widgets/Pair/Pair.dart';
 import 'package:http/http.dart' as http;
@@ -28,7 +32,14 @@ class CustomSearchDelegate extends SearchDelegate<String> {
         print(e);
       }
       if (resBodyOfLogin['success'] == true) {
-        Navigator.pushNamed(context, AppRoutes.searchResultScreen);
+        Profession professionInfo = Profession.fromJson(resBodyOfLogin["userData"]);
+        await RememberProfessionPreferences.storeProfessionInfo(professionInfo);
+        try {
+          Navigator.pushNamed(context, AppRoutes.searchResultScreen);
+          //close(context, query);
+        } catch (e) {
+          print("Navigation error: $e");
+        }
       }
       else {
         _checkTut(context, query);
@@ -54,7 +65,14 @@ class CustomSearchDelegate extends SearchDelegate<String> {
         print(e);
       }
       if (resBodyOfLogin['success'] == true) {
-        Navigator.pushNamed(context, AppRoutes.visitProfileOfTutorScreen);
+        Tutor tutorInfo = Tutor.fromJson(resBodyOfLogin["userData"]);
+        await RememberTutorPreferences.storeTutorInfo(tutorInfo);
+        try {
+          Navigator.pushNamed(context, AppRoutes.visitProfileOfTutorScreen);
+          //close(context, query);
+        } catch (e) {
+          print("Navigation error: $e");
+        }
       }
     }
   }
@@ -109,62 +127,11 @@ class CustomSearchDelegate extends SearchDelegate<String> {
           onTap:() {
             query = result.first;
             _checkTile(context, query);
-            close(context, query);
+            //close(context, query);
           },
         );
       },
     );
-    
-    
-    /*FutureBuilder<List<String>> (
-      future: _fetchSuggestions(query),
-      builder: ((context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          // While the data is being fetched, display a loading indicator
-          return Center(
-            child: CircularProgressIndicator(),
-          );
-        }
-        else if (snapshot.hasError) {
-           // If an error occurs while fetching data, display an error message
-          return Center(
-            child: Text('Error: ${snapshot.error}'),
-          );
-        }
-        else if (!snapshot.hasData || (snapshot.data?.isEmpty ?? true)) {
-          // If there are no suggestions, display a message indicating so
-          return Center(
-            child: Text('No suggestions found'),
-          );
-        }
-        else {
-          // If data is available, display the suggestions
-          final List<String>? suggestions = snapshot.data;
-          return ListView.builder(
-            itemCount: suggestions!.length,
-            itemBuilder: (context, index) {
-              return ListTile(
-                title: Text(suggestions[index]),
-                onTap: () {
-                  // Handle when a suggestion is tapped
-                  // For example, you can close the search and show details
-                  close(context, suggestions[index]);
-                }
-              );
-            }
-          );
-        }
-      })
-    );
-   /* // Implement your search results here
-    return Center(
-      child: Text(
-        'Searching results for: $query',
-        style: TextStyle(
-          color: const Color.fromARGB(255, 0, 0, 0), // Set your desired color here
-        ),
-      ),
-    );*/*/
   }
 
   @override
@@ -189,7 +156,7 @@ class CustomSearchDelegate extends SearchDelegate<String> {
           onTap:() {
             query = result.first;
             _checkTile(context, query);
-            close(context, query);
+            //close(context, query);
           },
         );
       },

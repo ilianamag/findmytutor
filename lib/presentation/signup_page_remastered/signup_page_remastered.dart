@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:login/core/app_export.dart';
 import 'package:login/models/student_model/student.dart';
 import 'package:login/models/student_model/studentPreferences.dart';
+import 'package:login/models/tutor_model/tutor.dart';
+import 'package:login/models/tutor_model/tutorPreferences.dart';
 import 'package:login/widgets/custom_drop_down_menu.dart';
 import 'package:login/widgets/custom_icon_button.dart';
 import 'package:login/widgets/text_field_stateful.dart';
@@ -44,6 +46,15 @@ class _MyHomePageState extends State<MyHomePage> {
   TextEditingController professionController = TextEditingController();
   TextEditingController infoController = TextEditingController();
 
+  //FocusNodes
+  late FocusNode firstNameFocusNode;
+  late FocusNode lastNameFocusNode;
+  late FocusNode emailFocusNode;
+  late FocusNode passwordFocusNode;
+  late FocusNode pphFocusNode;
+  late FocusNode radiusFocusNode;
+  late FocusNode informationFocusNode;
+
   //Lists
   List<String> dropdownItemList = [
       "Student",
@@ -63,6 +74,15 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
 
+    //Add FocusNodes
+    firstNameFocusNode = FocusNode();
+    lastNameFocusNode = FocusNode();
+    emailFocusNode = FocusNode();
+    passwordFocusNode = FocusNode();
+    pphFocusNode = FocusNode();
+    radiusFocusNode = FocusNode();
+    informationFocusNode = FocusNode();
+
     // Add listeners to the text controllers
     roleController.addListener(addTextFields);
     categoryController.addListener(addProfessionList);
@@ -79,6 +99,16 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   void dispose() {
+
+    //Remove FocusNodes
+    firstNameFocusNode.dispose();
+    lastNameFocusNode.dispose();
+    emailFocusNode.dispose();
+    passwordFocusNode.dispose();
+    pphFocusNode.dispose();
+    radiusFocusNode.dispose();
+    informationFocusNode.dispose();
+
     // Remove listeners when the widget is disposed
     roleController.removeListener(addTextFields);
     categoryController.addListener(addProfessionList);
@@ -95,6 +125,20 @@ class _MyHomePageState extends State<MyHomePage> {
   }
   
   ///Void Functions
+  //clear text controoles
+  void _clearTextControllers() {
+    nameEditTextController.clear();
+    lastNameEditTextController.clear();
+    emailEditTextController.clear();
+    passwordEditTextController.clear();
+    roleController.clear();
+    priceController.clear();
+    radiusController.clear();
+    categoryController.clear();
+    professionController.clear();
+    infoController.clear();
+  }
+
   //AddTeachers' extra fields
   void addTextFields() {
     setState(() {
@@ -272,6 +316,8 @@ class _MyHomePageState extends State<MyHomePage> {
             print(e);
           }
           if (resBodyOfSignUp['success'] == true) {
+            Tutor tutorInfo = Tutor.fromJson(resBodyOfSignUp["userData"]);
+            await RememberTutorPreferences.storeTutorInfo(tutorInfo);
             Navigator.pushNamed(context, AppRoutes.tutorProfilePage);
             nameEditTextController.clear();
             lastNameEditTextController.clear();
@@ -289,101 +335,106 @@ class _MyHomePageState extends State<MyHomePage> {
   //Build
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        body: Center(
-          child: SingleChildScrollView(
-            padding: EdgeInsets.only(
-              bottom: MediaQuery.of(context).viewInsets.bottom,
-            ),
-            child: Form(
-              key: _formKeySignUp,
-              child: SizedBox(
-                width: double.maxFinite,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      height: 102.v,
-                      width: 108.h,
-                      child: Stack(
-                        alignment: Alignment.bottomRight,
-                        children: [
-                          Align(
-                            alignment: Alignment.topLeft,
-                            child: Container(
-                              height: 90.v,
-                              width: 92.h,
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 13.h,
-                                vertical: 9.v,
-                              ),
-                              decoration: AppDecoration.fillRed.copyWith(
-                                borderRadius: BorderRadiusStyle.circleBorder45,
-                              ),
-                              child: CustomImageView(
-                                  imagePath: ImageConstant.imgSettings,
-                                  height: 57.v,
-                                  width: 64.h,
-                                  alignment: Alignment.bottomCenter,
+      child: GestureDetector (
+        onTap: () {
+          FocusScope.of(context).unfocus();
+        },
+        child: Scaffold(
+          resizeToAvoidBottomInset: false,
+          body: Center(
+            child: SingleChildScrollView(
+              padding: EdgeInsets.only(
+                bottom: MediaQuery.of(context).viewInsets.bottom,
+              ),
+              child: Form(
+                key: _formKeySignUp,
+                child: SizedBox(
+                  width: double.maxFinite,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        height: 102.v,
+                        width: 108.h,
+                        child: Stack(
+                          alignment: Alignment.bottomRight,
+                          children: [
+                            Align(
+                              alignment: Alignment.topLeft,
+                              child: Container(
+                                height: 90.v,
+                                width: 92.h,
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: 13.h,
+                                  vertical: 9.v,
+                                ),
+                                decoration: AppDecoration.fillRed.copyWith(
+                                  borderRadius: BorderRadiusStyle.circleBorder45,
+                                ),
+                                child: CustomImageView(
+                                    imagePath: ImageConstant.imgSettings,
+                                    height: 57.v,
+                                    width: 64.h,
+                                    alignment: Alignment.bottomCenter,
+                                  ),
                                 ),
                               ),
-                            ),
-                          CustomIconButton(
-                              height: 43.v,
-                              width: 46.h,
-                              padding: EdgeInsets.all(9.h),
-                              alignment: Alignment.bottomRight,
-                              child: CustomImageView(
-                                imagePath: ImageConstant.imgEdit,
+                            CustomIconButton(
+                                height: 43.v,
+                                width: 46.h,
+                                padding: EdgeInsets.all(9.h),
+                                alignment: Alignment.bottomRight,
+                                child: CustomImageView(
+                                  imagePath: ImageConstant.imgEdit,
+                                ),
                               ),
-                            ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                    SizedBox(height: 14.v),
-                    _buildNameEditText(context),
-                    SizedBox(height: 27.v),
-                    _buildLastNameEditText(context),
-                    SizedBox(height: 27.v),
-                    _buildEmailEditText(context),
-                    SizedBox(height: 27.v),
-                    _buildPasswordEditText(context),
-                    SizedBox(height: 27.v),
+                      SizedBox(height: 14.v),
+                      _buildNameEditText(context),
+                      SizedBox(height: 27.v),
+                      _buildLastNameEditText(context),
+                      SizedBox(height: 27.v),
+                      _buildEmailEditText(context),
+                      SizedBox(height: 27.v),
+                      _buildPasswordEditText(context),
+                      SizedBox(height: 27.v),
 
-                    _buildRoleDropDownMenu(context),
-                    SizedBox(height: 27.v),
+                      _buildRoleDropDownMenu(context),
+                      SizedBox(height: 27.v),
 
-                    if (isTeacherSelected) ...[
-                      _buildPrice(context),
-                      SizedBox(height: 27.v),
-                      _buildDestination(context),
-                      SizedBox(height: 27.v),
-                      _buildCategoryDropdown(context),
-                      SizedBox(height: 27.v),
-                      Visibility(
-                        visible: isCategorySelected,
-                        child: Column(
-                          children: [
-                            _buildProfessionDropdown(context),
-                            SizedBox(height: 27.v),
-                          ]
-                        )
-                      ),
-                      _buildInfo(context),
-                      SizedBox(height: 27.v),
+                      if (isTeacherSelected) ...[
+                        _buildPrice(context),
+                        SizedBox(height: 27.v),
+                        _buildDestination(context),
+                        SizedBox(height: 27.v),
+                        _buildCategoryDropdown(context),
+                        SizedBox(height: 27.v),
+                        Visibility(
+                          visible: isCategorySelected,
+                          child: Column(
+                            children: [
+                              _buildProfessionDropdown(context),
+                              SizedBox(height: 27.v),
+                            ]
+                          )
+                        ),
+                        _buildInfo(context),
+                        SizedBox(height: 27.v),
+                      ],
+                    
+                      SizedBox(height: 6.v),
+                      _buildCreateAccountButton(context),
+                      SizedBox(height: 6.v),
                     ],
-                   
-                    SizedBox(height: 6.v),
-                    _buildCreateAccountButton(context),
-                    SizedBox(height: 6.v),
-                  ],
+                  ),
                 ),
               ),
             ),
           ),
+          bottomNavigationBar: _buildLoginButtonRow(context),
         ),
-        bottomNavigationBar: _buildLoginButtonRow(context),
       ),
     );
   }
@@ -391,6 +442,7 @@ class _MyHomePageState extends State<MyHomePage> {
   /// First Name
   Widget _buildNameEditText(BuildContext context) {
     return TextFieldStateful(
+      focusNode: firstNameFocusNode,
       width: 210.h,
       controller: nameEditTextController,
       //hintText: "First Name",
@@ -412,6 +464,7 @@ class _MyHomePageState extends State<MyHomePage> {
   /// Last Name
   Widget _buildLastNameEditText(BuildContext context) {
     return TextFieldStateful(
+      focusNode: lastNameFocusNode,
       width: 210.h,
       controller: lastNameEditTextController,
       //hintText: "Last Name",
@@ -433,6 +486,7 @@ class _MyHomePageState extends State<MyHomePage> {
   /// Email
   Widget _buildEmailEditText(BuildContext context) {
     return TextFieldStateful(
+      focusNode: emailFocusNode,
       width: 210.h,
       controller: emailEditTextController,
       //hintText: "Email",
@@ -455,6 +509,7 @@ class _MyHomePageState extends State<MyHomePage> {
   /// Password
   Widget _buildPasswordEditText(BuildContext context) {
     return TextFieldStateful(
+      focusNode: passwordFocusNode,
       width: 210.h,
       controller: passwordEditTextController,
       //hintText: "Password ",
@@ -503,6 +558,7 @@ class _MyHomePageState extends State<MyHomePage> {
   ///PPH
   Widget _buildPrice (BuildContext context) {
     return TextFieldStateful(
+      focusNode: pphFocusNode,
       width: 210.h,
       controller: priceController,
       //hintText: "Price/hour",
@@ -525,6 +581,7 @@ class _MyHomePageState extends State<MyHomePage> {
   ///Radius
   Widget _buildDestination (BuildContext context) {
     return TextFieldStateful(
+      focusNode: radiusFocusNode,
       width: 210.h,
       controller: radiusController,
       //hintText: "Radius (km)",
@@ -585,6 +642,7 @@ class _MyHomePageState extends State<MyHomePage> {
   ///Information
   Widget _buildInfo(BuildContext context) {
     return TextFieldStateful(
+      focusNode: informationFocusNode,
       width: 210.h,
       //hintText: '*Type more info (not required)',
       labelText: "Information",
@@ -596,6 +654,11 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       hintStyle: TextStyle(fontSize: 10.fSize, fontFamily: 'Roboto'),
       controller: infoController,
+      prefix: Icon(Icons.info_outline),
+      suffix: IconButton(
+        onPressed: () => radiusController.clear(),
+        icon: Icon(Icons.clear, size: 25)
+      ),
       maxLines: null,
       textInputType: TextInputType.text,
       textInputAction: TextInputAction.newline,
@@ -657,6 +720,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               TextButton (
                 onPressed: () {
+                  _clearTextControllers();
                   onTapTxtLogin(context);
                 },
                 style: TextButton.styleFrom(

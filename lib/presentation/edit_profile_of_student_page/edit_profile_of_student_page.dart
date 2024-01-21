@@ -129,10 +129,38 @@ class _EditProfileOfStudentPageState extends State<EditProfileOfStudentPage> {
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool pInvisibility = true;
 
+  //FocusNodes
+  late FocusNode firstNameFocusNode;
+  late FocusNode lastNameFocusNode;
+  late FocusNode emailFocusNode;
+  late FocusNode passwordFocusNode;
+
   @override
   void initState() {
     super.initState();
+    firstNameFocusNode = FocusNode();
+    lastNameFocusNode = FocusNode();
+    emailFocusNode = FocusNode();
+    passwordFocusNode = FocusNode();
     _initializeData();
+    emailFocusNode.addListener(() {
+      if (emailFocusNode.hasFocus) {
+        setState(() {
+          _buildErrorSnackBar(context);
+        });
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    //Remove FocusNodes
+    firstNameFocusNode.dispose();
+    lastNameFocusNode.dispose();
+    emailFocusNode.dispose();
+    passwordFocusNode.dispose();
+
+    super.dispose();
   }
 
   Future<void> _initializeData() async {
@@ -146,79 +174,84 @@ class _EditProfileOfStudentPageState extends State<EditProfileOfStudentPage> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        appBar: AppWidgets.buildAppBar(context),
-        drawer: AppWidgets.buildDrawer(context),
-        body: SizedBox(
-          width: SizeUtils.width,
-          child: SingleChildScrollView(
-            padding: EdgeInsets.only(
-              bottom: MediaQuery.of(context).viewInsets.bottom,
-            ),
-            child: Form(
-              key: _formKey,
-              child: Container(
-                width: double.maxFinite,
-                padding: EdgeInsets.only(
-                  left: 18.h,
-                  top: 48.v,
-                  bottom: 48.v,
-                ),
-                child: Column(
-                  children: [
-                   SizedBox(
-                    height: 102.v,
-                    width: 110.h,
-                    child: Stack(
-                      alignment: Alignment.bottomRight,
-                      children: [
-                        Align(
-                          alignment: Alignment.topLeft,
-                          child: GestureDetector(
-                            onTap: () {
-                              _openCamera();
-                            },
-                            child: Container(
-                              height: 90.v,
-                              width: 92.h,
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 13.h,
-                                vertical: 9.v,
-                              ),
-                              decoration: AppDecoration.fillRed.copyWith(
-                                borderRadius: BorderRadiusStyle.circleBorder45,
-                              ),
-                              child: CustomImageView(
-                                imagePath: _image.path, // Assuming _image is not null here
-                                height: 57.v,
-                                width: 64.h,
-                                alignment: Alignment.bottomCenter,
+      child: GestureDetector (
+        onTap: () {
+          FocusScope.of(context).unfocus();
+        },
+        child: Scaffold(
+          resizeToAvoidBottomInset: false,
+          appBar: AppWidgets.buildAppBar(context),
+          drawer: AppWidgets.buildDrawer(context),
+          body: SizedBox(
+            width: SizeUtils.width,
+            child: SingleChildScrollView(
+              padding: EdgeInsets.only(
+                bottom: MediaQuery.of(context).viewInsets.bottom,
+              ),
+              child: Form(
+                key: _formKey,
+                child: Container(
+                  width: double.maxFinite,
+                  padding: EdgeInsets.only(
+                    left: 18.h,
+                    top: 48.v,
+                    bottom: 48.v,
+                  ),
+                  child: Column(
+                    children: [
+                    SizedBox(
+                      height: 102.v,
+                      width: 110.h,
+                      child: Stack(
+                        alignment: Alignment.bottomRight,
+                        children: [
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: GestureDetector(
+                              onTap: () {
+                                _openCamera();
+                              },
+                              child: Container(
+                                height: 90.v,
+                                width: 92.h,
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: 13.h,
+                                  vertical: 9.v,
+                                ),
+                                decoration: AppDecoration.fillRed.copyWith(
+                                  borderRadius: BorderRadiusStyle.circleBorder45,
+                                ),
+                                child: CustomImageView(
+                                  imagePath: _image.path, // Assuming _image is not null here
+                                  height: 57.v,
+                                  width: 64.h,
+                                  alignment: Alignment.bottomCenter,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                  SizedBox(height: 15.v),
-                  _buildFirstNameField(context),
-                  SizedBox(height: 27.v),
-                  _buildLastNameField(context),
-                  SizedBox(height: 27.v),
-                  _buildEmailField(context),
-                  SizedBox(height: 27.v),
-                  _buildPasswordField(context),
-                  SizedBox(height: 46.v),
-                  _buildEditButton(context),
-                  SizedBox(height: 5.v),
-                ],
+                    SizedBox(height: 15.v),
+                    _buildFirstNameField(context),
+                    SizedBox(height: 27.v),
+                    _buildLastNameField(context),
+                    SizedBox(height: 27.v),
+                    _buildEmailField(context),
+                    SizedBox(height: 27.v),
+                    _buildPasswordField(context),
+                    SizedBox(height: 46.v),
+                    _buildEditButton(context),
+                    SizedBox(height: 5.v),
+                  ],
+                ),
               ),
             ),
           ),
         ),
+        bottomNavigationBar: _buildBottomBar(context),
       ),
-      bottomNavigationBar: _buildBottomBar(context),
     ),
   );
   }
@@ -238,6 +271,7 @@ class _EditProfileOfStudentPageState extends State<EditProfileOfStudentPage> {
   /// Section Widget
   Widget _buildFirstNameField(BuildContext context) {
     return TextFieldStateful(
+      focusNode: firstNameFocusNode,
       width: 210.h,
       controller: firstNameFieldController,
       //hintText: "First Name",
@@ -259,6 +293,7 @@ class _EditProfileOfStudentPageState extends State<EditProfileOfStudentPage> {
   /// Section Widget
   Widget _buildLastNameField(BuildContext context) {
     return TextFieldStateful(
+      focusNode: lastNameFocusNode,
       width: 210.h,
       controller: lastNameFieldController,
       //hintText: "Last Name",
@@ -279,17 +314,8 @@ class _EditProfileOfStudentPageState extends State<EditProfileOfStudentPage> {
 
   /// Section Widget
   Widget _buildEmailField(BuildContext context) {
-    final focusNode = FocusNode();
-
-    focusNode.addListener(() {
-      if (focusNode.hasFocus) {
-        setState(() {
-          _buildErrorSnackBar(context);
-        });
-      }
-    });
     return TextFieldStateful(
-      focusNode: focusNode,
+      focusNode: emailFocusNode,
       textStyle: TextStyle(color: appTheme.gray600),
       readOnly: true,
       width: 210.h,
@@ -308,6 +334,7 @@ class _EditProfileOfStudentPageState extends State<EditProfileOfStudentPage> {
   /// Section Widget
   Widget _buildPasswordField(BuildContext context) {
     return TextFieldStateful(
+      focusNode: passwordFocusNode,
       width: 210.h,
       controller: passwordFieldController,
       //hintText: "Password ",

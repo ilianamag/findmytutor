@@ -15,6 +15,8 @@ GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 //Text Editing Controllers
 TextEditingController emailAddress = TextEditingController();
 TextEditingController password = TextEditingController();
+late FocusNode emailFocusNode;
+late FocusNode passwordFocusNode;
 
 class LoginPageRemastered extends StatefulWidget {
   const LoginPageRemastered({Key? key}) : super(key: key);
@@ -30,6 +32,8 @@ class _LoginPageRemasteredState extends State<LoginPageRemastered> {
   @override
   void initState() {
     super.initState();
+    emailFocusNode = FocusNode();
+    passwordFocusNode = FocusNode();
 
     // Add listeners to the text controllers
     emailAddress.addListener(updateButtonStatus);
@@ -38,6 +42,8 @@ class _LoginPageRemasteredState extends State<LoginPageRemastered> {
 
   @override
   void dispose() {
+    emailFocusNode.dispose();
+    passwordFocusNode.dispose();
     // Remove listeners when the widget is disposed
     emailAddress.removeListener(updateButtonStatus);
     password.removeListener(updateButtonStatus);
@@ -78,6 +84,7 @@ class _LoginPageRemasteredState extends State<LoginPageRemastered> {
 
                     //Email Text Field           
                     TextFieldStateful (
+                      focusNode: emailFocusNode,
                       width: 210.h,
                       controller: emailAddress,
                       prefix: Icon(Icons.email, size: 25),
@@ -101,6 +108,7 @@ class _LoginPageRemasteredState extends State<LoginPageRemastered> {
 
                     //Password Text Field
                     TextFieldStateful (
+                      focusNode: passwordFocusNode,
                       width: 210.h,
                       controller: password,
                       prefix: Icon(Icons.lock, size: 25),
@@ -186,6 +194,8 @@ class _LoginPageRemasteredState extends State<LoginPageRemastered> {
                     ),
                     TextButton (
                       onPressed: () {
+                        emailAddress.clear();
+                        password.clear();
                         onTapTxtSignUp(context);
                       },
                       style: TextButton.styleFrom(
